@@ -6,6 +6,8 @@
  * depends on a small, stable contract and no server-only types cross the wire.
  */
 export type ChatStreamEvent =
+  /** Sent once at the start: tells the client which conversation this is. */
+  | { kind: "meta"; convId: string }
   /** A chunk of assistant text to append. */
   | { kind: "text"; text: string }
   /** A specialist or tool started working - drives the "thinking" indicator. */

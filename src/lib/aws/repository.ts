@@ -139,3 +139,119 @@ export async function updateMentorshipStatus(
     }),
   );
 }
+
+// --- Conversations & messages -------------------------------------------
+//
+// Keys:
+//   PK = USER#<id>
+//   SK = CONV#<convId>              -> conversation metadata (title, times)
+//        CONVMSG#<convId>#<seq>     -> one message, seq is a zero-padded index
+//
+// Listing a user's conversations queries SK begins_with "CONV#" (which also
+// matches CONVMSG#, so we filter by the exact prefix shape). To keep it simple
+// and correct, metadata uses "CONV#" and messages use "CONVMSG#", two distinct
+// prefixes, so neither query accidentally includes the other.
+
+export interface Conversation {
+  userId: string;
+  convId: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ChatMessageRecord {
+  userId: string;
+  convId: string;
+  seq: number;
+  role: "user" | "assistant";
+  content: string;
+  createdAt: string;
+}
+
+function pad(n: number): string {
+  return String(n).padStart(6, "0");
+}
+
+export async function putConversation(c: Conversation): Promise<void> {
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { PK: `USER#${c.userId}`, SK: `CONV#${c.convId}`, ...c },
+    }),
+  );
+}
+
+export async function touchConversation(
+  userId: string,
+  convId: string,
+  updatedAt: string,
+  title?: string,
+): Promise<void> {
+  const names: Record<string, string> = { "#u": "updatedAt" };
+  const values: Record<string, unknown> = { ":u": updatedAt };
+  let expr = "SET #u = :u";
+  if (title) {
+    names["#t"] = "title";
+    values[":t"] = title;
+    expr += ", #t = :t";
+  }
+  await ddb().send(
+    new UpdateCommand({
+      TableName: TABLE,
+      Key: { PK: `USER#${userId}`, SK: `CONV#${convId}` },
+      UpdateExpression: expr,
+      ExpressionAttributeNames: names,
+      ExpressionAttributeValues: values,
+    }),
+  );
+}
+
+export async function listConversations(userId: string): Promise<Conversation[]> {
+  const res = await ddb().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
+      ExpressionAttributeValues: { ":pk": `USER#${userId}`, ":sk": "CONV#" },
+    }),
+  );
+  const items = (res.Items as Conversation[] | undefined) ?? [];
+  // Newest first.
+  return items.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+
+export async function appendMessage(msg: ChatMessageRecord): Promise<void> {
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        PK: `USER#${msg.userId}`,
+        SK: `CONVMSG#${msg.convId}#${pad(msg.seq)}`,
+        ...msg,
+      },
+    }),
+  );
+}
+
+export async function listMessages(
+  userId: string,
+  convId: string,
+): Promise<ChatMessageRecord[]> {
+  const res = await ddb().send(
+    new QueryCommand({
+      TableName: TABLE,
+      KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
+      ExpressionAttributeValues: {
+        ":pk": `USER#${userId}`,
+        ":sk": `CONVMSG#${convId}#`,
+      },
+    }),
+  );
+  const items = (res.Items as ChatMessageRecord[] | undefined) ?? [];
+  return items.sort((a, b) => a.seq - b.seq);
+}
+
+export async function countMessages(userId: string, convId: string): Promise<number> {
+  const msgs = await listMessages(userId, convId);
+  return msgs.length;
+}

@@ -1,34 +1,35 @@
 import { auth } from "@/auth";
+import { randomUUID } from "node:crypto";
 import { buildOrchestrator } from "@/lib/agent/orchestrator";
 import { encodeEvent, toolLabel, type ChatStreamEvent } from "@/lib/agent/stream-protocol";
 import type { MessageData, ContentBlockData, DocumentFormat } from "@strands-agents/sdk";
-import { getVaultDoc } from "@/lib/aws/repository";
+import {
+  getVaultDoc,
+  listMessages,
+  appendMessage,
+  putConversation,
+  touchConversation,
+  type ChatMessageRecord,
+} from "@/lib/aws/repository";
 import { config } from "@/lib/config";
 import { z } from "zod";
 
 /**
  * Chat endpoint.
  *
- * Authenticates the user, rebuilds the multi-agent orchestrator for them
- * (prior turns replayed as history), and streams the run back as
- * newline-delimited JSON: text chunks plus tool-activity markers so the UI can
- * show which specialist is working. Runs on the Node runtime because the
- * Strands SDK and AWS SDK need it.
+ * Authenticates the user, loads the conversation history from storage, rebuilds
+ * the multi-agent orchestrator for them, streams the run back as newline-
+ * delimited JSON (text chunks plus tool-activity markers), and persists both
+ * the user message and the assistant reply so history survives reloads. Runs on
+ * the Node runtime because the Strands SDK and AWS SDK need it.
  */
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
 const BodySchema = z.object({
   message: z.string().min(1).max(8000),
-  history: z
-    .array(
-      z.object({
-        role: z.enum(["user", "assistant"]),
-        content: z.string(),
-      }),
-    )
-    .max(50)
-    .optional(),
+  /** Existing conversation to continue; omit to start a new one. */
+  convId: z.string().uuid().optional(),
   /** Optional: attach a Vault document (by id) for the agent to review directly. */
   docId: z.string().uuid().optional(),
 });
@@ -67,11 +68,33 @@ export async function POST(req: Request): Promise<Response> {
     return new Response("Bad request", { status: 400 });
   }
 
-  // Replay prior conversation as agent history.
-  const history: MessageData[] | undefined = parsed.history?.map((m) => ({
+  // Resolve the conversation: continue an existing one or start a new one.
+  const convId = parsed.convId ?? randomUUID();
+  const isNew = !parsed.convId;
+  const now = new Date().toISOString();
+
+  // Load prior turns from storage (authoritative), not from the client.
+  const prior = isNew ? [] : await listMessages(userId, convId);
+  const history: MessageData[] = prior.map((m) => ({
     role: m.role,
     content: [{ text: m.content }],
   }));
+  const nextSeq = prior.length;
+
+  // Persist the conversation shell (on first message) and the user's message.
+  if (isNew) {
+    const title = parsed.message.trim().slice(0, 60) || "New conversation";
+    await putConversation({ userId, convId, title, createdAt: now, updatedAt: now });
+  }
+  const userMsg: ChatMessageRecord = {
+    userId,
+    convId,
+    seq: nextSeq,
+    role: "user",
+    content: parsed.message,
+    createdAt: now,
+  };
+  await appendMessage(userMsg);
 
   const agent = buildOrchestrator(userId, history as never);
 
@@ -106,8 +129,11 @@ export async function POST(req: Request): Promise<Response> {
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       const send = (e: ChatStreamEvent) => controller.enqueue(encoder.encode(encodeEvent(e)));
+      // Tell the client which conversation this is (so a new one is remembered).
+      send({ kind: "meta", convId });
       // Avoid duplicate "tool" markers for the same tool within a burst.
       let lastTool = "";
+      let answer = "";
       try {
         for await (const event of agent.stream(turnInput)) {
           switch (event.type) {
@@ -118,6 +144,7 @@ export async function POST(req: Request): Promise<Response> {
                 inner.delta.type === "textDelta" &&
                 inner.delta.text
               ) {
+                answer += inner.delta.text;
                 send({ kind: "text", text: inner.delta.text });
               }
               break;
@@ -133,6 +160,18 @@ export async function POST(req: Request): Promise<Response> {
             default:
               break;
           }
+        }
+        // Persist the assistant reply and bump the conversation timestamp.
+        if (answer.trim()) {
+          await appendMessage({
+            userId,
+            convId,
+            seq: nextSeq + 1,
+            role: "assistant",
+            content: answer,
+            createdAt: new Date().toISOString(),
+          });
+          await touchConversation(userId, convId, new Date().toISOString());
         }
         send({ kind: "done" });
       } catch (err) {
