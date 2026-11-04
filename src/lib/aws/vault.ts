@@ -12,8 +12,9 @@ import { config } from "@/lib/config";
  * Objects are namespaced per user (`<userId>/<docId>/<fileName>`) so one
  * student can never read another's files. The bucket blocks all public access;
  * the browser uploads and downloads via short-lived presigned URLs, and the
- * server reads text content for the Document Coach. Server-side encryption is
- * enforced by the bucket policy defined in infra.
+ * server reads text content for the Document Coach. Server-side encryption comes
+ * from the bucket's default encryption (AES256). The upload URL must not sign an
+ * encryption header, because the browser's PUT would then have to send it too.
  */
 
 const BUCKET = config.storage.vaultBucket;
@@ -36,7 +37,6 @@ export async function presignUpload(
       Bucket: BUCKET,
       Key: key,
       ContentType: contentType,
-      ServerSideEncryption: "AES256",
     }),
     { expiresIn: expiresInSeconds },
   );
