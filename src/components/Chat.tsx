@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import type { ChatStreamEvent } from "@/lib/agent/stream-protocol";
 
 type Msg = { role: "user" | "assistant"; content: string };
+type VaultDocRef = { docId: string; fileName: string };
 
 const STARTERS = [
   { title: "Assess my readiness", prompt: "I want to study abroad for a master's. Can you assess how ready I am and what gaps I need to close? I'll share my background." },
@@ -20,11 +21,23 @@ export function Chat() {
   const [streaming, setStreaming] = useState(false);
   const [activeTool, setActiveTool] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [docs, setDocs] = useState<VaultDocRef[]>([]);
+  const [attachedDocId, setAttachedDocId] = useState<string>("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, activeTool]);
+
+  // Load the student's Vault documents so they can attach one to review.
+  useEffect(() => {
+    fetch("/api/vault")
+      .then((r) => (r.ok ? r.json() : { documents: [] }))
+      .then((d: { documents?: VaultDocRef[] }) =>
+        setDocs((d.documents ?? []).map((x) => ({ docId: x.docId, fileName: x.fileName }))),
+      )
+      .catch(() => setDocs([]));
+  }, []);
 
   const send = useCallback(
     async (text: string) => {
@@ -33,9 +46,13 @@ export function Chat() {
       setError(null);
 
       const history = messages.map((m) => ({ role: m.role, content: m.content }));
-      const next: Msg[] = [...messages, { role: "user", content: trimmed }, { role: "assistant", content: "" }];
+      const docId = attachedDocId || undefined;
+      const attachedName = docId ? docs.find((d) => d.docId === docId)?.fileName : undefined;
+      const shownContent = attachedName ? `📎 ${attachedName}\n\n${trimmed}` : trimmed;
+      const next: Msg[] = [...messages, { role: "user", content: shownContent }, { role: "assistant", content: "" }];
       setMessages(next);
       setInput("");
+      setAttachedDocId("");
       setStreaming(true);
       setActiveTool(null);
 
@@ -43,7 +60,7 @@ export function Chat() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: trimmed, history }),
+          body: JSON.stringify({ message: trimmed, history, docId }),
         });
         if (!res.ok || !res.body) {
           throw new Error(res.status === 401 ? "Your session expired. Please sign in again." : "Request failed.");
@@ -93,7 +110,7 @@ export function Chat() {
         });
       }
     },
-    [messages, streaming],
+    [messages, streaming, attachedDocId, docs],
   );
 
   const empty = messages.length === 0;
@@ -123,7 +140,15 @@ export function Chat() {
         </div>
       </div>
 
-      <Composer value={input} onChange={setInput} onSend={() => send(input)} disabled={streaming} />
+      <Composer
+        value={input}
+        onChange={setInput}
+        onSend={() => send(input)}
+        disabled={streaming}
+        docs={docs}
+        attachedDocId={attachedDocId}
+        onAttach={setAttachedDocId}
+      />
     </div>
   );
 }
@@ -203,15 +228,41 @@ function Composer({
   onChange,
   onSend,
   disabled,
+  docs,
+  attachedDocId,
+  onAttach,
 }: {
   value: string;
   onChange: (v: string) => void;
   onSend: () => void;
   disabled: boolean;
+  docs: VaultDocRef[];
+  attachedDocId: string;
+  onAttach: (docId: string) => void;
 }) {
   return (
     <div style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
       <div className="container" style={{ maxWidth: 820, padding: "14px 20px" }}>
+        {docs.length > 0 && (
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+            <label className="muted" style={{ fontSize: 13 }} htmlFor="attach">
+              Attach a document to review:
+            </label>
+            <select
+              id="attach"
+              value={attachedDocId}
+              onChange={(e) => onAttach(e.target.value)}
+              style={{ padding: "6px 10px", borderRadius: 8, border: "1px solid var(--border)", fontSize: 13.5 }}
+            >
+              <option value="">None</option>
+              {docs.map((d) => (
+                <option key={d.docId} value={d.docId}>
+                  {d.fileName}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <div style={{ display: "flex", gap: 10, alignItems: "flex-end" }}>
           <textarea
             value={value}

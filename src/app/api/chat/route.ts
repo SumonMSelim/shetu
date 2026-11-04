@@ -1,7 +1,9 @@
 import { auth } from "@/auth";
 import { buildOrchestrator } from "@/lib/agent/orchestrator";
 import { encodeEvent, toolLabel, type ChatStreamEvent } from "@/lib/agent/stream-protocol";
-import type { MessageData } from "@strands-agents/sdk";
+import type { MessageData, ContentBlockData, DocumentFormat } from "@strands-agents/sdk";
+import { getVaultDoc } from "@/lib/aws/repository";
+import { config } from "@/lib/config";
 import { z } from "zod";
 
 /**
@@ -27,7 +29,29 @@ const BodySchema = z.object({
     )
     .max(50)
     .optional(),
+  /** Optional: attach a Vault document (by id) for the agent to review directly. */
+  docId: z.string().uuid().optional(),
 });
+
+/** Map common document formats to the Bedrock DocumentFormat enum. */
+const DOC_FORMATS: Record<string, DocumentFormat> = {
+  pdf: "pdf",
+  csv: "csv",
+  doc: "doc",
+  docx: "docx",
+  xls: "xls",
+  xlsx: "xlsx",
+  html: "html",
+  txt: "txt",
+  md: "md",
+  json: "json",
+  xml: "xml",
+};
+
+function formatFromName(fileName: string): DocumentFormat | null {
+  const ext = fileName.split(".").pop()?.toLowerCase() ?? "";
+  return DOC_FORMATS[ext] ?? null;
+}
 
 export async function POST(req: Request): Promise<Response> {
   const session = await auth();
@@ -51,6 +75,33 @@ export async function POST(req: Request): Promise<Response> {
 
   const agent = buildOrchestrator(userId, history as never);
 
+  // Build the turn input. If the student attached a Vault document, pass it to
+  // the model as a native document block (by S3 reference) so Claude can read
+  // PDFs, Word docs, etc. directly - no server-side parsing needed.
+  let turnInput: string | ContentBlockData[] = parsed.message;
+  if (parsed.docId) {
+    const doc = await getVaultDoc(userId, parsed.docId);
+    const format = doc ? formatFromName(doc.fileName) : null;
+    if (doc && format) {
+      turnInput = [
+        {
+          document: {
+            name: doc.fileName.replace(/[^a-zA-Z0-9 _.-]/g, "_"),
+            format,
+            source: {
+              location: {
+                type: "s3",
+                uri: `s3://${config.storage.vaultBucket}/${doc.s3Key}`,
+              },
+            },
+            citations: { enabled: true },
+          },
+        },
+        { text: parsed.message },
+      ];
+    }
+  }
+
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
@@ -58,7 +109,7 @@ export async function POST(req: Request): Promise<Response> {
       // Avoid duplicate "tool" markers for the same tool within a burst.
       let lastTool = "";
       try {
-        for await (const event of agent.stream(parsed.message)) {
+        for await (const event of agent.stream(turnInput)) {
           switch (event.type) {
             case "modelStreamUpdateEvent": {
               const inner = event.event;
