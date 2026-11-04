@@ -121,13 +121,55 @@ Dockerfile             production image
 
 ## Running and deploying
 
-See **[docs/SETUP.md](docs/SETUP.md)** for:
+### Prerequisites
 
-- creating the Google OAuth client (step by step),
-- enabling Bedrock model access,
-- running locally,
-- building the Docker image and deploying to AWS with CDK,
-- pointing `shetu.mol.la` at the service via Cloudflare.
+- Node.js 22+ and npm
+- An AWS account with Amazon Bedrock access (Claude models enabled)
+- A Google OAuth client (for sign-in)
+- Docker (for the production image)
+
+### Run locally
+
+```bash
+npm install
+cp .env.example .env.local   # fill in the values (see below)
+npm run dev
+```
+
+Set these in `.env.local`:
+
+- `AUTH_URL` - `http://localhost:3000` locally
+- `AUTH_SECRET` - generate with `openssl rand -base64 33`
+- `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` - from your Google OAuth web client
+  (authorised redirect URI: `<AUTH_URL>/api/auth/callback/google`)
+- `AWS_REGION` - e.g. `us-east-1`
+- `SHETU_MODEL_ID` / `SHETU_FAST_MODEL_ID` - Bedrock cross-region inference profiles
+- `SHETU_VAULT_BUCKET` / `SHETU_TABLE_NAME` - the S3 bucket and DynamoDB table names
+
+AWS credentials come from your local AWS profile for development, and from the
+task IAM role in production (never hard-coded).
+
+### Deploy to AWS
+
+Infrastructure is defined with AWS CDK in `infra/` and provisions a VPC, an ECS
+Fargate service behind an Application Load Balancer, and an IAM task role scoped
+to Bedrock plus the S3 bucket and DynamoDB table. The container image is built
+from the `Dockerfile` at deploy time.
+
+```bash
+cd infra
+npm install
+npx cdk bootstrap          # first time per account/region
+npx cdk deploy \
+  -c appUrl=https://your-domain \
+  -c authSecret="$(openssl rand -base64 33)" \
+  -c googleId=YOUR_GOOGLE_CLIENT_ID \
+  -c googleSecret=YOUR_GOOGLE_CLIENT_SECRET \
+  -c certArn=YOUR_ACM_CERT_ARN
+```
+
+Put your domain in front with your DNS provider (a CNAME to the load balancer),
+and terminate TLS with an ACM certificate on the load balancer.
 
 ## A note on scope
 

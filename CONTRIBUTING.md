@@ -46,8 +46,8 @@ The integrity tests in `tests/knowledge.test.ts` enforce much of this. Run them.
 
 ## Development setup
 
-See [docs/SETUP.md](docs/SETUP.md) for full setup (Google OAuth, Bedrock access,
-environment variables). In short:
+See the **Running and deploying** section of the [README](README.md) for full
+setup (Google OAuth, Bedrock access, environment variables). In short:
 
 ```bash
 npm install
