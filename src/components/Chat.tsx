@@ -457,11 +457,37 @@ function Composer({
             type="button"
             onClick={() => fileRef.current?.click()}
             disabled={disabled || uploading}
-            title="Upload a document to review"
-            className="btn btn-ghost"
-            style={{ height: 48, width: 48, padding: 0, flexShrink: 0, fontSize: 20 }}
+            title="Attach a document (PDF, Word, or text)"
+            aria-label="Attach a document"
+            style={{
+              height: 48,
+              width: 44,
+              flexShrink: 0,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "transparent",
+              border: "1px solid var(--border)",
+              borderRadius: 12,
+              color: "var(--muted)",
+              cursor: disabled || uploading ? "default" : "pointer",
+              opacity: disabled || uploading ? 0.5 : 1,
+              transition: "border-color 0.15s ease, color 0.15s ease",
+            }}
           >
-            {uploading ? "…" : "+"}
+            {uploading ? (
+              <span style={{ fontSize: 13 }}>…</span>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M21 11.5l-8.49 8.49a5 5 0 01-7.07-7.07l8.49-8.49a3.5 3.5 0 014.95 4.95l-8.49 8.49a2 2 0 01-2.83-2.83l7.78-7.78"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
           </button>
           <textarea
             value={value}
