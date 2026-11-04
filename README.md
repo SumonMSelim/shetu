@@ -129,14 +129,27 @@ See **[docs/SETUP.md](docs/SETUP.md)** for:
 - building the Docker image and deploying to AWS with CDK,
 - pointing `shetu.mol.la` at the service via Cloudflare.
 
-## A note on scope and honesty
+## A note on scope
 
 Shetu gives source-cited guidance, but it is **not** a substitute for the
 official university admissions and immigration pages, nor for legal or
 immigration advice. Figures change yearly; every data record carries the date it
-was last checked. The project exists to give students an honest starting point,
+was last checked. The project exists to give students a reliable starting point,
 not to replace the final official checks they must always do themselves.
+
+## Contributing and community
+
+Contributions are welcome, especially improvements to the knowledge base and
+support for new destinations.
+
+- [CONTRIBUTING.md](CONTRIBUTING.md) - how to set up, the knowledge-base rules, and the PR process
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - how we treat each other
+- [SECURITY.md](SECURITY.md) - how to report a vulnerability privately
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+GNU Affero General Public License v3.0 (AGPL-3.0). See [LICENSE](LICENSE).
+
+Shetu is network-facing software. Under the AGPL, if you run a modified version
+and let others interact with it over a network, you must also make your modified
+source available to those users. See the license for the exact terms.

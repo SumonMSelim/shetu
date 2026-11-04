@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Shetu - an honest, conversational AI advisor that helps students plan higher education abroad, countering predatory agencies with transparent, source-cited guidance.",
+  "description": "Shetu - a reliable, trusted, conversational AI advisor that helps students plan higher education abroad, countering agencies that profit from misinformation.",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
