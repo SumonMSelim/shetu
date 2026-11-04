@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import type { ChatStreamEvent } from "@/lib/agent/stream-protocol";
+import { Markdown } from "@/components/Markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
 type VaultDocRef = { docId: string; fileName: string };
@@ -301,7 +302,6 @@ function Bubble({ role, content }: { role: "user" | "assistant"; content: string
           maxWidth: "88%",
           padding: "12px 16px",
           borderRadius: 16,
-          whiteSpace: "pre-wrap",
           lineHeight: 1.6,
           fontSize: 15.5,
           background: isUser ? "var(--primary)" : "var(--surface)",
@@ -310,9 +310,10 @@ function Bubble({ role, content }: { role: "user" | "assistant"; content: string
           boxShadow: isUser ? "none" : "var(--shadow)",
           borderBottomRightRadius: isUser ? 4 : 16,
           borderBottomLeftRadius: isUser ? 16 : 4,
+          ...(isUser ? { whiteSpace: "pre-wrap" as const } : {}),
         }}
       >
-        {content || "…"}
+        {isUser ? content : content ? <Markdown>{content}</Markdown> : "…"}
       </div>
     </div>
   );
