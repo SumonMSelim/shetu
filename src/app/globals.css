@@ -1,16 +1,16 @@
 :root {
-  --bg: #f6f8fb;
+  --bg: #f4faf7;
   --surface: #ffffff;
-  --border: #e3e8f0;
-  --text: #11203a;
-  --muted: #5a6b80;
-  --primary: #1e6feb;
-  --primary-dark: #1348b8;
+  --border: #dfe9e4;
+  --text: #0f2a22;
+  --muted: #5a7068;
+  --primary: #10a37f;
+  --primary-dark: #0b7d60;
   --accent: #ff8a5b;
   --accent-soft: #fff3ec;
   --warn: #b4531f;
   --radius: 14px;
-  --shadow: 0 1px 2px rgba(19, 72, 184, 0.06), 0 8px 24px rgba(19, 72, 184, 0.07);
+  --shadow: 0 1px 2px rgba(11, 125, 96, 0.06), 0 8px 24px rgba(11, 125, 96, 0.08);
 }
 
 * {
@@ -66,6 +66,19 @@ button {
 }
 .btn-ghost:hover {
   border-color: var(--primary);
+}
+
+/* Google sign-in: white, bordered, dark text (Google brand style).
+   Stands out clearly on both light and colored backgrounds. */
+.btn-google {
+  background: #ffffff;
+  color: #1f2937;
+  border: 1px solid #dadce0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+.btn-google:hover {
+  background: #f7f9f9;
+  border-color: #c9ced4;
 }
 
 .card {

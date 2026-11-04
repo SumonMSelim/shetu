@@ -40,7 +40,7 @@ function SignInButton({ size = 16 }: { size?: number }) {
       }}
       style={{ display: "inline-block" }}
     >
-      <button className="btn btn-primary" type="submit" style={{ fontSize: size }}>
+      <button className="btn btn-google" type="submit" style={{ fontSize: size }}>
         <GoogleGlyph />
         Continue with Google
       </button>
@@ -67,12 +67,12 @@ function TopBar() {
 
 function Hero() {
   return (
-    <section style={{ background: "linear-gradient(180deg, #f1f6ff 0%, var(--bg) 100%)" }}>
+    <section style={{ background: "linear-gradient(180deg, #e9f7f1 0%, var(--bg) 100%)" }}>
       <div className="container" style={{ paddingTop: 72, paddingBottom: 72, textAlign: "center" }}>
         <span
           style={{
             display: "inline-block",
-            background: "#e4eeff",
+            background: "#d6f0e6",
             color: "var(--primary-dark)",
             fontWeight: 600,
             fontSize: 13.5,
@@ -206,7 +206,7 @@ function WhyTrust() {
         className="card"
         style={{
           padding: "36px 32px",
-          background: "linear-gradient(180deg, #ffffff 0%, #f6faff 100%)",
+          background: "linear-gradient(180deg, #ffffff 0%, #f0faf6 100%)",
           textAlign: "center",
         }}
       >
@@ -229,7 +229,7 @@ function FinalCta() {
         <h2 style={{ fontSize: 30, margin: "0 0 12px", color: "#fff" }}>
           Start planning today
         </h2>
-        <p style={{ fontSize: 17, lineHeight: 1.6, margin: "0 auto 28px", maxWidth: 520, color: "#eaf1ff" }}>
+        <p style={{ fontSize: 17, lineHeight: 1.6, margin: "0 auto 28px", maxWidth: 520, color: "#e3f5ee" }}>
           Ask your first question in under a minute. It is free to begin.
         </p>
         <form
@@ -274,7 +274,7 @@ function CheckBadge() {
   return (
     <span
       style={{
-        flexShrink: 0, width: 26, height: 26, borderRadius: "50%", background: "#e4eeff",
+        flexShrink: 0, width: 26, height: 26, borderRadius: "50%", background: "#d6f0e6",
         display: "inline-flex", alignItems: "center", justifyContent: "center",
       }}
       aria-hidden="true"
