@@ -281,15 +281,27 @@ function Composer({
               resize: "none",
               border: "1px solid var(--border)",
               borderRadius: 12,
-              padding: "12px 14px",
+              padding: "13px 14px",
               fontSize: 15.5,
               fontFamily: "inherit",
-              lineHeight: 1.5,
+              lineHeight: 1.4,
+              minHeight: 48,
               maxHeight: 160,
               outline: "none",
+              boxSizing: "border-box",
             }}
           />
-          <button className="btn btn-primary" onClick={onSend} disabled={disabled} style={{ opacity: disabled ? 0.6 : 1 }}>
+          <button
+            className="btn btn-primary"
+            onClick={onSend}
+            disabled={disabled}
+            style={{
+              height: 48,
+              padding: "0 22px",
+              flexShrink: 0,
+              opacity: disabled ? 0.6 : 1,
+            }}
+          >
             Send
           </button>
         </div>
