@@ -18,7 +18,7 @@ export const config = {
   app: {
     url: process.env.AUTH_URL ?? "http://localhost:3000",
     name: "Shetu",
-    tagline: "Your honest guide to studying abroad",
+    tagline: "A trusted guide to studying abroad",
   },
   aws: {
     region: process.env.AWS_REGION ?? "us-east-1",

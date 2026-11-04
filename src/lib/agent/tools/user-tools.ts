@@ -54,7 +54,7 @@ export function buildUserTools(userId: string) {
         doc.fileName.endsWith(".md");
       if (!isTextual) {
         return {
-          error: `Document "${doc.fileName}" is ${doc.contentType}, which cannot be read as text yet. Ask the student to paste the content.`,
+          error: `Document "${doc.fileName}" is a ${doc.contentType} file, which cannot be read as plain text through this tool. Ask the student to attach it to their message using the "Attach a document to review" picker below the chat box; attached PDF and Word files are read directly. They can also paste the text.`,
         };
       }
       const content = await readTextContent(doc.s3Key);

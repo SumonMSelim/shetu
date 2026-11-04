@@ -17,8 +17,8 @@ export default function TermsPage() {
       <h2>What Shetu is</h2>
       <p>
         Shetu is a conversational advisor that helps students plan higher education abroad. It
-        provides honest, source-cited information about programmes, scholarships, costs, visas,
-        documents, and test preparation, and it can flag common predatory-agency tactics. It can also
+        provides reliable, source-cited information about programmes, scholarships, costs, visas,
+        documents, and test preparation, and it can warn you about common agency tricks. It can also
         arrange a request for a human mentor.
       </p>
 

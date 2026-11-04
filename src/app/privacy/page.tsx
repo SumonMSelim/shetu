@@ -11,8 +11,8 @@ export default function PrivacyPage() {
     <LegalPage title="Privacy Policy" updated="4 November 2026">
       <p>
         Shetu (&ldquo;we&rdquo;, &ldquo;us&rdquo;) is a conversational advisor that helps students
-        plan higher education abroad with honest, source-cited guidance. This policy explains what
-        data we collect, why, and how we protect it. We have tried to keep it plain and honest,
+        plan higher education abroad with reliable, source-cited guidance. This policy explains what
+        data we collect, why, and how we protect it. We have tried to keep it plain and clear,
         because being trustworthy with your information is the whole point of this project.
       </p>
 

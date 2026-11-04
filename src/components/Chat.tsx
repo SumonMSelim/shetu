@@ -7,12 +7,12 @@ type Msg = { role: "user" | "assistant"; content: string };
 type VaultDocRef = { docId: string; fileName: string };
 
 const STARTERS = [
-  { title: "Assess my readiness", prompt: "I want to study abroad for a master's. Can you assess how ready I am and what gaps I need to close? I'll share my background." },
-  { title: "What are the real costs?", prompt: "What does it really cost to study abroad for one year, including tuition, living costs, insurance and visa proof of funds? Please be honest and itemised." },
-  { title: "Find scholarships for me", prompt: "What scholarships could I realistically apply for, and which ones actually cover full tuition versus only part?" },
-  { title: "Is this agency offer legit?", prompt: "An agency told me they can guarantee my admission and visa, and secure me a scholarship if I pay an upfront package fee. Is this legitimate?" },
-  { title: "Review my statement", prompt: "I'd like help improving my statement of purpose. What makes a strong one, and how should I start?" },
-  { title: "Help me prepare for IELTS", prompt: "I need to prepare for IELTS. Can you explain the bands and give me a short writing practice task at my level?" },
+  { title: "Am I ready?", prompt: "I want to study abroad for a master's. Please check how ready I am and tell me what I need to improve. I will share my background." },
+  { title: "What is the real cost?", prompt: "What does it really cost to study abroad for one year? Please give me a full, clear list: tuition, living costs, insurance, and the visa money I must show." },
+  { title: "Find scholarships for me", prompt: "What scholarships can I really apply for? Please tell me which ones pay full tuition and which pay only a part." },
+  { title: "Is this agency offer real?", prompt: "An agency told me they can guarantee my admission and visa, and get me a scholarship if I pay a big fee first. Is this real or a trick?" },
+  { title: "Make my statement better", prompt: "I want help to improve my statement of purpose. What makes a strong one, and how should I begin?" },
+  { title: "Help me with IELTS", prompt: "I need to prepare for IELTS. Please explain the bands in simple words and give me one short writing task at my level." },
 ];
 
 export function Chat() {
@@ -156,9 +156,10 @@ export function Chat() {
 function EmptyState({ onPick }: { onPick: (prompt: string) => void }) {
   return (
     <div>
-      <h1 style={{ fontSize: 28, margin: "6px 0 6px" }}>How can I help with your plans?</h1>
+      <h1 style={{ fontSize: 28, margin: "6px 0 6px" }}>How can I help you today?</h1>
       <p className="muted" style={{ margin: "0 0 24px", fontSize: 16 }}>
-        Ask me anything about studying abroad. Pick a starting point, or just type your question.
+        Ask me anything about studying abroad. Pick a starting point below, or just type your
+        question in your own words.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 12 }}>
         {STARTERS.map((s) => (
@@ -293,8 +294,8 @@ function Composer({
           </button>
         </div>
         <p className="muted" style={{ fontSize: 12, margin: "8px 2px 0" }}>
-          Shetu gives source-cited guidance, but always verify with the official university and
-          immigration pages. It is not a substitute for legal or immigration advice.
+          Shetu shares reliable facts with their sources. Always check the official university and
+          visa pages too. This is help and guidance, not legal advice.
         </p>
       </div>
     </div>

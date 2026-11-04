@@ -1,39 +1,36 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shetu logo">
   <defs>
     <linearGradient id="shetuBg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0E7C7B"/>
-      <stop offset="1" stop-color="#0A5C66"/>
+      <stop offset="0" stop-color="#1E6FEB"/>
+      <stop offset="1" stop-color="#1348B8"/>
     </linearGradient>
-    <linearGradient id="shetuArc" x1="96" y1="320" x2="416" y2="320" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFC857"/>
-      <stop offset="1" stop-color="#FF8A5B"/>
+    <linearGradient id="shetuCap" x1="120" y1="150" x2="392" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E8F0FF"/>
     </linearGradient>
   </defs>
 
   <!-- rounded square background -->
   <rect width="512" height="512" rx="112" fill="url(#shetuBg)"/>
 
-  <!-- a bridge: the span, two towers, and the suspension cables.
-       Shetu means "bridge" - a bridge from a student to opportunity abroad. -->
-  <!-- deck -->
-  <rect x="96" y="312" width="320" height="20" rx="10" fill="#EAF6F5"/>
+  <!-- graduation cap: study / learning.
+       The mortarboard (diamond) + the band below it. -->
+  <!-- mortarboard top -->
+  <path d="M256 150 L412 224 256 298 100 224 Z" fill="url(#shetuCap)"/>
+  <!-- subtle inner line on the board for depth -->
+  <path d="M256 170 L372 224 256 278 140 224 Z" fill="#DCE8FF" opacity="0.55"/>
 
-  <!-- suspension arc -->
-  <path d="M106 312 C 180 196, 332 196, 406 312" stroke="url(#shetuArc)" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <!-- cap band / head -->
+  <path d="M176 258 L256 296 336 258 L336 318 C336 346 300 364 256 364 C212 364 176 346 176 318 Z" fill="url(#shetuCap)"/>
+  <path d="M176 258 L256 296 336 258 L336 274 C336 300 300 316 256 316 C212 316 176 300 176 274 Z" fill="#CFE0FF" opacity="0.6"/>
 
-  <!-- towers -->
-  <rect x="168" y="196" width="18" height="152" rx="9" fill="#EAF6F5"/>
-  <rect x="326" y="196" width="18" height="152" rx="9" fill="#EAF6F5"/>
+  <!-- tassel: cord from the center button down the right side -->
+  <circle cx="256" cy="224" r="12" fill="#FFC94D"/>
+  <path d="M256 224 C 392 236, 404 236, 404 236 L404 320" stroke="#FFC94D" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <!-- tassel knot + strands -->
+  <circle cx="404" cy="326" r="9" fill="#FFC94D"/>
+  <path d="M398 334 L398 360 M404 334 L404 364 M410 334 L410 360" stroke="#FFC94D" stroke-width="5" stroke-linecap="round"/>
 
-  <!-- cables -->
-  <g stroke="#EAF6F5" stroke-width="6" stroke-linecap="round" opacity="0.85">
-    <line x1="140" y1="300" x2="140" y2="312"/>
-    <line x1="210" y1="250" x2="210" y2="312"/>
-    <line x1="256" y1="232" x2="256" y2="312"/>
-    <line x1="302" y1="250" x2="302" y2="312"/>
-    <line x1="372" y1="300" x2="372" y2="312"/>
-  </g>
-
-  <!-- a guiding star above the bridge: honest direction -->
-  <path d="M256 92 l16 40 42 4 -32 28 10 42 -36 -23 -36 23 10 -42 -32 -28 42 -4 z" fill="#FFC857"/>
+  <!-- a small check mark inside the band: trusted / verified guidance -->
+  <path d="M232 322 l14 14 30 -32" stroke="#1E6FEB" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

@@ -103,8 +103,9 @@ export function Vault() {
     <div className="container" style={{ maxWidth: 820, paddingTop: 28, paddingBottom: 40 }}>
       <h1 style={{ fontSize: 26, margin: "0 0 6px" }}>Your document Vault</h1>
       <p className="muted" style={{ margin: "0 0 22px", fontSize: 15.5, lineHeight: 1.6 }}>
-        Store your documents privately. Text documents (.txt, .md) can be reviewed directly by the
-        Document Coach in chat. You always keep your own originals - never hand them to an agency.
+        Keep your documents here, safe and private. You can upload PDF, Word (.docx), or text files.
+        In the chat, attach a document and Shetu will read it and give you feedback. You always keep
+        your own files. Never give your original documents to an agency.
       </p>
 
       <div className="card" style={{ padding: 18, marginBottom: 24 }}>
@@ -123,6 +124,7 @@ export function Vault() {
           <input
             ref={fileRef}
             type="file"
+            accept=".pdf,.doc,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,text/plain,text/markdown"
             onChange={(e) => {
               const f = e.target.files?.[0];
               if (f) void upload(f);
