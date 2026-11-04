@@ -24,11 +24,9 @@ export const config = {
     region: process.env.AWS_REGION ?? "us-east-1",
   },
   bedrock: {
-    /** Primary reasoning model (orchestrator + specialists). */
-    modelId:
-      process.env.SHETU_MODEL_ID ??
-      "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
-    /** Cheaper/faster model for lightweight side calls. */
+    /** Primary reasoning model (orchestrator + specialists). Current, non-legacy. */
+    modelId: process.env.SHETU_MODEL_ID ?? "us.anthropic.claude-sonnet-4-6",
+    /** Cheaper/faster model for lightweight side calls. Current, non-legacy. */
     fastModelId:
       process.env.SHETU_FAST_MODEL_ID ??
       "us.anthropic.claude-haiku-4-5-20251001-v1:0",

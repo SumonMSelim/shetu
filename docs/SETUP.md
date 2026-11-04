@@ -54,11 +54,11 @@ You now have `AUTH_GOOGLE_ID` and `AUTH_GOOGLE_SECRET`.
 1. In the AWS Console, open **Amazon Bedrock → Model access** in your region
    (default `us-east-1`).
 2. Request/enable access to the Claude models Shetu uses:
-   - Claude Sonnet 4.5
+   - Claude Sonnet 4.6 (primary)
    - Claude Haiku 4.5 (used for lighter tasks)
 3. Shetu invokes them through **cross-region inference profiles**
-   (`us.anthropic.claude-sonnet-4-5-...`), which is the recommended path and
-   avoids on-demand throughput errors.
+   (`us.anthropic.claude-sonnet-4-6`, `us.anthropic.claude-haiku-4-5-...`),
+   which is the recommended path and avoids on-demand throughput errors.
 
 ---
 
@@ -76,7 +76,7 @@ AUTH_SECRET=         # openssl rand -base64 33
 AUTH_GOOGLE_ID=      # from step 2
 AUTH_GOOGLE_SECRET=  # from step 2
 AWS_REGION=us-east-1
-SHETU_MODEL_ID=us.anthropic.claude-sonnet-4-5-20250929-v1:0
+SHETU_MODEL_ID=us.anthropic.claude-sonnet-4-6
 SHETU_FAST_MODEL_ID=us.anthropic.claude-haiku-4-5-20251001-v1:0
 SHETU_VAULT_BUCKET=shetu-vault     # real name is set by CDK in production
 SHETU_TABLE_NAME=shetu-app         # real name is set by CDK in production

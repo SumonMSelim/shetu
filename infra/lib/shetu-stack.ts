@@ -35,7 +35,7 @@ export class ShetuStack extends cdk.Stack {
     super(scope, id, props);
 
     const imageTag = props.imageTag ?? "latest";
-    const modelId = props.modelId ?? "us.anthropic.claude-sonnet-4-5-20250929-v1:0";
+    const modelId = props.modelId ?? "us.anthropic.claude-sonnet-4-6";
     const fastModelId = props.fastModelId ?? "us.anthropic.claude-haiku-4-5-20251001-v1:0";
 
     // --- Vault bucket -----------------------------------------------------

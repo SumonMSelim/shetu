@@ -92,7 +92,7 @@ orchestrator talks to the student and delegates to focused specialists.
 | Layer | Choice |
 |------|--------|
 | Agents | Strands Agents SDK (TypeScript), multi-agent agents-as-tools |
-| Model | Amazon Bedrock - Claude Sonnet 4.5 (+ Haiku for light tasks) |
+| Model | Amazon Bedrock - Claude Sonnet 4.6 (+ Haiku 4.5 for light tasks) |
 | App | Next.js (App Router), React, TypeScript |
 | Auth | Auth.js v5, Google sign-in |
 | Vault | Amazon S3 (encrypted, private, presigned uploads/downloads) |
