@@ -5,6 +5,8 @@ import {
   listVaultDocs,
   getVaultDoc,
   putMentorshipRequest,
+  getProfile,
+  putProfile,
 } from "@/lib/aws/repository";
 import { readTextContent } from "@/lib/aws/vault";
 
@@ -90,5 +92,47 @@ export function buildUserTools(userId: string) {
     },
   });
 
-  return [vaultList, vaultRead, requestMentorship];
+  const getStudentProfile = tool({
+    name: "get_profile",
+    description:
+      "Get the current student's saved profile (target country, level, field, English score, budget, notes). Call this early to personalise advice instead of asking for details the student already gave.",
+    inputSchema: z.object({}),
+    callback: async () => {
+      const profile = await getProfile(userId);
+      if (!profile) return { profile: null, note: "No profile saved yet." };
+      return { profile };
+    },
+  });
+
+  const saveStudentProfile = tool({
+    name: "save_profile",
+    description:
+      "Save or update facts about the student so future advice is personalised. Call this when the student shares durable background (target country, study level, field, English/IELTS score, yearly budget). Only include fields you actually learned; omit the rest.",
+    inputSchema: z.object({
+      name: z.string().max(120).optional(),
+      targetCountry: z.string().max(60).optional().describe("ISO code or country name, e.g. 'NL'."),
+      level: z.enum(["bachelor", "master", "phd"]).optional(),
+      field: z.string().max(120).optional().describe("Intended field of study."),
+      englishScore: z.string().max(60).optional().describe("e.g. 'IELTS 6.5'."),
+      budgetPerYearEur: z.number().int().nonnegative().optional(),
+      notes: z.string().max(1000).optional().describe("Other durable context worth remembering."),
+    }),
+    callback: async (input) => {
+      const existing = await getProfile(userId);
+      await putProfile({
+        userId,
+        name: input.name ?? existing?.name,
+        targetCountry: input.targetCountry ?? existing?.targetCountry,
+        level: input.level ?? existing?.level,
+        field: input.field ?? existing?.field,
+        englishScore: input.englishScore ?? existing?.englishScore,
+        budgetPerYearEur: input.budgetPerYearEur ?? existing?.budgetPerYearEur,
+        notes: input.notes ?? existing?.notes,
+        updatedAt: new Date().toISOString(),
+      });
+      return { ok: true, note: "Profile saved." };
+    },
+  });
+
+  return [vaultList, vaultRead, requestMentorship, getStudentProfile, saveStudentProfile];
 }

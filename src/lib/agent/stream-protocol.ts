@@ -32,6 +32,8 @@ export const TOOL_LABELS: Record<string, string> = {
   vault_list: "Opening your Vault",
   vault_read: "Reading your document",
   request_mentorship: "Arranging human mentorship",
+  get_profile: "Recalling your profile",
+  save_profile: "Saving your profile",
 };
 
 export function toolLabel(name: string): string {
