@@ -2,28 +2,34 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
-import * as ecr from "aws-cdk-lib/aws-ecr";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as ecs from "aws-cdk-lib/aws-ecs";
+import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
 import * as iam from "aws-cdk-lib/aws-iam";
-import * as apprunner from "aws-cdk-lib/aws-apprunner";
+import * as logs from "aws-cdk-lib/aws-logs";
+import * as path from "path";
 
 /**
  * Shetu production infrastructure.
  *
  * Provisions, as code:
- *   - S3 bucket for the document Vault (encrypted, all public access blocked)
- *   - DynamoDB single table (on-demand) for profiles, docs, mentorship
- *   - ECR repository for the app image
- *   - App Runner service running that image, with:
- *       - an instance role scoped to Bedrock invoke + this bucket + this table
- *       - secrets (AUTH_SECRET, Google OAuth) injected as env vars
+ *   - A VPC (public subnets only, no NAT) to keep cost down
+ *   - An ECS Fargate service behind an Application Load Balancer, running the
+ *     container with a task role scoped to Bedrock invoke + the existing S3
+ *     bucket and DynamoDB table
+ *   - The container image is built from the repo's Dockerfile at deploy time
+ *     (CDK handles the build and push to ECR automatically)
+ *   - Secrets (AUTH_SECRET, Google OAuth) injected as container env vars
  *
- * Nothing is public except the App Runner HTTPS endpoint. Credentials for AWS
- * are the instance role, so no keys live in the app.
+ * The S3 Vault bucket and DynamoDB table are created and configured outside
+ * this stack and referenced by name, so data resources are stable and
+ * independent of stack replacement.
+ *
+ * ECS Fargate is used instead of App Runner because App Runner service
+ * creation is restricted on this account. Fargate supports streaming responses
+ * (which the chat endpoint needs) and runs the same Docker image.
  */
 export interface ShetuStackProps extends cdk.StackProps {
-  /** Container image tag to deploy (defaults to "latest"). */
-  readonly imageTag?: string;
-  /** Bedrock model IDs passed through to the app. */
   readonly modelId?: string;
   readonly fastModelId?: string;
   /** Public URL the app is served at (for Auth.js callbacks). */
@@ -34,125 +40,108 @@ export class ShetuStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ShetuStackProps = {}) {
     super(scope, id, props);
 
-    const imageTag = props.imageTag ?? "latest";
     const modelId = props.modelId ?? "us.anthropic.claude-sonnet-4-6";
     const fastModelId = props.fastModelId ?? "us.anthropic.claude-haiku-4-5-20251001-v1:0";
 
-    // --- Vault bucket -----------------------------------------------------
-    const vaultBucket = new s3.Bucket(this, "VaultBucket", {
-      encryption: s3.BucketEncryption.S3_MANAGED,
-      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-      enforceSSL: true,
-      versioned: true,
-      // CORS so the browser can PUT/GET via presigned URLs.
-      cors: [
-        {
-          allowedMethods: [s3.HttpMethods.PUT, s3.HttpMethods.GET],
-          allowedOrigins: props.appUrl ? [props.appUrl] : ["*"],
-          allowedHeaders: ["*"],
-          maxAge: 3000,
-        },
+    const vaultBucketName =
+      (this.node.tryGetContext("vaultBucket") as string | undefined) ?? "shetu-vault";
+    const tableName =
+      (this.node.tryGetContext("tableName") as string | undefined) ?? "shetu-app";
+    const appUrl = props.appUrl ?? (this.node.tryGetContext("appUrl") as string | undefined) ?? "";
+
+    // Secrets supplied at deploy time via context (never committed).
+    const authSecret = (this.node.tryGetContext("authSecret") as string | undefined) ?? "";
+    const googleId = (this.node.tryGetContext("googleId") as string | undefined) ?? "";
+    const googleSecret = (this.node.tryGetContext("googleSecret") as string | undefined) ?? "";
+
+    // --- Existing data resources (referenced by name) --------------------
+    const vaultBucket = s3.Bucket.fromBucketName(this, "VaultBucket", vaultBucketName);
+    const table = dynamodb.Table.fromTableName(this, "AppTable", tableName);
+
+    // --- Network: public-subnet-only VPC (no NAT, to avoid NAT cost) -----
+    const vpc = new ec2.Vpc(this, "Vpc", {
+      maxAzs: 2,
+      natGateways: 0,
+      subnetConfiguration: [
+        { name: "public", subnetType: ec2.SubnetType.PUBLIC, cidrMask: 24 },
       ],
-      lifecycleRules: [{ abortIncompleteMultipartUploadAfter: cdk.Duration.days(7) }],
-      removalPolicy: cdk.RemovalPolicy.RETAIN, // never auto-delete student documents
     });
 
-    // --- DynamoDB single table -------------------------------------------
-    const table = new dynamodb.Table(this, "AppTable", {
-      partitionKey: { name: "PK", type: dynamodb.AttributeType.STRING },
-      sortKey: { name: "SK", type: dynamodb.AttributeType.STRING },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      pointInTimeRecoverySpecification: { pointInTimeRecoveryEnabled: true },
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
-    });
+    const cluster = new ecs.Cluster(this, "Cluster", { vpc });
 
-    // --- ECR repository for the app image --------------------------------
-    const repo = new ecr.Repository(this, "AppRepo", {
-      imageScanOnPush: true,
-      lifecycleRules: [{ maxImageCount: 10 }],
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    // --- Task role (what the running container can do) -------------------
+    const taskRole = new iam.Role(this, "TaskRole", {
+      assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
+      description: "Runtime role for the Shetu Fargate task",
     });
-
-    // --- App Runner instance role (what the running app can do) ----------
-    const instanceRole = new iam.Role(this, "AppInstanceRole", {
-      assumedBy: new iam.ServicePrincipal("tasks.apprunner.amazonaws.com"),
-      description: "Runtime role for the Shetu App Runner service",
-    });
-    vaultBucket.grantReadWrite(instanceRole);
-    table.grantReadWriteData(instanceRole);
-    // Scope Bedrock to invoke only (both regional and cross-region profiles).
-    instanceRole.addToPolicy(
+    vaultBucket.grantReadWrite(taskRole);
+    table.grantReadWriteData(taskRole);
+    taskRole.addToPolicy(
       new iam.PolicyStatement({
         actions: ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"],
         resources: [
-          `arn:aws:bedrock:*::foundation-model/*`,
+          "arn:aws:bedrock:*::foundation-model/*",
           `arn:aws:bedrock:*:${this.account}:inference-profile/*`,
         ],
       }),
     );
 
-    // --- App Runner access role (to pull from ECR) -----------------------
-    const accessRole = new iam.Role(this, "AppAccessRole", {
-      assumedBy: new iam.ServicePrincipal("build.apprunner.amazonaws.com"),
-    });
-    repo.grantPull(accessRole);
-
-    // --- Secrets -----------------------------------------------------------
-    // AUTH_SECRET and Google OAuth values are provided at deploy time via CDK
-    // context (so they are not committed). For a hardened setup, move these to
-    // AWS Secrets Manager and reference them here instead.
-    const authSecret = this.node.tryGetContext("authSecret") ?? "";
-    const googleId = this.node.tryGetContext("googleId") ?? "";
-    const googleSecret = this.node.tryGetContext("googleSecret") ?? "";
-    const appUrl = props.appUrl ?? this.node.tryGetContext("appUrl") ?? "";
-
-    // --- App Runner service ----------------------------------------------
-    const service = new apprunner.CfnService(this, "AppService", {
-      serviceName: "shetu",
-      sourceConfiguration: {
-        autoDeploymentsEnabled: true,
-        authenticationConfiguration: { accessRoleArn: accessRole.roleArn },
-        imageRepository: {
-          imageIdentifier: `${repo.repositoryUri}:${imageTag}`,
-          imageRepositoryType: "ECR",
-          imageConfiguration: {
-            port: "3000",
-            runtimeEnvironmentVariables: [
-              { name: "AWS_REGION", value: this.region },
-              { name: "SHETU_MODEL_ID", value: modelId },
-              { name: "SHETU_FAST_MODEL_ID", value: fastModelId },
-              { name: "SHETU_VAULT_BUCKET", value: vaultBucket.bucketName },
-              { name: "SHETU_TABLE_NAME", value: table.tableName },
-              { name: "AUTH_URL", value: appUrl },
-              { name: "AUTH_TRUST_HOST", value: "true" },
-              { name: "AUTH_SECRET", value: authSecret },
-              { name: "AUTH_GOOGLE_ID", value: googleId },
-              { name: "AUTH_GOOGLE_SECRET", value: googleSecret },
-            ],
-          },
+    // --- Fargate service behind an ALB -----------------------------------
+    const service = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
+      cluster,
+      cpu: 512,
+      memoryLimitMiB: 1024,
+      desiredCount: 1,
+      publicLoadBalancer: true,
+      // Task runs in public subnets with a public IP so it can reach AWS APIs
+      // (Bedrock, S3, DynamoDB) without a NAT gateway.
+      assignPublicIp: true,
+      taskSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      taskImageOptions: {
+        // Build the image from the repo root Dockerfile at deploy time.
+        image: ecs.ContainerImage.fromAsset(path.join(__dirname, "..", ".."), {
+          platform: cdk.aws_ecr_assets.Platform.LINUX_AMD64,
+        }),
+        containerPort: 3000,
+        taskRole,
+        enableLogging: true,
+        logDriver: ecs.LogDrivers.awsLogs({
+          streamPrefix: "shetu",
+          logRetention: logs.RetentionDays.ONE_MONTH,
+        }),
+        environment: {
+          AWS_REGION: this.region,
+          SHETU_MODEL_ID: modelId,
+          SHETU_FAST_MODEL_ID: fastModelId,
+          SHETU_VAULT_BUCKET: vaultBucketName,
+          SHETU_TABLE_NAME: tableName,
+          AUTH_URL: appUrl,
+          AUTH_TRUST_HOST: "true",
+          AUTH_SECRET: authSecret,
+          AUTH_GOOGLE_ID: googleId,
+          AUTH_GOOGLE_SECRET: googleSecret,
         },
       },
-      instanceConfiguration: {
-        cpu: "1 vCPU",
-        memory: "2 GB",
-        instanceRoleArn: instanceRole.roleArn,
-      },
-      healthCheckConfiguration: {
-        protocol: "TCP",
-        interval: 10,
-        timeout: 5,
-        healthyThreshold: 1,
-        unhealthyThreshold: 5,
-      },
     });
 
-    // --- Outputs ----------------------------------------------------------
-    new cdk.CfnOutput(this, "EcrRepositoryUri", { value: repo.repositoryUri });
-    new cdk.CfnOutput(this, "AppRunnerServiceUrl", {
-      value: `https://${service.attrServiceUrl}`,
-      description: "Point the Cloudflare CNAME for shetu.mol.la at this host.",
+    // Health check: Next.js serves the landing page at "/" with a 200.
+    service.targetGroup.configureHealthCheck({
+      path: "/",
+      healthyHttpCodes: "200-399",
+      interval: cdk.Duration.seconds(30),
+      timeout: cdk.Duration.seconds(10),
+      healthyThresholdCount: 2,
+      unhealthyThresholdCount: 5,
     });
-    new cdk.CfnOutput(this, "VaultBucketName", { value: vaultBucket.bucketName });
-    new cdk.CfnOutput(this, "TableName", { value: table.tableName });
+    service.targetGroup.setAttribute("deregistration_delay.timeout_seconds", "15");
+
+    // --- Outputs ----------------------------------------------------------
+    new cdk.CfnOutput(this, "LoadBalancerUrl", {
+      value: `http://${service.loadBalancer.loadBalancerDnsName}`,
+      description: "Point the Cloudflare CNAME for shetu.mol.la at this ALB host.",
+    });
+    new cdk.CfnOutput(this, "VaultBucketName", { value: vaultBucketName });
+    new cdk.CfnOutput(this, "TableName", { value: tableName });
   }
 }
+

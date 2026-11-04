@@ -11,8 +11,7 @@ import { ShetuStack } from "../lib/shetu-stack";
  *     -c authSecret="$(openssl rand -base64 33)" \
  *     -c googleId=xxxx.apps.googleusercontent.com \
  *     -c googleSecret=yyyy \
- *     -c appUrl=https://shetu.mol.la \
- *     -c imageTag=latest
+ *     -c appUrl=https://shetu.mol.la
  */
 const app = new cdk.App();
 
@@ -21,7 +20,6 @@ new ShetuStack(app, "ShetuStack", {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION ?? "us-east-1",
   },
-  imageTag: app.node.tryGetContext("imageTag"),
   appUrl: app.node.tryGetContext("appUrl"),
-  description: "Shetu - honest study-abroad advisor (Strands multi-agent app)",
+  description: "Shetu - reliable study-abroad advisor (Strands multi-agent app)",
 });
