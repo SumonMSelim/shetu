@@ -56,6 +56,13 @@ export default async function Home() {
           <li>Request a human mentor whenever you want one.</li>
         </ul>
       </section>
+
+      <footer
+        className="muted"
+        style={{ marginTop: 56, paddingTop: 20, borderTop: "1px solid var(--border)", fontSize: 13.5 }}
+      >
+        <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a>
+      </footer>
     </main>
   );
 }
