@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Shetu logo">
+  <defs>
+    <linearGradient id="shetuBg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0E7C7B"/>
+      <stop offset="1" stop-color="#0A5C66"/>
+    </linearGradient>
+    <linearGradient id="shetuArc" x1="96" y1="320" x2="416" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFC857"/>
+      <stop offset="1" stop-color="#FF8A5B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- rounded square background -->
+  <rect width="512" height="512" rx="112" fill="url(#shetuBg)"/>
+
+  <!-- a bridge: the span, two towers, and the suspension cables.
+       Shetu means "bridge" - a bridge from a student to opportunity abroad. -->
+  <!-- deck -->
+  <rect x="96" y="312" width="320" height="20" rx="10" fill="#EAF6F5"/>
+
+  <!-- suspension arc -->
+  <path d="M106 312 C 180 196, 332 196, 406 312" stroke="url(#shetuArc)" stroke-width="22" stroke-linecap="round" fill="none"/>
+
+  <!-- towers -->
+  <rect x="168" y="196" width="18" height="152" rx="9" fill="#EAF6F5"/>
+  <rect x="326" y="196" width="18" height="152" rx="9" fill="#EAF6F5"/>
+
+  <!-- cables -->
+  <g stroke="#EAF6F5" stroke-width="6" stroke-linecap="round" opacity="0.85">
+    <line x1="140" y1="300" x2="140" y2="312"/>
+    <line x1="210" y1="250" x2="210" y2="312"/>
+    <line x1="256" y1="232" x2="256" y2="312"/>
+    <line x1="302" y1="250" x2="302" y2="312"/>
+    <line x1="372" y1="300" x2="372" y2="312"/>
+  </g>
+
+  <!-- a guiding star above the bridge: honest direction -->
+  <path d="M256 92 l16 40 42 4 -32 28 10 42 -36 -23 -36 23 10 -42 -32 -28 42 -4 z" fill="#FFC857"/>
+</svg>
