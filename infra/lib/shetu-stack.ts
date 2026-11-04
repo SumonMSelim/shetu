@@ -5,6 +5,8 @@ import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
+import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as logs from "aws-cdk-lib/aws-logs";
 import * as path from "path";
@@ -54,6 +56,11 @@ export class ShetuStack extends cdk.Stack {
     const googleId = (this.node.tryGetContext("googleId") as string | undefined) ?? "";
     const googleSecret = (this.node.tryGetContext("googleSecret") as string | undefined) ?? "";
 
+    // ACM certificate for HTTPS on the ALB (end-to-end TLS with Cloudflare
+    // Full (Strict)). When provided, the ALB serves HTTPS on 443 and redirects
+    // HTTP to HTTPS. When absent, the ALB serves plain HTTP (initial bring-up).
+    const certArn = (this.node.tryGetContext("certArn") as string | undefined) ?? "";
+
     // --- Existing data resources (referenced by name) --------------------
     const vaultBucket = s3.Bucket.fromBucketName(this, "VaultBucket", vaultBucketName);
     const table = dynamodb.Table.fromTableName(this, "AppTable", tableName);
@@ -87,6 +94,10 @@ export class ShetuStack extends cdk.Stack {
     );
 
     // --- Fargate service behind an ALB -----------------------------------
+    const certificate = certArn
+      ? acm.Certificate.fromCertificateArn(this, "Cert", certArn)
+      : undefined;
+
     const service = new ecsPatterns.ApplicationLoadBalancedFargateService(this, "Service", {
       cluster,
       cpu: 512,
@@ -97,6 +108,15 @@ export class ShetuStack extends cdk.Stack {
       // (Bedrock, S3, DynamoDB) without a NAT gateway.
       assignPublicIp: true,
       taskSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      // When a certificate is provided, serve HTTPS on 443 and redirect HTTP.
+      ...(certificate
+        ? {
+            protocol: elbv2.ApplicationProtocol.HTTPS,
+            certificate,
+            redirectHTTP: true,
+            sslPolicy: elbv2.SslPolicy.RECOMMENDED_TLS,
+          }
+        : {}),
       taskImageOptions: {
         // Build the image from the repo root Dockerfile at deploy time.
         image: ecs.ContainerImage.fromAsset(path.join(__dirname, "..", ".."), {
@@ -137,8 +157,8 @@ export class ShetuStack extends cdk.Stack {
 
     // --- Outputs ----------------------------------------------------------
     new cdk.CfnOutput(this, "LoadBalancerUrl", {
-      value: `http://${service.loadBalancer.loadBalancerDnsName}`,
-      description: "Point the Cloudflare CNAME for shetu.mol.la at this ALB host.",
+      value: `${certArn ? "https" : "http"}://${service.loadBalancer.loadBalancerDnsName}`,
+      description: "The ALB host. shetu.mol.la is a Cloudflare CNAME to this.",
     });
     new cdk.CfnOutput(this, "VaultBucketName", { value: vaultBucketName });
     new cdk.CfnOutput(this, "TableName", { value: tableName });
