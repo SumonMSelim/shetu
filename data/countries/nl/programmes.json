@@ -44,5 +44,24 @@
       "retrieved": "2026-11-22",
       "period": "2026-2027"
     }
+  },
+  {
+    "id": "nl-msc-computer-science-joint-deg-university-of-amsterdam",
+    "institution": "University of Amsterdam",
+    "institutionType": "research-university",
+    "name": "MSc Computer Science (joint degree)",
+    "level": "master",
+    "field": "Computer Science",
+    "language": "English",
+    "city": "Amsterdam",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.uva.nl/en/masters/masters-programmes/computer-science",
+    "notes": "Joint degree programme with VU Amsterdam. Courses taught at both UvA Science Park and VU Campus. Four tracks available: Big Data Engineering, Foundations of Computing and Concurrency, Computer Systems and Infrastructure, Software Engineering and Green IT. Starts in September.",
+    "provenance": {
+      "source": "UvA programme page (programme page, verified by reviewer)",
+      "sourceUrl": "https://www.uva.nl/en/masters/masters-programmes/computer-science",
+      "retrieved": "2026-11-22"
+    }
   }
 ]

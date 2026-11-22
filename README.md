@@ -117,10 +117,29 @@ src/
   proxy.ts             route protection
 data/
   countries/<CC>/      country knowledge bases as JSON, schema-validated in CI
-scripts/               set-role, harden-storage, validate-data
+scripts/               set-role, harden-storage, validate-data, draft-programmes
 infra/                 AWS CDK app (Fargate, Cloudflare Tunnel, S3, DynamoDB, IAM)
 Dockerfile             production image
 ```
+
+## Adding programmes (the sourcing pipeline)
+
+Programmes grow through AI-drafted, human-approved records:
+
+1. Run `npm run draft:programmes -- --country nl --url <programme-page>`.
+   If the site blocks automated fetching (403), save the page from your
+   browser and use `--file <saved-page>` instead.
+2. The fast Bedrock model drafts records from ONLY page-stated facts; the
+   script validates them against the schema, stamps provenance with today's
+   date, dedupes against existing records, and writes the additions.
+3. Review the git diff against the source page yourself: this human step is
+   the integrity of the knowledge base. Edit anything the model got wrong,
+   delete anything you cannot verify.
+4. Commit and open a PR. CI validates the schema, ids, and provenance
+   freshness (400-day budget). After merge, the next deploy serves the new
+   programmes to the agents.
+
+The drafter costs about one cent of Bedrock usage per page.
 
 ## Running and deploying
 
