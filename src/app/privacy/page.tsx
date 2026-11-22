@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="4 November 2026">
+    <LegalPage title="Privacy Policy" updated="22 November 2026">
       <p>
         Shetu (&ldquo;we&rdquo;, &ldquo;us&rdquo;) is a conversational advisor that helps students
         plan higher education abroad with reliable, source-cited guidance. This policy explains what
@@ -77,26 +77,39 @@ export default function PrivacyPage() {
       <h2>Sharing</h2>
       <p>
         We share your data only with the infrastructure providers that run the service (Google for
-        sign-in; Amazon Web Services for hosting, storage, and AI processing), and with a human
-        mentor only when you explicitly request mentorship. We may disclose information if required
-        by law.
+        sign-in; Amazon Web Services for hosting, storage, and AI processing; Cloudflare as the
+        network proxy; Amazon SES for the mentorship notification emails), and with a human mentor
+        only when you explicitly request mentorship. We may disclose information if required by law.
       </p>
 
       <h2>Your choices and rights</h2>
       <ul>
         <li>You can delete documents from your Vault at any time.</li>
         <li>
-          You can request deletion of your account and associated data by contacting us (see below).
+          <strong>Export your data yourself</strong>: the &ldquo;Your data&rdquo; page (/account)
+          downloads everything stored about your account as a JSON file.
+        </li>
+        <li>
+          <strong>Delete your account yourself</strong>: also on the &ldquo;Your data&rdquo; page. This
+          immediately and permanently removes your profile, every conversation and reply, mentorship
+          requests, audit traces, and all Vault documents. A bare record (identifier and date only,
+          no content) is kept so old data can never resurface.
         </li>
         <li>You can stop using the service and revoke Google access from your Google account.</li>
       </ul>
 
       <h2>Retention</h2>
-      <p>
-        We keep your data while your account is active. If you ask us to delete your account, we
-        remove your profile, conversations, mentorship requests, and Vault documents, except where
-        we are required to retain something by law.
-      </p>
+      <ul>
+        <li>Your profile, conversations, and Vault documents are kept while your account is active.</li>
+        <li>
+          Usage counters (rate limiting) expire automatically within days; server logs are kept for
+          30 days.
+        </li>
+        <li>
+          If you delete your account (self-service above), everything is removed immediately,
+          except where we are required to retain something by law.
+        </li>
+      </ul>
 
       <h2>Children</h2>
       <p>
@@ -118,8 +131,9 @@ export default function PrivacyPage() {
 
       <h2>Contact</h2>
       <p>
-        For privacy questions or deletion requests, contact the project maintainer at the email
-        address listed on the project&rsquo;s public repository.
+        For privacy questions, contact the project maintainer at the email address listed on the
+        project&rsquo;s public repository. Export and deletion are self-service (see
+        &ldquo;Your data&rdquo;); for anything else, we are happy to help.
       </p>
     </LegalPage>
   );

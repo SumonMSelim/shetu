@@ -1,7 +1,9 @@
 import { auth } from "@/auth";
-import { randomUUID } from "node:crypto";
 import { z } from "zod";
-import { listMentorshipRequests, putMentorshipRequest } from "@/lib/aws/repository";
+import { listMentorshipRequests } from "@/lib/aws/repository";
+import { createMentorshipRequest } from "@/lib/mentorship/service";
+import { consumeBurst } from "@/lib/aws/rate-limit";
+import { config } from "@/lib/config";
 
 /**
  * Mentorship API.
@@ -39,14 +41,19 @@ export async function POST(req: Request): Promise<Response> {
     return new Response("Bad request", { status: 400 });
   }
 
-  const requestId = randomUUID();
-  await putMentorshipRequest({
+  if (!(await consumeBurst(userId, "mentorship", config.limits.burst.mentorship))) {
+    return new Response("Too many requests: please wait a moment.", { status: 429 });
+  }
+
+  const session = await auth();
+  const email = (session?.user as { email?: string } | undefined)?.email;
+  const name = (session?.user as { name?: string } | undefined)?.name;
+  const result = await createMentorshipRequest({
     userId,
-    requestId,
+    studentEmail: email,
+    studentName: name,
     topic: c.topic,
     message: c.message,
-    status: "open",
-    createdAt: new Date().toISOString(),
   });
-  return Response.json({ ok: true, requestId });
+  return Response.json({ ok: true, requestId: result.requestId, matched: result.matched, mentorName: result.mentorName });
 }

@@ -58,3 +58,41 @@ export async function consumeChatQuota(userId: string): Promise<ChatQuota> {
   const used = Number((res.Attributes as { count?: number } | undefined)?.count ?? 0);
   return { allowed: used <= limit, used, limit };
 }
+
+// --- Burst limiting -----------------------------------------------------------
+
+/** The minute-window key for a burst limiter (SK next to the daily counters). */
+export function burstKey(route: string, window: string): string {
+  return `RATE#BURST#${route}#${window}`;
+}
+
+/** Pure decision helper: the limiter allows counts up to and including the limit. */
+export function burstAllowed(count: number, limit: number): boolean {
+  return count <= limit;
+}
+
+/**
+ * Minute-window burst limiter, same atomic-counter pattern as the daily
+ * quota: one item per user+route+minute with a short TTL. Call before
+ * expensive work; returns false when the user exceeded the per-minute limit.
+ */
+export async function consumeBurst(
+  userId: string,
+  route: string,
+  limitPerMinute: number,
+): Promise<boolean> {
+  const window = new Date().toISOString().slice(0, 16); // YYYY-MM-DDTHH:MM
+  const ttl = Math.floor(Date.now() / 1000) + 180;
+  const res = await ddb().send(
+    new UpdateCommand({
+      TableName: config.storage.tableName,
+      Key: { PK: `USER#${userId}`, SK: burstKey(route, window) },
+      UpdateExpression: "ADD #c :one SET #t = :ttl",
+      ExpressionAttributeNames: { "#c": "count", "#t": "ttl" },
+      ExpressionAttributeValues: { ":one": 1, ":ttl": ttl },
+      ReturnValues: "ALL_NEW",
+    }),
+  );
+  const count = Number((res.Attributes as { count?: number } | undefined)?.count ?? 0);
+  return burstAllowed(count, limitPerMinute);
+}

@@ -17,6 +17,7 @@ export default auth((req) => {
     pathname.startsWith("/vault") ||
     pathname.startsWith("/mentorship") ||
     pathname.startsWith("/mentor") ||
+    pathname.startsWith("/account") ||
     pathname.startsWith("/admin");
 
   if (isProtected && !isLoggedIn) {

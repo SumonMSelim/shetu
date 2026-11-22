@@ -1,4 +1,5 @@
 import {
+  BatchWriteCommand,
   GetCommand,
   PutCommand,
   QueryCommand,
@@ -468,4 +469,69 @@ export async function assignMentorToRequest(
     }),
   );
   return request;
+}
+
+// --- GDPR export and erasure ------------------------------------------------
+
+/** Every item in the user's partition, in raw DynamoDB form (GDPR export). */
+export async function listEverythingForUser(userId: string): Promise<Record<string, unknown>[]> {
+  const items: Record<string, unknown>[] = [];
+  let lastEvaluated: Record<string, unknown> | undefined;
+  do {
+    const res = await ddb().send(
+      new QueryCommand({
+        TableName: TABLE,
+        KeyConditionExpression: "PK = :pk",
+        ExpressionAttributeValues: { ":pk": `USER#${userId}` },
+        ExclusiveStartKey: lastEvaluated,
+      }),
+    );
+    items.push(...((res.Items as Record<string, unknown>[]) ?? []));
+    lastEvaluated = res.LastEvaluatedKey;
+  } while (lastEvaluated);
+  return items;
+}
+
+/**
+ * Erase the user's partition (GDPR Art. 17). Deletes in batches of 25 until
+ * the partition is empty, then writes a minimal tombstone so the identifier
+ * cannot be silently re-used with old data. Returns the deleted item count.
+ */
+export async function deleteEverythingForUser(userId: string): Promise<number> {
+  let deleted = 0;
+  let lastEvaluated: Record<string, unknown> | undefined;
+  do {
+    const res = await ddb().send(
+      new QueryCommand({
+        TableName: TABLE,
+        KeyConditionExpression: "PK = :pk",
+        ExpressionAttributeValues: { ":pk": `USER#${userId}` },
+        ExclusiveStartKey: lastEvaluated,
+      }),
+    );
+    const page = (res.Items as Record<string, unknown>[]) ?? [];
+    for (let i = 0; i < page.length; i += 25) {
+      const batch = page.slice(i, i + 25).map((item) => ({
+        DeleteRequest: { Key: { PK: item.PK, SK: item.SK } },
+      }));
+      await ddb().send(
+        new BatchWriteCommand({ RequestItems: { [TABLE]: batch } }),
+      );
+      deleted += batch.length;
+    }
+    lastEvaluated = res.LastEvaluatedKey;
+  } while (lastEvaluated);
+
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        PK: `USER#${userId}`,
+        SK: "DELETED",
+        deletedAt: new Date().toISOString(),
+        reason: "gdpr-erasure-request",
+      },
+    }),
+  );
+  return deleted;
 }

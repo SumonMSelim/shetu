@@ -3,6 +3,8 @@ import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { listVaultDocs, putVaultDoc } from "@/lib/aws/repository";
 import { presignUpload, presignDownload, vaultKey } from "@/lib/aws/vault";
+import { consumeBurst } from "@/lib/aws/rate-limit";
+import { config } from "@/lib/config";
 
 /**
  * Vault API.
@@ -59,6 +61,9 @@ export async function GET(): Promise<Response> {
 export async function POST(req: Request): Promise<Response> {
   const userId = await userIdOrNull();
   if (!userId) return new Response("Unauthorized", { status: 401 });
+  if (!(await consumeBurst(userId, "vault", config.limits.burst.vault))) {
+    return new Response("Too many requests: please wait a moment.", { status: 429 });
+  }
 
   const body = await req.json().catch(() => null);
   if (!body || typeof body !== "object") {

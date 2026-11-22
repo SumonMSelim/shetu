@@ -12,7 +12,7 @@ import {
   putTurnTrace,
   type ChatMessageRecord,
 } from "@/lib/aws/repository";
-import { consumeChatQuota } from "@/lib/aws/rate-limit";
+import { consumeBurst, consumeChatQuota } from "@/lib/aws/rate-limit";
 import { TurnTraceCollector } from "@/lib/observability/trace";
 import { emitMetrics, logError, logInfo, logWarn } from "@/lib/observability/logger";
 import { config } from "@/lib/config";
@@ -82,7 +82,10 @@ export async function POST(req: Request): Promise<Response> {
     return new Response("Bad request", { status: 400 });
   }
 
-  // Cost and abuse guardrail: one atomic counter per user per day.
+  // Cost and abuse guardrails: per-minute burst first, then the daily quota.
+  if (!(await consumeBurst(userId, "chat", config.limits.burst.chat))) {
+    return new Response("Too many requests: please wait a moment.", { status: 429 });
+  }
   const quota = await consumeChatQuota(userId);
   if (!quota.allowed) {
     logInfo("chat.quota_exceeded", { userId, used: quota.used, limit: quota.limit });

@@ -1,5 +1,7 @@
 import {
+  DeleteObjectsCommand,
   GetObjectCommand,
+  ListObjectsV2Command,
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -64,4 +66,41 @@ export async function readTextContent(key: string, maxBytes = 200_000): Promise<
   if (!body) return "";
   const text = await body.transformToString("utf-8");
   return text.length > maxBytes ? text.slice(0, maxBytes) : text;
+}
+
+// --- GDPR erasure helpers -----------------------------------------------------
+
+/** List every Vault object belonging to one user (prefix `${userId}/`). */
+export async function listVaultUserObjects(
+  userId: string,
+): Promise<{ key: string; size: number }[]> {
+  const objects: { key: string; size: number }[] = [];
+  let token: string | undefined;
+  do {
+    const res = await s3().send(
+      new ListObjectsV2Command({
+        Bucket: BUCKET,
+        Prefix: `${userId}/`,
+        ContinuationToken: token,
+      }),
+    );
+    for (const o of res.Contents ?? []) {
+      if (o.Key) objects.push({ key: o.Key, size: o.Size ?? 0 });
+    }
+    token = res.IsTruncated ? res.NextContinuationToken : undefined;
+  } while (token);
+  return objects;
+}
+
+/** Delete every Vault object belonging to one user, in batches of 1,000. */
+export async function deleteVaultUserObjects(userId: string): Promise<number> {
+  const objects = await listVaultUserObjects(userId);
+  let deleted = 0;
+  for (let i = 0; i < objects.length; i += 1000) {
+    const batch = objects.slice(i, i + 1000).map((o) => ({ Key: o.key }));
+    if (batch.length === 0) continue;
+    await s3().send(new DeleteObjectsCommand({ Bucket: BUCKET, Delete: { Objects: batch } }));
+    deleted += batch.length;
+  }
+  return deleted;
 }
