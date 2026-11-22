@@ -16,6 +16,14 @@ import fiApplicationsJson from "../../../data/countries/fi/applications.json";
 import fiVisaJson from "../../../data/countries/fi/visa.json";
 import fiRedFlagsJson from "../../../data/countries/fi/red-flags.json";
 import fiProgrammesJson from "../../../data/countries/fi/programmes.json";
+import seCountryJson from "../../../data/countries/se/country.json";
+import seScholarshipsJson from "../../../data/countries/se/scholarships.json";
+import seCostsJson from "../../../data/countries/se/costs.json";
+import seInstitutionsJson from "../../../data/countries/se/institutions.json";
+import seApplicationsJson from "../../../data/countries/se/applications.json";
+import seVisaJson from "../../../data/countries/se/visa.json";
+import seRedFlagsJson from "../../../data/countries/se/red-flags.json";
+import seProgrammesJson from "../../../data/countries/se/programmes.json";
 import deCountryJson from "../../../data/countries/de/country.json";
 import deScholarshipsJson from "../../../data/countries/de/scholarships.json";
 import deCostsJson from "../../../data/countries/de/costs.json";
@@ -68,13 +76,25 @@ const FI = countryDataSchema.parse({
   programmes: fiProgrammesJson,
 });
 
+const SE = countryDataSchema.parse({
+  meta: seCountryJson,
+  scholarships: seScholarshipsJson,
+  costs: seCostsJson,
+  institutions: seInstitutionsJson,
+  applications: seApplicationsJson,
+  visa: seVisaJson,
+  redFlags: seRedFlagsJson,
+  programmes: seProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
   DE: toKnowledgeBase(DE),
   FI: toKnowledgeBase(FI),
+  SE: toKnowledgeBase(SE),
 };
 
-function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }
