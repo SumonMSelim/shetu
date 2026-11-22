@@ -19,6 +19,7 @@ import {
   applicationFactSchema,
   costItemSchema,
   countryMetaSchema,
+  FRESHNESS_DAYS,
   institutionSchema,
   programmeSchema,
   redFlagSchema,
@@ -27,7 +28,6 @@ import {
 } from "../src/lib/knowledge/schema";
 
 const DATA_DIR = join(import.meta.dirname, "..", "data", "countries");
-const FRESHNESS_DAYS = 400;
 
 type FileSpec = {
   schema: z.ZodTypeAny;

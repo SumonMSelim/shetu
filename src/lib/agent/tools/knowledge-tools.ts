@@ -1,6 +1,21 @@
 import { tool } from "@strands-agents/sdk";
 import { z } from "zod";
 import { getKnowledgeBase, availableCountries, DEFAULT_COUNTRY } from "@/lib/knowledge";
+import { isStaleProvenance } from "@/lib/knowledge/schema";
+
+/**
+ * Time metadata every figure carries into the retrieval path: when it was last
+ * verified against its source, and whether it is past the freshness budget.
+ * The answering model uses these to present figures honestly (see the honesty
+ * charter in prompts.ts).
+ */
+function withTime<T extends { id: string; provenance: { retrieved: string } }>(records: T[]) {
+  return records.map((r) => ({
+    ...r,
+    verifiedOn: r.provenance.retrieved,
+    stale: isStaleProvenance(r.provenance),
+  }));
+}
 
 /**
  * Knowledge tools.
@@ -32,7 +47,7 @@ export const getScholarships = tool({
   inputSchema: z.object({ country: countryField }),
   callback: ({ country }) => {
     const kb = getKnowledgeBase(country);
-    return { country: kb.country, scholarships: kb.scholarships };
+    return { country: kb.country, scholarships: withTime(kb.scholarships) };
   },
 });
 
@@ -43,7 +58,7 @@ export const getCosts = tool({
   inputSchema: z.object({ country: countryField }),
   callback: ({ country }) => {
     const kb = getKnowledgeBase(country);
-    return { country: kb.country, currency: kb.currency, costs: kb.costs };
+    return { country: kb.country, currency: kb.currency, costs: withTime(kb.costs) };
   },
 });
 
@@ -113,7 +128,7 @@ export const getProgrammes = tool({
         (p) => p.field.toLowerCase().includes(f) || p.name.toLowerCase().includes(f),
       );
     }
-    return { country: kb.country, count: list.length, programmes: list };
+    return { country: kb.country, count: list.length, programmes: withTime(list) };
   },
 });
 

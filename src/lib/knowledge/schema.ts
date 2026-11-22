@@ -13,6 +13,20 @@ import { z } from "zod";
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "must be an ISO date (YYYY-MM-DD)");
 const httpsUrl = z.string().url().refine((u) => u.startsWith("https://"), "must be https");
 
+/**
+ * How long a fact may serve without re-verification. Older records are marked
+ * stale for retrieval (the answering model says so) and are flagged for
+ * cleanup or retirement; CI fails on them too.
+ */
+export const FRESHNESS_DAYS = 400;
+
+/** True when a provenance date is older than the freshness budget. */
+export function isStaleProvenance(p: { retrieved: string }, now: Date = new Date()): boolean {
+  const retrieved = new Date(p.retrieved).getTime();
+  if (Number.isNaN(retrieved)) return true;
+  return (now.getTime() - retrieved) / 86_400_000 > FRESHNESS_DAYS;
+}
+
 export const provenanceSchema = z.object({
   source: z.string().min(3),
   sourceUrl: httpsUrl,

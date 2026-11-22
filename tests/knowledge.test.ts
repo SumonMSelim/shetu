@@ -61,6 +61,28 @@ test("cost figures stay within the freshness budget", () => {
   }
 });
 
+test("staleness marking and retirement logic", async () => {
+  const { isStaleProvenance } = await import("../src/lib/knowledge/schema");
+  const { partitionByStaleness, markRetired, daysSince } = await import("../src/lib/knowledge/retire");
+  const now = new Date("2026-11-22T12:00:00Z");
+
+  assert.equal(isStaleProvenance({ retrieved: "2026-11-01" }, now), false, "fresh record");
+  assert.equal(isStaleProvenance({ retrieved: "2025-08-01" }, now), true, "over 400 days old");
+  assert.equal(isStaleProvenance({ retrieved: "not-a-date" }, now), true, "unparseable is stale");
+
+  const fresh = { id: "a", provenance: { retrieved: "2026-11-01" } };
+  const old = { id: "b", provenance: { retrieved: "2025-08-01" } };
+  const editorial = { id: "c", provenance: undefined };
+  const { stale, current } = partitionByStaleness([fresh, old, editorial], now);
+  assert.deepEqual(current.map((r) => r.id), ["a", "c"], "records without a date stay current");
+  assert.deepEqual(stale.map((r) => r.id), ["b"]);
+
+  const marked = markRetired([old], "stale: past freshness budget", now);
+  assert.equal(marked[0].retiredOn, "2026-11-22");
+  assert.ok(marked[0].retiredReason.length > 0);
+  assert.equal(daysSince("2026-11-01", now), 21);
+});
+
 test("every scholarship carries provenance and explicit caveats", () => {
   const kb = getKnowledgeBase("NL");
   assert.ok(kb.scholarships.length > 0);
