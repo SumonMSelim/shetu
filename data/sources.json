@@ -28,5 +28,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "Bulk programme discovery via the finder's public JSON API (api/programs). Deterministic, no LLM, no browser needed: the API returns structured records."
+  },
+  {
+    "id": "opintopolku-studyinfo",
+    "country": "FI",
+    "kind": "portal-finder",
+    "url": "https://opintopolku.fi/konfo/en",
+    "adapter": "opintopolku-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "Opintopolku / Studyinfo search API with kieli=en filter (Finnish National Agency for Education). Deterministic, no LLM. Fees not in the search payload; a per-implementation detail harvest can add them later."
   }
 ]
