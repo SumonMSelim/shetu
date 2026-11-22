@@ -37,10 +37,10 @@ export const config = {
      * row, which the account's credits cover (the Anthropic rows bill gross).
      * Rollback to Claude if quality regresses: SHETU_MODEL_ID=us.anthropic.claude-sonnet-4-6
      */
-    modelId: process.env.SHETU_MODEL_ID ?? "amazon.nova-pro-v1:0",
+    modelId: process.env.SHETU_MODEL_ID ?? "us.amazon.nova-pro-v1:0",
     /** Cheaper/faster model for lightweight side calls (e.g. IELTS drills). */
     fastModelId:
-      process.env.SHETU_FAST_MODEL_ID ?? "amazon.nova-2-lite-v1:0",
+      process.env.SHETU_FAST_MODEL_ID ?? "us.amazon.nova-2-lite-v1:0",
   },
   storage: {
     vaultBucket: process.env.SHETU_VAULT_BUCKET ?? "shetu-vault",

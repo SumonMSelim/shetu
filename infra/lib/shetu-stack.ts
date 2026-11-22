@@ -61,8 +61,8 @@ export class ShetuStack extends cdk.Stack {
     // Amazon Nova Pro / Nova 2 Lite: first-party models billed under the
     // generic "Amazon Bedrock" service row, which the account's credits
     // cover. Rollback to Claude = change these two defaults.
-    const modelId = props.modelId ?? "amazon.nova-pro-v1:0";
-    const fastModelId = props.fastModelId ?? "amazon.nova-2-lite-v1:0";
+    const modelId = props.modelId ?? "us.amazon.nova-pro-v1:0";
+    const fastModelId = props.fastModelId ?? "us.amazon.nova-2-lite-v1:0";
     const alarmEmail = props.alarmEmail ?? (this.node.tryGetContext("alarmEmail") as string | undefined) ?? "";
     const appUrl = props.appUrl ?? (this.node.tryGetContext("appUrl") as string | undefined) ?? "";
 

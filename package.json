@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/**/*.test.ts",
     "validate:data": "node --import tsx scripts/validate-data.ts",
+    "evals": "node --import tsx scripts/run-evals.ts",
     "draft:programmes": "node --import tsx scripts/draft-programmes.ts",
     "harvest": "node --import tsx scripts/harvest.ts",
     "clean:stale": "node --import tsx scripts/clean-stale.ts",
