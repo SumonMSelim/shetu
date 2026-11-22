@@ -2,6 +2,7 @@ import {
   GetCommand,
   PutCommand,
   QueryCommand,
+  ScanCommand,
   UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { ddb } from "./clients";
@@ -53,13 +54,50 @@ export interface VaultDoc {
   uploadedAt: string;
 }
 
+export type MentorshipStatus =
+  | "open"
+  | "matched"
+  | "accepted"
+  | "declined"
+  | "completed";
+
 export interface MentorshipRequest {
   userId: string;
   requestId: string;
   topic: string;
   message: string;
-  status: "open" | "assigned" | "closed";
+  status: MentorshipStatus;
   createdAt: string;
+  /** Student context, captured at creation for matching and mentor contact. */
+  studentEmail?: string;
+  studentName?: string;
+  targetCountry?: string;
+  level?: string;
+  field?: string;
+  language?: string;
+  /** The mentor side, filled by matching and the mentor's responses. */
+  mentorId?: string;
+  mentorName?: string;
+  respondedAt?: string;
+  meetingUrl?: string;
+  completedAt?: string;
+  outcomeNote?: string;
+}
+
+export interface MentorProfile {
+  userId: string;
+  displayName: string;
+  email: string;
+  bio: string;
+  /** ISO countries this mentor knows well, e.g. ["NL", "DE"]. */
+  countries: string[];
+  levels: string[];
+  fields: string[];
+  languages: string[];
+  capacityPerWeek: number;
+  available: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // --- Profile -------------------------------------------------------------
@@ -131,20 +169,113 @@ export async function listMentorshipRequests(userId: string): Promise<Mentorship
   return (res.Items as MentorshipRequest[] | undefined) ?? [];
 }
 
-export async function updateMentorshipStatus(
-  userId: string,
-  requestId: string,
-  status: MentorshipRequest["status"],
-): Promise<void> {
-  await ddb().send(
-    new UpdateCommand({
+/**
+ * Requests assigned to one mentor, newest first. The requests live in the
+ * STUDENT's partition, so this is a filtered scan: the mentor population is
+ * small and request volume low, which keeps the single-table design free of
+ * extra indexes. Revisit with a GSI if mentor traffic grows.
+ */
+export async function listRequestsForMentor(mentorId: string): Promise<MentorshipRequest[]> {
+  const res = await ddb().send(
+    new ScanCommand({
       TableName: TABLE,
-      Key: { PK: `USER#${userId}`, SK: `MENTORSHIP#${requestId}` },
-      UpdateExpression: "SET #s = :s",
-      ExpressionAttributeNames: { "#s": "status" },
-      ExpressionAttributeValues: { ":s": status },
+      FilterExpression: "mentorId = :mid AND status IN (:matched, :accepted, :completed)",
+      ExpressionAttributeValues: {
+        ":mid": mentorId,
+        ":matched": "matched",
+        ":accepted": "accepted",
+        ":completed": "completed",
+      },
     }),
   );
+  const items = (res.Items as MentorshipRequest[] | undefined) ?? [];
+  return items.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/** One request by id within the mentor's assignments (for action routes). */
+export async function getRequestForMentor(
+  mentorId: string,
+  requestId: string,
+): Promise<MentorshipRequest | null> {
+  const res = await ddb().send(
+    new ScanCommand({
+      TableName: TABLE,
+      FilterExpression: "mentorId = :mid AND requestId = :rid",
+      ExpressionAttributeValues: { ":mid": mentorId, ":rid": requestId },
+    }),
+  );
+  return (res.Items as MentorshipRequest[] | undefined)?.[0] ?? null;
+}
+
+/** Update an existing request in place (status flow fields). */
+export async function updateMentorshipRequest(
+  request: MentorshipRequest,
+): Promise<void> {
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { PK: `USER#${request.userId}`, SK: `MENTORSHIP#${request.requestId}`, ...request },
+    }),
+  );
+}
+
+// --- Mentor profiles -------------------------------------------------------
+
+export async function putMentorProfile(profile: MentorProfile): Promise<void> {
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        PK: `USER#${profile.userId}`,
+        SK: "MENTOR_PROFILE",
+        ...profile,
+      },
+    }),
+  );
+}
+
+export async function getMentorProfile(userId: string): Promise<MentorProfile | null> {
+  const res = await ddb().send(
+    new GetCommand({
+      TableName: TABLE,
+      Key: { PK: `USER#${userId}`, SK: "MENTOR_PROFILE" },
+    }),
+  );
+  return (res.Item as MentorProfile | undefined) ?? null;
+}
+
+/**
+ * All mentor profiles that are accepting mentees. A filtered scan on purpose:
+ * mentors are counted in tens, so a scan is simpler than a GSI while the
+ * single-table design stays index-free. Revisit if the mentor base grows.
+ */
+export async function listAvailableMentors(): Promise<MentorProfile[]> {
+  const res = await ddb().send(
+    new ScanCommand({
+      TableName: TABLE,
+      FilterExpression: "SK = :sk AND available = :yes",
+      ExpressionAttributeValues: { ":sk": "MENTOR_PROFILE", ":yes": true },
+    }),
+  );
+  return (res.Items as MentorProfile[] | undefined) ?? [];
+}
+
+/** Open (matched/accepted) request count for a mentor, for capacity checks. */
+export async function countActiveForMentor(mentorId: string): Promise<number> {
+  const res = await ddb().send(
+    new ScanCommand({
+      TableName: TABLE,
+      FilterExpression:
+        "mentorId = :mid AND (status = :matched OR status = :accepted)",
+      ExpressionAttributeValues: {
+        ":mid": mentorId,
+        ":matched": "matched",
+        ":accepted": "accepted",
+      },
+      Select: "COUNT",
+    }),
+  );
+  return res.Count ?? 0;
 }
 
 // --- Conversations & messages -------------------------------------------

@@ -36,7 +36,7 @@ Everything happens through a chat interface after a one-click Google sign-in:
 - **Document coaching** - structured feedback on your statement of purpose, CV, or motivation letter.
 - **IELTS preparation** - band explanations, targeted practice, and realistic scoring.
 - **A private document Vault** - store your documents securely; you always keep your own originals.
-- **Human mentorship on request** - when a decision is high-stakes or personal, Shetu arranges a real person.
+- **Human mentorship on request** - when a decision is high-stakes or personal, Shetu matches the student with a mentor whose expertise fits (country, level, field, language). Mentors manage requests from their inbox at `/mentor`.
 
 Two design choices make Shetu trustworthy where agencies are not:
 

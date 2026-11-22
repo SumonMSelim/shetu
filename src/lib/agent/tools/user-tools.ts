@@ -1,14 +1,13 @@
 import { tool } from "@strands-agents/sdk";
 import { z } from "zod";
-import { randomUUID } from "node:crypto";
 import {
   listVaultDocs,
   getVaultDoc,
-  putMentorshipRequest,
   getProfile,
   putProfile,
 } from "@/lib/aws/repository";
 import { readTextContent } from "@/lib/aws/vault";
+import { createMentorshipRequest } from "@/lib/mentorship/service";
 
 /**
  * User-scoped tools.
@@ -65,7 +64,7 @@ export function buildUserTools(userId: string) {
   const requestMentorship = tool({
     name: "request_mentorship",
     description:
-      "Record a request for a real human mentor on behalf of the student. Use when the student asks for a human, or when they face a high-stakes, emotional, or complex decision where a person would genuinely help. Confirm with the student before calling this.",
+      "Create a request for a real human mentor on behalf of the student. Matching runs automatically: an available mentor whose expertise fits the student's country, level and field is assigned and notified. Use when the student asks for a human, or when they face a high-stakes, emotional, or complex decision where a person would genuinely help. Confirm with the student before calling this.",
     inputSchema: z.object({
       topic: z
         .string()
@@ -75,19 +74,13 @@ export function buildUserTools(userId: string) {
         .describe("A summary of what the student needs help with, in their words where possible."),
     }),
     callback: async ({ topic, message }) => {
-      const requestId = randomUUID();
-      await putMentorshipRequest({
-        userId,
-        requestId,
-        topic,
-        message,
-        status: "open",
-        createdAt: new Date().toISOString(),
-      });
+      const result = await createMentorshipRequest({ userId, topic, message });
       return {
         ok: true,
-        requestId,
-        note: "A human mentorship request has been recorded. A mentor will follow up; the student can track it on the Mentorship page.",
+        requestId: result.requestId,
+        note: result.matched
+          ? `A mentorship request has been created and ${result.mentorName} has been assigned. The student can track it on the Mentorship page.`
+          : "A mentorship request has been recorded. No mentor is available right now, so it is in the queue; the student can track it on the Mentorship page.",
       };
     },
   });

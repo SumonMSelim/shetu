@@ -3,9 +3,16 @@ import Link from "next/link";
 import { signOut } from "@/auth";
 
 /**
- * Top navigation shared across the authenticated app pages.
+ * Top navigation shared across the authenticated app pages. `showMentor`
+ * reveals the mentor dashboard link for accounts with the mentor role.
  */
-export function AppHeader({ active }: { active: "chat" | "vault" | "mentorship" }) {
+export function AppHeader({
+  active,
+  showMentor = false,
+}: {
+  active: "chat" | "vault" | "mentorship" | "mentor";
+  showMentor?: boolean;
+}) {
   const link = (href: string, key: string, label: string) => (
     <Link
       href={href}
@@ -51,6 +58,7 @@ export function AppHeader({ active }: { active: "chat" | "vault" | "mentorship" 
           {link("/chat", "chat", "Chat")}
           {link("/vault", "vault", "Vault")}
           {link("/mentorship", "mentorship", "Mentorship")}
+          {showMentor ? link("/mentor", "mentor", "Mentor") : null}
         </nav>
 
         <form

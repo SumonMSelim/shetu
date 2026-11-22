@@ -15,7 +15,8 @@ export default auth((req) => {
   const isProtected =
     pathname.startsWith("/chat") ||
     pathname.startsWith("/vault") ||
-    pathname.startsWith("/mentorship");
+    pathname.startsWith("/mentorship") ||
+    pathname.startsWith("/mentor");
 
   if (isProtected && !isLoggedIn) {
     return NextResponse.redirect(new URL("/", req.nextUrl.origin));
