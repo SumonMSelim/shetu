@@ -96,6 +96,48 @@ export interface RedFlag {
   provenance?: Provenance;
 }
 
+/**
+ * A concrete study programme. This is the entity that lets the Opportunity
+ * Matcher name real options instead of programme types. Fields the pipeline
+ * has not verified stay absent rather than guessed: every figure present is
+ * backed by the record's provenance.
+ */
+export interface Programme {
+  id: string;
+  /** Institution offering the programme, e.g. "Delft University of Technology". */
+  institution: string;
+  /** "research-university" | "university-of-applied-sciences" | "institute". */
+  institutionType: string;
+  /** Official programme name, e.g. "MSc Computer Science". */
+  name: string;
+  level: "bachelor" | "master" | "phd";
+  /** Field of study, e.g. "Computer Science". */
+  field: string;
+  /** Teaching language, e.g. "English". */
+  language: string;
+  /** City of the main campus. */
+  city: string;
+  /** Programme length in months, when known. */
+  durationMonths?: number;
+  /** Statutory (EU/EEA) tuition per year, when applicable. */
+  tuitionEu?: number;
+  /** Institutional (non-EEA) tuition per year, when verified per programme. */
+  tuitionNonEu?: number;
+  /** Honest range for the non-EEA fee when the exact figure is not verified. */
+  tuitionNonEuRangeLow?: number;
+  tuitionNonEuRangeHigh?: number;
+  currency: string;
+  /** Application deadline as stated by the source, e.g. "1 April (non-EU)". */
+  applicationDeadline?: string;
+  numerusFixus?: boolean;
+  /** English requirement as stated, e.g. "IELTS 6.5". */
+  englishRequirement?: string;
+  /** Official programme page (the authoritative source for the specifics). */
+  applicationUrl: string;
+  notes?: string;
+  provenance: Provenance;
+}
+
 /** The full knowledge base for one destination. */
 export interface KnowledgeBase {
   /** ISO country code, e.g. "NL". */
@@ -108,4 +150,5 @@ export interface KnowledgeBase {
   applications: ApplicationFact[];
   visa: VisaFact[];
   redFlags: RedFlag[];
+  programmes: Programme[];
 }

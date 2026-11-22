@@ -111,11 +111,14 @@ src/
   components/          Chat, Vault, header UI
   lib/
     agent/             orchestrator, specialists, prompts, model, tools
-    knowledge/         destination knowledge bases (Netherlands) + types
+    knowledge/         schema + registry (loads the JSON data files)
     aws/               S3 vault, DynamoDB repository, clients
   auth.ts              Auth.js (Google) config
   proxy.ts             route protection
-infra/                 AWS CDK app (App Runner, S3, DynamoDB, ECR, IAM)
+data/
+  countries/<CC>/      country knowledge bases as JSON, schema-validated in CI
+scripts/               set-role, harden-storage, validate-data
+infra/                 AWS CDK app (Fargate, Cloudflare Tunnel, S3, DynamoDB, IAM)
 Dockerfile             production image
 ```
 

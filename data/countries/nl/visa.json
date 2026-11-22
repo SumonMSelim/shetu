@@ -1,0 +1,33 @@
+[
+  {
+    "id": "who-needs-visa",
+    "topic": "Who needs a visa",
+    "detail": "EU/EEA nationals do not need a visa or work permit. Non-EU/EEA students generally need an entry visa (MVV) and/or a residence permit (VVR). Your university acts as your official sponsor and usually submits the immigration application for you.",
+    "provenance": {
+      "source": "Study in NL - Do you need a visa?",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay/do-you-need-a-visa",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "sponsor-process",
+    "topic": "The university is your sponsor",
+    "detail": "For student immigration, the recognised sponsor is your university. They file the MVV/VVR application with the IND on your behalf. You do not need a private agency to lodge the immigration application, and no agency can 'guarantee' a visa.",
+    "provenance": {
+      "source": "Study in NL - Plan your stay",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "proof-of-funds-visa",
+    "topic": "Proof of funds for the visa",
+    "detail": "You must show about €1,130 per month for 12 months (roughly €13,569) as available funds, on top of unpaid tuition. This is money you must demonstrate you have; it is not paid to the university or an agent.",
+    "provenance": {
+      "source": "Dutch immigration service (IND) - income requirements for study",
+      "sourceUrl": "https://ind.nl/en/income-requirements-study",
+      "retrieved": "2026-11-04",
+      "period": "2026"
+    }
+  }
+]

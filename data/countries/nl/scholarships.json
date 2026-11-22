@@ -1,0 +1,68 @@
+[
+  {
+    "id": "nl-scholarship",
+    "name": "NL Scholarship (formerly Holland Scholarship)",
+    "provider": "government",
+    "summary": "A one-off grant from the Dutch Ministry of Education and participating universities for students from outside the European Economic Area (EEA).",
+    "value": "€5,000, paid once in the first year of study",
+    "coversFullTuition": false,
+    "eligibility": [
+      "Nationality outside the EEA",
+      "Applying for a full-time bachelor's or master's at a participating institution",
+      "Not previously studied in the Netherlands"
+    ],
+    "levels": ["bachelor", "master"],
+    "caveats": [
+      "This is NOT a full scholarship: €5,000 is a one-time amount and does not renew.",
+      "It does not cover tuition on its own; you still need to fund the rest of tuition and all living costs.",
+      "You apply directly to the university, not to a paid agency. Application is free."
+    ],
+    "provenance": {
+      "source": "Study in NL - NL Scholarship",
+      "sourceUrl": "https://www.studyinnl.org/finances/nl-scholarship",
+      "retrieved": "2026-11-04",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "orange-knowledge",
+    "name": "Orange Knowledge Programme (ended)",
+    "provider": "government",
+    "summary": "A former Dutch government scholarship for professionals from eligible countries. It has ended and has no new application rounds.",
+    "value": "No longer available",
+    "coversFullTuition": false,
+    "eligibility": ["Not applicable - programme closed"],
+    "levels": ["master"],
+    "caveats": [
+      "The Orange Knowledge Programme ended in 2024. There are no new rounds.",
+      "If an agency offers to get you an 'Orange Knowledge' scholarship, that is a red flag - the programme is closed."
+    ],
+    "provenance": {
+      "source": "Study in NL - Scholarships",
+      "sourceUrl": "https://www.studyinnl.org/finances/scholarships",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "erasmus-mundus",
+    "name": "Erasmus Mundus Joint Masters",
+    "provider": "eu",
+    "summary": "EU-funded scholarships for selected joint master's programmes studied across multiple European countries, often including the Netherlands.",
+    "value": "Typically covers tuition plus a monthly living allowance and travel; amount varies by programme",
+    "coversFullTuition": true,
+    "eligibility": [
+      "Admission to a specific Erasmus Mundus Joint Masters programme",
+      "Selection is highly competitive and programme-specific"
+    ],
+    "levels": ["master"],
+    "caveats": [
+      "You apply to the specific joint programme, not to a general fund.",
+      "Highly competitive; funding is limited and merit-based."
+    ],
+    "provenance": {
+      "source": "Study in NL - Scholarships (StudyFinder)",
+      "sourceUrl": "https://www.studyinnl.org/finances/scholarships",
+      "retrieved": "2026-11-04"
+    }
+  }
+]

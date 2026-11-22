@@ -1,0 +1,24 @@
+[
+  {
+    "id": "research-university",
+    "name": "Research universities (WO)",
+    "type": "research-university",
+    "summary": "Academically oriented universities focused on research-driven programmes. Suited to students aiming for academic or research careers.",
+    "provenance": {
+      "source": "Study in NL - Dutch education",
+      "sourceUrl": "https://www.studyinnl.org/dutch-education",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "applied-sciences",
+    "name": "Universities of applied sciences (HBO)",
+    "type": "university-of-applied-sciences",
+    "summary": "Practice-oriented institutions focused on professional preparation, often with internships. Suited to students wanting applied, career-focused study.",
+    "provenance": {
+      "source": "Study in NL - Dutch education",
+      "sourceUrl": "https://www.studyinnl.org/dutch-education",
+      "retrieved": "2026-11-04"
+    }
+  }
+]

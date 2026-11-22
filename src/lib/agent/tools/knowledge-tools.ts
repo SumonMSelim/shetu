@@ -91,11 +91,38 @@ export const getRedFlags = tool({
   },
 });
 
+export const getProgrammes = tool({
+  name: "get_programmes",
+  description:
+    "Get verified study programmes for a destination, with fees, language, duration and the official programme page link. Use this when matching programmes or naming concrete options, and always give the programme page link so the student can verify figures themselves.",
+  inputSchema: z.object({
+    country: countryField,
+    level: z.enum(["bachelor", "master", "phd"]).optional().describe("Filter by study level."),
+    field: z
+      .string()
+      .optional()
+      .describe("Filter by field or programme name, e.g. 'Computer Science'."),
+  }),
+  callback: ({ country, level, field }) => {
+    const kb = getKnowledgeBase(country);
+    let list = kb.programmes;
+    if (level) list = list.filter((p) => p.level === level);
+    if (field) {
+      const f = field.toLowerCase();
+      list = list.filter(
+        (p) => p.field.toLowerCase().includes(f) || p.name.toLowerCase().includes(f),
+      );
+    }
+    return { country: kb.country, count: list.length, programmes: list };
+  },
+});
+
 /** All knowledge tools, for convenient registration. */
 export const knowledgeTools = [
   listDestinations,
   getScholarships,
   getCosts,
+  getProgrammes,
   getApplicationInfo,
   getVisaInfo,
   getInstitutions,

@@ -1,0 +1,113 @@
+[
+  {
+    "id": "tuition-statutory",
+    "label": "Statutory tuition fee (government-set)",
+    "category": "tuition",
+    "amount": 2694,
+    "currency": "EUR",
+    "per": "year",
+    "notes": "The statutory fee applies mainly to EU/EEA students and some others who meet nationality and prior-study conditions. Most non-EEA students pay the higher institutional fee instead. Re-verified against the source on 22 November 2026.",
+    "provenance": {
+      "source": "Study in NL - Tuition fees",
+      "sourceUrl": "https://www.studyinnl.org/finances/tuition-fees",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "tuition-institutional",
+    "label": "Institutional tuition fee (non-EEA)",
+    "category": "tuition",
+    "amount": 12000,
+    "currency": "EUR",
+    "per": "year",
+    "rangeLow": 9000,
+    "rangeHigh": 30000,
+    "notes": "Non-EEA students pay an institutional fee set by each university. For 2026-2027 the source states bachelor's programmes average €9,000-20,000 and master's programmes €12,000-30,000; technical and medical programmes sit at the top. Exact figures per programme are on each institution's own page.",
+    "provenance": {
+      "source": "Study in NL - Tuition fees",
+      "sourceUrl": "https://www.studyinnl.org/finances/tuition-fees",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "application-handling-fee",
+    "label": "Application / handling fee (some institutions)",
+    "category": "other",
+    "amount": 100,
+    "currency": "EUR",
+    "per": "once",
+    "rangeLow": 75,
+    "rangeHigh": 100,
+    "notes": "Some institutions charge non-EEA applicants a handling fee of roughly €75-100 when they submit an application. This is a university charge, not an agency fee.",
+    "provenance": {
+      "source": "Study in NL - Tuition fees",
+      "sourceUrl": "https://www.studyinnl.org/finances/tuition-fees",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "living-costs",
+    "label": "Living costs",
+    "category": "living",
+    "amount": 1250,
+    "currency": "EUR",
+    "per": "month",
+    "rangeLow": 1000,
+    "rangeHigh": 1500,
+    "notes": "Covers rent, food, transport, insurance and personal expenses. Amsterdam and Utrecht sit at the higher end; smaller cities are cheaper. Budget for the higher end to be safe.",
+    "provenance": {
+      "source": "Study in NL - Costs of living",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "proof-of-funds",
+    "label": "Proof of funds required for the visa",
+    "category": "upfront",
+    "amount": 13569,
+    "currency": "EUR",
+    "per": "year",
+    "notes": "For the entry visa/residence permit, non-EU students must prove roughly €1,130 per month for 12 months (about €13,569), on top of any unpaid tuition. This money must be shown as available; it is not a fee paid to anyone.",
+    "provenance": {
+      "source": "Dutch immigration service (IND) - income requirements for study",
+      "sourceUrl": "https://ind.nl/en/income-requirements-study",
+      "retrieved": "2026-11-04",
+      "period": "2026"
+    }
+  },
+  {
+    "id": "residence-permit-fee",
+    "label": "Residence permit / entry visa fee",
+    "category": "visa",
+    "amount": 286,
+    "currency": "EUR",
+    "per": "once",
+    "notes": "A non-refundable government fee for the residence permit, usually paid to and handled by your university as your sponsor. This is a government charge, not an agency service fee.",
+    "provenance": {
+      "source": "Dutch universities (IND-set fee)",
+      "sourceUrl": "https://ind.nl/en",
+      "retrieved": "2026-11-04",
+      "period": "2026"
+    }
+  },
+  {
+    "id": "health-insurance",
+    "label": "Health insurance",
+    "category": "insurance",
+    "amount": 1400,
+    "currency": "EUR",
+    "per": "year",
+    "rangeLow": 150,
+    "rangeHigh": 1600,
+    "notes": "International students need valid health insurance. A student policy can be relatively cheap; if you work alongside study you may be required to switch to Dutch public insurance, which costs more.",
+    "provenance": {
+      "source": "Study in NL - Plan your stay (insurance)",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay",
+      "retrieved": "2026-11-04"
+    }
+  }
+]

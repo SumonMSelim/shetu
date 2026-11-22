@@ -1,0 +1,53 @@
+[
+  {
+    "id": "guaranteed-admission",
+    "claim": "'We guarantee your admission / visa.'",
+    "why": "No one can guarantee admission or a visa. Admission is decided by the university and immigration by the IND. A guarantee is a sales tactic, not a fact.",
+    "reality": "A legitimate adviser improves your application and explains your realistic chances. The university decides admission; the IND decides the visa."
+  },
+  {
+    "id": "pay-for-scholarship",
+    "claim": "'Pay us and we'll secure you a scholarship.'",
+    "why": "Official scholarships like the NL Scholarship are applied for directly through the university, for free. You cannot buy your way into them.",
+    "reality": "You apply for the NL Scholarship (€5,000, one-off) and other funding yourself through the university at no charge.",
+    "provenance": {
+      "source": "Study in NL - NL Scholarship",
+      "sourceUrl": "https://www.studyinnl.org/finances/nl-scholarship",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "hidden-total-cost",
+    "claim": "'Study in the Netherlands for almost nothing.'",
+    "why": "This hides the real total cost: institutional tuition for non-EEA students plus €1,000-1,500/month living costs, insurance, and proof of funds of about €13,569.",
+    "reality": "Budget honestly for tuition + about €12,000-18,000/year in living and related costs. Ask for a full written cost breakdown.",
+    "provenance": {
+      "source": "Study in NL - Finances",
+      "sourceUrl": "https://www.studyinnl.org/finances",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "fake-orange-knowledge",
+    "claim": "'We can get you the Orange Knowledge scholarship.'",
+    "why": "The Orange Knowledge Programme ended in 2024 and has no new rounds. Offering it is a sign the adviser is out of date or dishonest.",
+    "reality": "Look at currently open funding via the official StudyFinder instead.",
+    "provenance": {
+      "source": "Study in NL - Scholarships",
+      "sourceUrl": "https://www.studyinnl.org/finances/scholarships",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "withholding-documents",
+    "claim": "'Let us hold your original documents / passport for safekeeping.'",
+    "why": "Keeping your originals creates leverage to extract more fees and is a known abusive tactic.",
+    "reality": "You keep your own originals. You submit certified copies or upload scans yourself through official portals."
+  },
+  {
+    "id": "upfront-large-fees",
+    "claim": "'Pay a large all-inclusive package fee upfront.'",
+    "why": "Large non-itemised upfront fees obscure what you are actually paying for and are hard to recover if the agency underdelivers.",
+    "reality": "Ask for an itemised list of services and fees. Most official steps (applying to programmes, the NL Scholarship, the StudyFinder) are free to access directly."
+  }
+]

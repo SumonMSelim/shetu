@@ -28,6 +28,7 @@ export const TOOL_LABELS: Record<string, string> = {
   ielts_prep: "Preparing IELTS guidance",
   get_scholarships: "Looking up scholarships",
   get_costs: "Looking up real costs",
+  get_programmes: "Matching real programmes",
   get_application_info: "Checking application requirements",
   get_visa_info: "Checking visa requirements",
   get_institutions: "Comparing institutions",

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "nl-msc-cs-tud",
+    "institution": "Delft University of Technology",
+    "institutionType": "research-university",
+    "name": "MSc Computer Science",
+    "level": "master",
+    "field": "Computer Science",
+    "language": "English",
+    "city": "Delft",
+    "durationMonths": 24,
+    "tuitionEu": 2694,
+    "tuitionNonEuRangeLow": 12000,
+    "tuitionNonEuRangeHigh": 30000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tudelft.nl/en/education/programmes/masters/computer-science/msc-computer-science",
+    "notes": "The statutory fee applies to EU/EEA students. The non-EEA institutional fee is set by TU Delft per programme; the range shown is the national master's range from Study in NL, and the exact figure plus programme-specific deadlines must be checked on the official programme page. Non-EU deadlines are often much earlier than general Dutch deadlines.",
+    "provenance": {
+      "source": "Study in NL - Tuition fees (fee figures); TU Delft programme page (programme details)",
+      "sourceUrl": "https://www.studyinnl.org/finances/tuition-fees",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "nl-msc-cs-uva-vu-segreenit",
+    "institution": "University of Amsterdam / Vrije Universiteit Amsterdam (joint degree)",
+    "institutionType": "research-university",
+    "name": "MSc Computer Science - Software Engineering and Green IT track",
+    "level": "master",
+    "field": "Computer Science",
+    "language": "English",
+    "city": "Amsterdam",
+    "durationMonths": 24,
+    "tuitionEu": 2694,
+    "tuitionNonEuRangeLow": 12000,
+    "tuitionNonEuRangeHigh": 30000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it",
+    "notes": "A track of the joint-degree MSc Computer Science run by UvA and VU; courses may take place at either campus. Duration 24 months (120 EC), language of instruction English, September start, as stated on the programme page on 22 November 2026. The page does not state a deadline or English requirement: verify both on the page and with the admissions office. The statutory fee applies to EU/EEA students; the non-EEA fee range is the national master's range from Study in NL, and the exact figure must be checked with the university.",
+    "provenance": {
+      "source": "UvA programme page (programme details, verified live 22 Nov 2026); Study in NL - Tuition fees (fee figures)",
+      "sourceUrl": "https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  }
+]

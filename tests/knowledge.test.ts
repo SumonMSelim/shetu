@@ -29,6 +29,38 @@ test("unknown country throws a clear error", () => {
   assert.throws(() => getKnowledgeBase("ZZ"), /No knowledge base/);
 });
 
+test("programmes carry provenance and honest fee ranges", () => {
+  const kb = getKnowledgeBase("NL");
+  assert.ok(kb.programmes.length > 0, "NL must have at least one seeded programme");
+  for (const p of kb.programmes) {
+    assertProvenance(`programme ${p.id}`, p.provenance);
+    assert.match(p.applicationUrl, /^https:\/\//, `programme ${p.id}: applicationUrl must be https`);
+    assert.ok(["bachelor", "master", "phd"].includes(p.level), `programme ${p.id}: level invalid`);
+    if (p.tuitionEu !== undefined) {
+      assert.ok(p.tuitionEu > 0, `programme ${p.id}: tuitionEu must be positive`);
+    }
+    if (p.tuitionNonEuRangeLow !== undefined && p.tuitionNonEuRangeHigh !== undefined) {
+      assert.ok(
+        p.tuitionNonEuRangeLow <= p.tuitionNonEuRangeHigh,
+        `programme ${p.id}: fee range low > high`,
+      );
+    }
+    assert.ok(p.notes && p.notes.length > 10, `programme ${p.id}: must carry verification notes`);
+  }
+});
+
+test("cost figures stay within the freshness budget", () => {
+  const kb = getKnowledgeBase("NL");
+  const FRESH_DAYS = 400;
+  for (const c of kb.costs) {
+    const ageDays = Math.floor((Date.now() - new Date(c.provenance.retrieved).getTime()) / 86_400_000);
+    assert.ok(
+      ageDays <= FRESH_DAYS,
+      `cost ${c.id}: provenance is ${ageDays} days old (budget ${FRESH_DAYS}); re-verify the figure against the source`,
+    );
+  }
+});
+
 test("every scholarship carries provenance and explicit caveats", () => {
   const kb = getKnowledgeBase("NL");
   assert.ok(kb.scholarships.length > 0);

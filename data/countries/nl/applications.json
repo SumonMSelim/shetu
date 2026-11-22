@@ -1,0 +1,42 @@
+[
+  {
+    "id": "deadline-general",
+    "topic": "Application deadlines",
+    "detail": "Common deadlines are 15 January for numerus fixus (capped-intake) programmes and 1 May for most other programmes. Individual programmes, especially for non-EU applicants who need a visa, often set much earlier deadlines, so check each programme page.",
+    "provenance": {
+      "source": "Study in NL - How to apply",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay/how-to-apply",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "english-requirement",
+    "topic": "English language requirement",
+    "detail": "English-taught programmes require proof of English proficiency, commonly IELTS or TOEFL. Typical minimums are around IELTS 6.0-6.5 for bachelor's and 6.5-7.0 for master's, but each programme sets its own exact score. Verify on the programme page.",
+    "provenance": {
+      "source": "Study in NL - How to apply",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay/how-to-apply",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "numerus-fixus",
+    "topic": "Numerus fixus (capped programmes)",
+    "detail": "Some popular programmes limit the number of places (numerus fixus) and select among applicants. These have a fixed earlier deadline (15 January) and a selection procedure, so you cannot apply late.",
+    "provenance": {
+      "source": "Study in NL - How to apply",
+      "sourceUrl": "https://www.studyinnl.org/plan-your-stay/how-to-apply",
+      "retrieved": "2026-11-04"
+    }
+  },
+  {
+    "id": "how-to-find-programme",
+    "topic": "Finding an English-taught programme",
+    "detail": "The official Study in NL StudyFinder lists English-taught programmes across Dutch institutions. You search and apply directly; you do not need a paid agency to access it.",
+    "provenance": {
+      "source": "Study in NL - Find a study programme",
+      "sourceUrl": "https://www.studyinnl.org/dutch-education",
+      "retrieved": "2026-11-04"
+    }
+  }
+]
