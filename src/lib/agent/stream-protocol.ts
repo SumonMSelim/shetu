@@ -48,3 +48,16 @@ export function toolLabel(name: string): string {
 export function encodeEvent(event: ChatStreamEvent): string {
   return JSON.stringify(event) + "\n";
 }
+
+/**
+ * The message shown to the student when a turn fails. When part of the answer
+ * already streamed (max tokens hit mid-listing), the partial answer is saved
+ * and the message explains how to continue, instead of a scary generic error.
+ */
+export function streamErrorMessage(err: unknown): string {
+  const name = err instanceof Error ? err.name : "";
+  if (name === "MaxTokensError") {
+    return "I hit my reply length limit mid-answer, so the reply stopped early. Your question is saved: ask me to continue and I will pick up where I stopped.";
+  }
+  return "Something went wrong while answering. Please try again. If it keeps happening, you can request a human mentor.";
+}

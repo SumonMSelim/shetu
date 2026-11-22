@@ -13,7 +13,10 @@ export function primaryModel(): BedrockModel {
     modelId: config.bedrock.modelId,
     region: config.aws.region,
     temperature: 0.3, // Low: we want accurate, grounded guidance, not creativity.
-    maxTokens: 2048,
+    // Detailed programme listings tokenize heavily in non-Latin scripts
+    // (Bangla needs roughly twice the tokens of English); 2048 cut answers
+    // off mid-stream. The request-level InvokeLimits still bound total cost.
+    maxTokens: 8192,
   });
 }
 
@@ -23,6 +26,6 @@ export function fastModel(): BedrockModel {
     modelId: config.bedrock.fastModelId,
     region: config.aws.region,
     temperature: 0.4,
-    maxTokens: 2048,
+    maxTokens: 4096,
   });
 }

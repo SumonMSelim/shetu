@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { randomUUID } from "node:crypto";
 import { buildOrchestrator } from "@/lib/agent/orchestrator";
-import { encodeEvent, toolLabel, type ChatStreamEvent } from "@/lib/agent/stream-protocol";
+import { encodeEvent, streamErrorMessage, toolLabel, type ChatStreamEvent } from "@/lib/agent/stream-protocol";
 import type { MessageData, ContentBlockData, DocumentFormat } from "@strands-agents/sdk";
 import {
   getVaultDoc,
@@ -266,17 +266,32 @@ export async function POST(req: Request): Promise<Response> {
         send({ kind: "done" });
       } catch (err) {
         logError("chat.stream_error", err, { userId, convId, turn: nextSeq });
+        // The student may already have received most of the answer when the
+        // turn failed (e.g. the model hit its output limit mid-listing).
+        // Persist whatever streamed, so a refresh keeps it, and say honestly
+        // what happened instead of a generic error.
+        if (answer.trim()) {
+          try {
+            await appendMessage({
+              userId,
+              convId,
+              seq: nextSeq + 1,
+              role: "assistant",
+              content: answer,
+              createdAt: new Date().toISOString(),
+            });
+            await touchConversation(userId, convId, new Date().toISOString());
+          } catch (persistErr) {
+            logError("chat.persist_failed", persistErr, { userId, convId, turn: nextSeq });
+          }
+        }
         // Record the failed turn too: audit both what worked and what did not.
         try {
           await putTurnTrace(trace.finish(userId, convId, nextSeq, err));
         } catch {
           // Audit write is best-effort.
         }
-        send({
-          kind: "error",
-          message:
-            "Something went wrong while answering. Please try again. If it keeps happening, you can request a human mentor.",
-        });
+        send({ kind: "error", message: streamErrorMessage(err) });
       } finally {
         clearInterval(ping);
         controller.close();

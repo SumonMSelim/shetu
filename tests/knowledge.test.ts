@@ -83,6 +83,23 @@ test("staleness marking and retirement logic", async () => {
   assert.equal(daysSince("2026-11-01", now), 21);
 });
 
+test("stream error messages: max tokens gets a specific, honest message", async () => {
+  const { streamErrorMessage } = await import("../src/lib/agent/stream-protocol");
+  const maxTokens = new Error("Model reached maximum token limit.");
+  maxTokens.name = "MaxTokensError";
+  assert.match(streamErrorMessage(maxTokens), /reply length limit/);
+  assert.match(streamErrorMessage(maxTokens), /saved/);
+  const generic = new Error("something else");
+  assert.equal(
+    streamErrorMessage(generic),
+    "Something went wrong while answering. Please try again. If it keeps happening, you can request a human mentor.",
+  );
+  assert.equal(
+    streamErrorMessage("a string error"),
+    "Something went wrong while answering. Please try again. If it keeps happening, you can request a human mentor.",
+  );
+});
+
 test("every scholarship carries provenance and explicit caveats", () => {
   const kb = getKnowledgeBase("NL");
   assert.ok(kb.scholarships.length > 0);
