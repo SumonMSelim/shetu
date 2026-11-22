@@ -24,6 +24,14 @@ import eeApplicationsJson from "../../../data/countries/ee/applications.json";
 import eeVisaJson from "../../../data/countries/ee/visa.json";
 import eeRedFlagsJson from "../../../data/countries/ee/red-flags.json";
 import eeProgrammesJson from "../../../data/countries/ee/programmes.json";
+import noCountryJson from "../../../data/countries/no/country.json";
+import noScholarshipsJson from "../../../data/countries/no/scholarships.json";
+import noCostsJson from "../../../data/countries/no/costs.json";
+import noInstitutionsJson from "../../../data/countries/no/institutions.json";
+import noApplicationsJson from "../../../data/countries/no/applications.json";
+import noVisaJson from "../../../data/countries/no/visa.json";
+import noRedFlagsJson from "../../../data/countries/no/red-flags.json";
+import noProgrammesJson from "../../../data/countries/no/programmes.json";
 import seCountryJson from "../../../data/countries/se/country.json";
 import seScholarshipsJson from "../../../data/countries/se/scholarships.json";
 import seCostsJson from "../../../data/countries/se/costs.json";
@@ -106,15 +114,27 @@ const EE = countryDataSchema.parse({
   programmes: eeProgrammesJson,
 });
 
+const NO = countryDataSchema.parse({
+  meta: noCountryJson,
+  scholarships: noScholarshipsJson,
+  costs: noCostsJson,
+  institutions: noInstitutionsJson,
+  applications: noApplicationsJson,
+  visa: noVisaJson,
+  redFlags: noRedFlagsJson,
+  programmes: noProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
   DE: toKnowledgeBase(DE),
   FI: toKnowledgeBase(FI),
   SE: toKnowledgeBase(SE),
   EE: toKnowledgeBase(EE),
+  NO: toKnowledgeBase(NO),
 };
 
-function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }

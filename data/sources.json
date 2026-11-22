@@ -58,5 +58,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "Study in Estonia (Education and Youth Board) server-rendered programme tables for bachelor/master/doctoral. Plain fetch + table parsing, no LLM, no browser."
+  },
+  {
+    "id": "studyinnorway-opportunities",
+    "country": "NO",
+    "kind": "portal-finder",
+    "url": "https://studyinnorway.no/study-opportunities",
+    "adapter": "no-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "Study in Norway (Norwegian Directorate for Higher Education and Skills) Drupal listing + per-programme detail pages. Plain fetches, no LLM, no browser."
   }
 ]
