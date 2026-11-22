@@ -231,7 +231,10 @@ export class ShetuStack extends cdk.Stack {
         SHETU_DB_PORT: "5432",
         SHETU_DB_NAME: "shetu",
         SHETU_DB_USER: "shetu",
-        SHETU_SES_FROM: (this.node.tryGetContext("sesFrom") as string | undefined) ?? "",
+        // Transactional mentorship notifications (SES). The domain identity
+        // shetu.mol.la must be DKIM-verified and SES production access granted.
+        SHETU_SES_FROM: (this.node.tryGetContext("sesFrom") as string | undefined)
+          ?? "no-reply@shetu.mol.la",
         AUTH_URL: appUrl,
         AUTH_TRUST_HOST: "true",
         // ECS sets HOSTNAME to the task ENI IP, and Next standalone's

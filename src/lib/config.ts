@@ -54,6 +54,13 @@ export const config = {
      * they also bind every specialist it delegates to (agents-as-tools joins
      * the parent's limits), so a looping delegation cannot burn tokens freely.
      */
+    burst: {
+      /** Per-minute limits (abuse guardrail next to the daily quota). */
+      chat: intFromEnv("SHETU_BURST_CHAT", 15),
+      vault: intFromEnv("SHETU_BURST_VAULT", 20),
+      mentorship: intFromEnv("SHETU_BURST_MENTORSHIP", 5),
+      gdpr: intFromEnv("SHETU_BURST_GDPR", 3),
+    },
     agentTurns: intFromEnv("SHETU_AGENT_TURNS", 14),
     agentOutputTokens: intFromEnv("SHETU_AGENT_OUTPUT_TOKENS", 24_000),
     agentTotalTokens: intFromEnv("SHETU_AGENT_TOTAL_TOKENS", 240_000),

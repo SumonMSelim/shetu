@@ -67,6 +67,15 @@ button {
 .btn-ghost:hover {
   border-color: var(--primary);
 }
+.btn-danger {
+  background: #b3261e;
+  color: #fff;
+  border-color: #b3261e;
+}
+.btn-danger:hover {
+  background: #8f1f18;
+  border-color: #8f1f18;
+}
 
 /* Google sign-in: white, bordered, dark text (Google brand style).
    Stands out clearly on both light and colored backgrounds. */
