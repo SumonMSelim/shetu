@@ -1,6 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fuseResults, rowToProgramme } from "../src/lib/knowledge/retrieval";
+import {
+  fuseResults,
+  jsonMatchScore,
+  PROGRAMME_RANK_EXPR,
+  rowToProgramme,
+} from "../src/lib/knowledge/retrieval";
 
 /**
  * Hybrid retrieval logic tests: reciprocal rank fusion and database row
@@ -55,6 +60,30 @@ test("rowToProgramme maps a database row onto the Programme shape", () => {
   assert.equal(p.stale, false);
   assert.equal(p.durationMonths, 12);
   assert.equal(p.institutionType, "research-university");
+});
+
+test("jsonMatchScore ranks name matches above field and institution matches", () => {
+  const p = { name: "MSc Computer Science", field: "General", institution: "Tampere University", notes: "" };
+  // "computer" +3 and "science" +3 in the name, plus the full-phrase bonus +3.
+  assert.equal(jsonMatchScore(p, "computer science"), 9);
+  const other = { name: "MSc Biology", field: "General", institution: "Computer Science Faculty", notes: "" };
+  assert.ok(
+    jsonMatchScore(p, "computer science") > jsonMatchScore(other, "computer science"),
+    "a true CS programme outranks one whose faculty merely mentions the words",
+  );
+});
+
+test("jsonMatchScore scores zero for unrelated programmes and multi-word queries per word", () => {
+  const p = { name: "MSc Biology", field: "General", institution: "X", notes: "" };
+  assert.equal(jsonMatchScore(p, "computer science"), 0);
+  const partial = { name: "MSc Data Analytics", field: "General", institution: "X", notes: "" };
+  assert.ok(jsonMatchScore(partial, "data analytics") > 0);
+});
+
+test("PROGRAMME_RANK_EXPR weights name above field and city", () => {
+  assert.match(PROGRAMME_RANK_EXPR, /setweight\(to_tsvector\('english', coalesce\(name, ''\)\), 'A'\)/);
+  assert.match(PROGRAMME_RANK_EXPR, /, 'B'\)/);
+  assert.match(PROGRAMME_RANK_EXPR, /, 'D'\)/);
 });
 
 test("rowToProgramme handles a string stale flag and jsonb object", () => {

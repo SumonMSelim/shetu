@@ -1,0 +1,29 @@
+{
+  "ranAt": "2026-11-22T18:31:07.597Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "judgeAverage": 5,
+  "results": [
+    {
+      "id": "bangla-costs-language",
+      "kind": "language",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor provides verified program listings with official tuition fee ranges, application deadlines, and language requirements, cites authoritative university and government sources, and includes realistic cost estimates without guaranteeing outcomes.",
+      "answerChars": 2886,
+      "durationMs": 15264,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes",
+        "get_costs",
+        "get_application_info"
+      ],
+      "answer": "<thinking> The user wants to pursue a Master's in Computer Science in the Netherlands. I need to find verified study programs, their costs, and application information. I'll use the get_programmes tool to find programs, get_costs for expenses, and get_application_info for application details. </thinking>\nনেদারল্যান্ডসে কম্পিউটার সায়েন্সে মাস্টার্স করার জন্য কয়েকটি বিশ্ববিদ্যালয় আছে। নিচে কয়েকটি প্রোগ্রামের তালিকা দেওয়া হলো:\n\n1. **University of Amsterdam / Vrije Universiteit Amsterdam (joint degree)**\n   - **শহর:** Amsterdam\n   - **টিউশন ফি (EU):** €2,694\n   - **টিউশন ফি (Non-EU):** €12,000 - €30,000\n   - **প্রোগ্রাম পেজ:** [UvA programme page](https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it)\n\n2. **University of Twente**\n   - **শহর:** Enschede\n   - **টিউশন ফি (EU):** €2,771\n   - **টিউশন ফি (Non-EU):** €22,320\n   - **প্রোগ্রাম পেজ:** [University of Twente](https://www.utwente.nl/en/education/master/programmes/computer-science/)\n\n3. **Eindhoven University of Technology**\n   - **শহর:** Eindhoven\n   - **টিউশন ফি (EU):** €2,771\n   - **টিউশন ফি (Non-EU):** €23,300\n   - **প্রোগ্রাম পেজ:** [Eindhoven University of Technology](https://www.tue.nl/en/education/graduate-school/master-computer-science-and-engineering/)\n\n4. **Delft University of Technology**\n   - **শহর:** Delft\n   - **টিউশন ফি (EU):** €2,694\n   - **টিউশন ফি (Non-EU):** €12,000 - €30,000\n   - **প্রোগ্রাম পেজ:** [Delft University of Technology](https://www.tudelft.nl/en/education/programmes/masters/computer-science/msc-computer-science)\n\n5. **Leiden University**\n   - **শহর:** Leiden\n   - **টিউশন ফি (EU):** €2,771\n   - **টিউশন ফি (Non-EU):** €23,300\n   - **প্রোগ্রাম পেজ:** [Leiden University](https://www.universiteitleiden.nl/en/education/study-programmes/master/computer-science)\n\n**খরচ:**\n- **টিউশন ফি (EU):** €2,694 - €2,771\n- **টিউশন ফি (Non-EU):** €12,000 - €30,000\n- **জীবনযাপন খরচ:** €1,000 - €1,500 প্রতি মাস\n- **ভিসা জন্য প্রমাণিত তহবিল:** €13,569\n\n**আবেদন প্রক্রিয়া:**\n- সাধারণ ডেডলাইন হল 15 জানুয়ারি (numerus fixus প্রোগ্রামের জন্য) এবং 1 মে (অন্যান্য প্রোগ্রামের জন্য)।\n- ইংরেজি ভাষার প্রয়োজনীয়তা সাধারণত IELTS 6.0-6.5 (bachelor's) এবং 6.5-7.0 (master's)।\n\nআরও তথ্যের জন্য, [Study in NL](https://www.studyinnl.org) এ যান।\n\n**Sources:**\n- [UvA programme page](https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it)\n- [University of Twente](https://www.utwente.nl/en/education/master/programmes/computer-science/)\n- [Eindhoven University of Technology](https://www.tue.nl/en/education/graduate-school/master-computer-science-and-engineering/)\n- [Delft University of Technology](https://www.tudelft.nl/en/education/programmes/masters/computer-science/msc-computer-science)\n- [Leiden University](https://www.universiteitleiden.nl/en/education/study-programmes/master/computer-science)\n- [Study in NL](https://www.studyinnl.org)"
+    }
+  ]
+}

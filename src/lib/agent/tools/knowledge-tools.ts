@@ -4,7 +4,13 @@ import { getKnowledgeBase, availableCountries, DEFAULT_COUNTRY } from "@/lib/kno
 import { isStaleProvenance } from "@/lib/knowledge/schema";
 import { dbConfigured, dbPool } from "@/lib/db/postgres";
 import { embedQuery } from "@/lib/db/embed";
-import { fuseResults, rowToProgramme, type DbProgrammeRow } from "@/lib/knowledge/retrieval";
+import {
+  fuseResults,
+  jsonMatchScore,
+  PROGRAMME_RANK_EXPR,
+  rowToProgramme,
+  type DbProgrammeRow,
+} from "@/lib/knowledge/retrieval";
 import { logWarn } from "@/lib/observability/logger";
 
 /**
@@ -142,7 +148,9 @@ export const getProgrammes = tool({
         const where =
           "country = $1 AND ($2::text IS NULL OR level = $2) AND ($3::text IS NULL OR city ILIKE '%' || $3 || '%') AND ($4::text IS NULL OR field ILIKE '%' || $4 || '%')";
         const params: unknown[] = [cc, level ?? null, city ?? null, field ?? null];
-        const searchText = (query ?? field ?? "").trim();
+        // Field text contributes to relevance ranking rather than acting as a
+        // hard filter (many records carry a general or missing field).
+        const searchText = [query, field].filter(Boolean).join(" ").trim();
 
         const countQ = await pool.query(
           `SELECT count(*)::int AS total FROM programmes WHERE ${where}`,
@@ -154,9 +162,11 @@ export const getProgrammes = tool({
         if (searchText && total > 0) {
           const ftsParams = [...params, searchText];
           const fts = await pool.query(
-            `SELECT ${cols} FROM programmes WHERE ${where}
-             AND search @@ websearch_to_tsquery('english', $5)
-             ORDER BY ts_rank(search, websearch_to_tsquery('english', $5)) DESC
+            `SELECT ${cols}, ts_rank(${PROGRAMME_RANK_EXPR}, websearch_to_tsquery('english', $5)) AS rank
+             FROM programmes WHERE ${where}
+             AND (${PROGRAMME_RANK_EXPR}) @@ websearch_to_tsquery('english', $5)
+             ORDER BY (ts_rank(${PROGRAMME_RANK_EXPR}, websearch_to_tsquery('english', $5))
+               + CASE WHEN lower(name) LIKE '%' || lower($5) || '%' THEN 0.5 ELSE 0 END) DESC
              LIMIT ${MAX_RESULTS}`,
             ftsParams,
           );
@@ -209,15 +219,21 @@ export const getProgrammes = tool({
       const c = city.toLowerCase();
       list = list.filter((p) => p.city.toLowerCase().includes(c));
     }
-    if (field || query) {
-      const f = (query ?? field ?? "").toLowerCase();
-      list = list.filter(
-        (p) =>
-          p.field.toLowerCase().includes(f) ||
-          p.name.toLowerCase().includes(f) ||
-          p.institution.toLowerCase().includes(f) ||
-          (p.notes ?? "").toLowerCase().includes(f),
-      );
+    const search = (query ?? field ?? "").trim();
+    if (search) {
+      // Match-quality ranking mirrors the weighted tsvector: name most, then
+      // field, then institution and notes.
+      list = list
+        .map((p) => ({
+          p,
+          score: jsonMatchScore(
+            { name: p.name, field: p.field, institution: p.institution, notes: p.notes },
+            search.toLowerCase(),
+          ),
+        }))
+        .filter((x) => x.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map((x) => x.p);
     }
     const total = list.length;
     const shown = list.slice(0, MAX_RESULTS);

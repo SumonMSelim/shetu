@@ -86,3 +86,41 @@ export function fuseResults<T extends { id: string }>(a: T[], b: T[], k = 60): T
     .map(([id]) => byId.get(id)!)
     .filter(Boolean);
 }
+
+/**
+ * Weighted text vector used for ranking programme relevance: the programme
+ * name weighs most (A), field and institution next (B), city least (D). A
+ * "computer science" query must rank true CS programmes over technical
+ * programmes that merely mention "science" in their city or faculty.
+ * Used inside WHERE (matching) and ORDER BY (ranking) against Postgres.
+ */
+export const PROGRAMME_RANK_EXPR =
+  "setweight(to_tsvector('english', coalesce(name, '')), 'A') || " +
+  "setweight(to_tsvector('english', coalesce(field, '') || ' ' || coalesce(institution, '')), 'B') || " +
+  "setweight(to_tsvector('english', coalesce(city, '')), 'D')";
+
+/**
+ * Match-quality score for the JSON fallback path: the same intuition as the
+ * weighted tsvector, in plain code. Name matches weigh most, then field,
+ * then institution and notes; multi-word queries score per word.
+ */
+export function jsonMatchScore(
+  programme: { name: string; field: string; institution: string; notes?: string },
+  search: string,
+): number {
+  const words = search.toLowerCase().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return 0;
+  const name = programme.name.toLowerCase();
+  const field = programme.field.toLowerCase();
+  const institution = programme.institution.toLowerCase();
+  const notes = (programme.notes ?? "").toLowerCase();
+  let score = 0;
+  for (const w of words) {
+    if (name.includes(w)) score += 3;
+    if (field.includes(w)) score += 2;
+    if (institution.includes(w)) score += 1;
+    if (notes.includes(w)) score += 1;
+  }
+  if (search.length >= 5 && name.includes(search)) score += 3; // full-phrase name match
+  return score;
+}

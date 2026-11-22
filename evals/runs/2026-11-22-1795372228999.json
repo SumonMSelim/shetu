@@ -1,0 +1,25 @@
+{
+  "ranAt": "2026-11-22T18:30:28.998Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "judgeAverage": null,
+  "results": [
+    {
+      "id": "routing-cs-netherlands",
+      "kind": "routing",
+      "pass": true,
+      "failures": [],
+      "answerChars": 1551,
+      "durationMs": 6828,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes"
+      ],
+      "answer": "<thinking> To find universities in the Netherlands that offer a master's in computer science, I will use the `get_programmes` tool to search for verified study programmes. I will filter by the field \"Computer Science\" and the level \"master\". </thinking>\n\nHere are some universities in the Netherlands that offer a master's in computer science:\n\n- **University of Amsterdam / Vrije Universiteit Amsterdam (joint degree)**\n  - [Programme Page](https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it)\n\n- **University of Amsterdam**\n  - [Programme Page](https://www.uva.nl/en/masters/masters-programmes/computer-science)\n\n- **University of Twente**\n  - [Programme Page](https://www.utwente.nl/en/education/master/programmes/computer-science/)\n\n- **Eindhoven University of Technology**\n  - [Programme Page](https://www.tue.nl/en/education/graduate-school/master-computer-science-and-engineering/)\n\n- **Delft University of Technology**\n  - [Programme Page](https://www.tudelft.nl/en/education/programmes/masters/computer-science/msc-computer-science)\n\n- **Leiden University**\n  - [Programme Page](https://www.universiteitleiden.nl/en/education/study-programmes/master/computer-science)\n\n- **Vrije Universiteit Amsterdam**\n  - [Programme Page](https://vu.nl/en/education/master/computer-science)\n\nThese programmes are verified and offer a master's degree in computer science. Each programme has its own tuition fees, application deadlines, and English requirements, so be sure to check the specific details on the programme pages."
+    }
+  ]
+}
