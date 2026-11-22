@@ -2,6 +2,9 @@ import { auth } from "@/auth";
 import { randomUUID } from "node:crypto";
 import { buildOrchestrator } from "@/lib/agent/orchestrator";
 import { encodeEvent, streamErrorMessage, toolLabel, type ChatStreamEvent } from "@/lib/agent/stream-protocol";
+import { sanitizeAnswerLinks, ThinkingFilter } from "@/lib/agent/answer-filter";
+import { extractHosts } from "@/lib/agent/answer-filter";
+import { TRUSTED_DOMAINS } from "@/lib/knowledge/trusted-domains";
 import type { MessageData, ContentBlockData, DocumentFormat } from "@strands-agents/sdk";
 import {
   getVaultDoc,
@@ -164,6 +167,12 @@ export async function POST(req: Request): Promise<Response> {
       // Keepalive: Cloudflare terminates origins that stay silent for ~100s,
       // and a specialist can be silent longer than that. Ping every 15s; the
       // client ignores unknown event kinds.
+      // Nova-family models sometimes emit their reasoning as plain text;
+      // the student must never see it (see answer-filter.ts).
+      const thinkingFilter = new ThinkingFilter();
+      // Hosts seen in tool outputs become the link allowlist for the final
+      // answer: an invented link must not survive into the record.
+      const toolHosts = new Set<string>(["shetu.mol.la", "mol.la"]);
       const ping = setInterval(() => {
         try {
           send({ kind: "ping" });
@@ -199,8 +208,11 @@ export async function POST(req: Request): Promise<Response> {
                 }
                 afterToolCall = false;
                 sentText = true;
-                answer += inner.delta.text;
-                send({ kind: "text", text: inner.delta.text });
+                const visible = thinkingFilter.push(inner.delta.text);
+                if (visible) {
+                  answer += visible;
+                  send({ kind: "text", text: visible });
+                }
               }
               break;
             }
@@ -216,6 +228,9 @@ export async function POST(req: Request): Promise<Response> {
             }
             case "afterToolCallEvent": {
               trace.onAfterToolCall(event.toolUse, event.error);
+              for (const host of extractHosts(JSON.stringify(event.result))) {
+                toolHosts.add(host);
+              }
               break;
             }
             case "agentResultEvent": {
@@ -226,6 +241,21 @@ export async function POST(req: Request): Promise<Response> {
               break;
           }
         }
+        const tail = thinkingFilter.flush();
+        if (tail) {
+          answer += tail;
+          send({ kind: "text", text: tail });
+        }
+
+        // An invented link (a host no tool returned) must not survive into
+        // the persisted record: reduce it to its link text.
+        const allowedHosts = [...toolHosts, ...TRUSTED_DOMAINS];
+        const sanitized = sanitizeAnswerLinks(answer, allowedHosts);
+        if (sanitized !== answer) {
+          logWarn("answer.link_stripped", undefined, { userId, convId });
+          answer = sanitized;
+        }
+
         // Persist the assistant reply and bump the conversation timestamp.
         if (answer.trim()) {
           await appendMessage({

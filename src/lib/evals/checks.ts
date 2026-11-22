@@ -46,6 +46,8 @@ export interface Expectations {
   mustContain?: string[];
   /** Grounding gate: every 3+ digit figure must appear in tool outputs. */
   grounded?: boolean;
+  /** Link gate: every Markdown link must point to a host seen in tool outputs. */
+  groundedLinks?: boolean;
   /** No phrase (case-insensitive) may appear in the answer. */
   mustNotContain?: string[];
   /** At least one of these tools must have been called. */
@@ -67,10 +69,34 @@ export function checkExpectations(
   answer: string,
   toolNames: string[],
   expect: Expectations,
+  toolTexts: string[] = [],
+  trustedDomains: string[] = [],
 ): ExpectResult {
   const failures: string[] = [];
   const normalized = normalizeDigits(answer);
   const lower = normalized.toLowerCase();
+
+  if (expect.groundedLinks) {
+    const allowed = new Set<string>(["mol.la", ...trustedDomains]);
+    for (const t of toolTexts) {
+      for (const m of t.matchAll(/https?:\/\/[^\s"' )\]]+/g)) {
+        try {
+          allowed.add(new URL(m[0]).hostname.replace(/^www\./, ""));
+        } catch {
+          // Unparseable URL in tool output: ignore.
+        }
+      }
+    }
+    for (const m of answer.matchAll(/\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g)) {
+      try {
+        const host = new URL(m[2]).hostname.replace(/^www\./, "");
+        const ok = [...allowed].some((d) => host === d || host.endsWith("." + d));
+        if (!ok) failures.push(`link to unverified host: ${host} (text: "${m[1].slice(0, 60)}")`);
+      } catch {
+        failures.push(`link with unparseable href: ${m[2].slice(0, 80)}`);
+      }
+    }
+  }
 
   for (const phrase of expect.mustContain ?? []) {
     if (!lower.includes(phrase.toLowerCase())) {

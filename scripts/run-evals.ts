@@ -17,6 +17,7 @@ import { buildOrchestrator } from "../src/lib/agent/orchestrator";
 import { fastModel } from "../src/lib/agent/model";
 import { checkExpectations, checkGrounding, type Expectations } from "../src/lib/evals/checks";
 import { todayIso } from "../src/lib/knowledge/draft";
+import { TRUSTED_DOMAINS } from "../src/lib/knowledge/trusted-domains";
 
 // --- Args -------------------------------------------------------------------
 const args = process.argv.slice(2);
@@ -145,7 +146,7 @@ for (const scenario of scenarios) {
     failure = String(err).slice(0, 200);
   }
 
-  const expectResult = checkExpectations(answer, toolNames, scenario.expect);
+  const expectResult = checkExpectations(answer, toolNames, scenario.expect, toolTexts, TRUSTED_DOMAINS);
   const grounding =
     scenario.expect.grounded === true ? checkGrounding(answer, toolTexts) : null;
   const failures = [...expectResult.failures];
