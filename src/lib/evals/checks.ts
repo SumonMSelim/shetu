@@ -29,12 +29,15 @@ export interface GroundingResult {
   ungrounded: string[];
 }
 
-/** Every 3+ digit figure in the answer must appear in some tool output. */
+/** Every 3+ digit figure in the answer must appear in some tool output.
+ *  URLs are stripped from the answer first: links contain long numeric ids
+ *  (Opintopolku oids, course codes) that are not factual claims. Both sides
+ *  normalize separators identically so translated answers stay comparable. */
 export function checkGrounding(answer: string, toolTexts: string[]): GroundingResult {
-  const haystack = normalizeDigits(toolTexts.join(" ")).replace(/[.,](?=\d{3})/g, "");
-  const ungrounded = extractFigures(answer).filter(
-    (f) => !haystack.includes(f.replace(/[.,]/g, "")),
-  );
+  const answerNoUrls = answer.replace(/https?:\/\/\S+/g, " ");
+  const normalize = (t: string) => normalizeDigits(t).replace(/[.,](?=\d)/g, "");
+  const haystack = normalize(toolTexts.join(" "));
+  const ungrounded = extractFigures(answerNoUrls).filter((f) => !haystack.includes(f));
   return { pass: ungrounded.length === 0, ungrounded };
 }
 

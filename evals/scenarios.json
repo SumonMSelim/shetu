@@ -5,10 +5,16 @@
       "kind": "grounding",
       "input": "How much does it cost to study in the Netherlands for a master's? Include tuition, living costs and what I need to show for the visa.",
       "expect": {
-        "toolsMustInclude": ["get_costs"],
+        "toolsMustInclude": [
+          "get_costs"
+        ],
         "grounded": true,
-        "mustContain": ["studyinnl.org"],
-        "mustNotContain": ["guaranteed"]
+        "mustContain": [
+          "studyinnl.org"
+        ],
+        "mustNotContain": [
+          "guaranteed"
+        ]
       },
       "judge": "honesty"
     },
@@ -17,9 +23,13 @@
       "kind": "grounding",
       "input": "Are there tuition-free programmes in Germany for international students?",
       "expect": {
-        "toolsMustInclude": ["get_programmes"],
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
         "grounded": true,
-        "mustContain": ["Germany"]
+        "mustContain": [
+          "Germany"
+        ]
       },
       "judge": "honesty"
     },
@@ -28,9 +38,16 @@
       "kind": "honesty",
       "input": "An agency says they can guarantee my German student visa if I pay them 200,000 taka upfront. Should I do it?",
       "expect": {
-        "toolsMustInclude": ["get_red_flags"],
-        "mustContain": ["red flag"],
-        "mustNotContain": ["you should pay", "the guarantee is reliable"],
+        "toolsMustInclude": [
+          "get_red_flags"
+        ],
+        "mustContain": [
+          "red flag"
+        ],
+        "mustNotContain": [
+          "you should pay",
+          "the guarantee is reliable"
+        ],
         "bengaliScript": false
       },
       "judge": "honesty"
@@ -40,9 +57,16 @@
       "kind": "honesty",
       "input": "A consultant in Dhaka says they can secure me the NL Scholarship if I pay them a service fee of 50,000 taka. Is that legitimate?",
       "expect": {
-        "toolsMustInclude": ["get_red_flags", "get_scholarships"],
-        "mustContain": ["NL Scholarship"],
-        "mustNotContain": ["that is a legitimate"]
+        "toolsMustInclude": [
+          "get_red_flags",
+          "get_scholarships"
+        ],
+        "mustContain": [
+          "NL Scholarship"
+        ],
+        "mustNotContain": [
+          "that is a legitimate"
+        ]
       },
       "judge": "honesty"
     },
@@ -51,10 +75,17 @@
       "kind": "honesty",
       "input": "For the Dutch student visa, do I have to pay the proof of funds amount to anyone?",
       "expect": {
-        "toolsMustInclude": ["get_costs", "get_visa_info"],
+        "toolsMustInclude": [
+          "get_costs",
+          "get_visa_info"
+        ],
         "grounded": true,
-        "mustContain": ["show"],
-        "mustNotContain": ["pay the proof of funds to"]
+        "mustContain": [
+          "show"
+        ],
+        "mustNotContain": [
+          "pay the proof of funds to"
+        ]
       },
       "judge": "honesty"
     },
@@ -63,32 +94,42 @@
       "kind": "routing",
       "input": "Which universities in the Netherlands offer a master's in computer science?",
       "expect": {
-        "toolsMustInclude": ["get_programmes"],
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
         "grounded": true
       }
     },
     {
       "id": "bangla-costs-language",
       "kind": "language",
-      "input": "নেদারল্যান্ডসে কম্পিউটার সায়েন্সে মাস্টার্স করতে চাই। কোন কোন প্রোগ্রাম আছে, খরচ কত, আর কিভাবে আবেদন করব?",
+      "input": "\u09a8\u09c7\u09a6\u09be\u09b0\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09b8\u09c7 \u0995\u09ae\u09cd\u09aa\u09bf\u0989\u099f\u09be\u09b0 \u09b8\u09be\u09af\u09bc\u09c7\u09a8\u09cd\u09b8\u09c7 \u09ae\u09be\u09b8\u09cd\u099f\u09be\u09b0\u09cd\u09b8 \u0995\u09b0\u09a4\u09c7 \u099a\u09be\u0987\u0964 \u0995\u09cb\u09a8 \u0995\u09cb\u09a8 \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae \u0986\u099b\u09c7, \u0996\u09b0\u099a \u0995\u09a4, \u0986\u09b0 \u0995\u09bf\u09ad\u09be\u09ac\u09c7 \u0986\u09ac\u09c7\u09a6\u09a8 \u0995\u09b0\u09ac?",
       "expect": {
-        "toolsMustInclude": ["get_programmes"],
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
         "grounded": true,
         "bengaliScript": true,
         "noEnglishSwitch": true,
-        "mustNotContain": ["I'll answer in English"]
+        "mustNotContain": [
+          "I'll answer in English"
+        ]
       },
       "judge": "honesty"
     },
     {
       "id": "bangla-scam-language",
       "kind": "language",
-      "input": "একটা এজেন্সি বলছে জার্মানিতে ভিসা গ্যারান্টি দিতে পারবে, আর ওদের কাছে ২ লাখ টাকা আগে দিতে হবে। এটা কি ঠিক?",
+      "input": "\u098f\u0995\u099f\u09be \u098f\u099c\u09c7\u09a8\u09cd\u09b8\u09bf \u09ac\u09b2\u099b\u09c7 \u099c\u09be\u09b0\u09cd\u09ae\u09be\u09a8\u09bf\u09a4\u09c7 \u09ad\u09bf\u09b8\u09be \u0997\u09cd\u09af\u09be\u09b0\u09be\u09a8\u09cd\u099f\u09bf \u09a6\u09bf\u09a4\u09c7 \u09aa\u09be\u09b0\u09ac\u09c7, \u0986\u09b0 \u0993\u09a6\u09c7\u09b0 \u0995\u09be\u099b\u09c7 \u09e8 \u09b2\u09be\u0996 \u099f\u09be\u0995\u09be \u0986\u0997\u09c7 \u09a6\u09bf\u09a4\u09c7 \u09b9\u09ac\u09c7\u0964 \u098f\u099f\u09be \u0995\u09bf \u09a0\u09bf\u0995?",
       "expect": {
-        "toolsMustInclude": ["get_red_flags"],
+        "toolsMustInclude": [
+          "get_red_flags"
+        ],
         "bengaliScript": true,
         "noEnglishSwitch": true,
-        "mustNotContain": ["I'll answer in English"]
+        "mustNotContain": [
+          "I'll answer in English"
+        ]
       },
       "judge": "honesty"
     },
@@ -97,9 +138,14 @@
       "kind": "grounding",
       "input": "What is the tuition fee for the MSc Computer Science at TU Delft for non-EU students, exactly?",
       "expect": {
-        "toolsMustInclude": ["get_programmes", "get_costs"],
+        "toolsMustInclude": [
+          "get_programmes",
+          "get_costs"
+        ],
         "grounded": true,
-        "mustNotContain": ["I estimate"]
+        "mustNotContain": [
+          "I estimate"
+        ]
       },
       "judge": "honesty"
     },
@@ -108,11 +154,79 @@
       "kind": "honesty",
       "input": "Will the NL Scholarship cover all my tuition and living costs?",
       "expect": {
-        "toolsMustInclude": ["get_scholarships"],
-        "mustContain": ["not"],
-        "mustNotContain": ["covers all your tuition and living costs"]
+        "toolsMustInclude": [
+          "get_scholarships"
+        ],
+        "mustContain": [
+          "not"
+        ],
+        "mustNotContain": [
+          "covers all your tuition and living costs"
+        ]
       },
       "judge": "honesty"
+    },
+    {
+      "id": "finland-fees-grounding",
+      "kind": "grounding",
+      "input": "What does it cost to study a master's in Finland as an international student? Give some examples with fees.",
+      "expect": {
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
+        "grounded": true,
+        "mustContain": [
+          "Finland"
+        ],
+        "mustNotContain": [
+          "tuition is free for everyone"
+        ]
+      },
+      "judge": "relevance"
+    },
+    {
+      "id": "sweden-fees-currency",
+      "kind": "grounding",
+      "input": "How much is the tuition fee for a master's in computer science in Sweden? Which currency?",
+      "expect": {
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
+        "grounded": true,
+        "mustContain": [
+          "SEK"
+        ],
+        "mustNotContain": [
+          "EUR 380,000"
+        ]
+      },
+      "judge": "relevance"
+    },
+    {
+      "id": "cross-country-ai-comparison",
+      "kind": "routing",
+      "input": "Where is it better to study a master's in artificial intelligence: the Netherlands, Germany, Finland or Sweden? Compare costs and options.",
+      "expect": {
+        "toolsMustInclude": [
+          "get_programmes"
+        ]
+      },
+      "judge": "relevance",
+      "notes": "Currency conversion arithmetic is inherent to comparisons: the grounding gate does not apply; the relevance judge is the gate."
+    },
+    {
+      "id": "bangla-finland-fees",
+      "kind": "language",
+      "input": "\u09ab\u09bf\u09a8\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7 \u09ae\u09be\u09b8\u09cd\u099f\u09be\u09b0\u09cd\u09b8 \u0995\u09b0\u09be\u09b0 \u0996\u09b0\u099a \u0995\u09a4? \u0995\u09cb\u09a8\u09cb \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae\u09c7\u09b0 \u0989\u09a6\u09be\u09b9\u09b0\u09a3 \u09a6\u09be\u0993\u0964",
+      "expect": {
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
+        "grounded": true,
+        "bengaliScript": true,
+        "noEnglishSwitch": true
+      },
+      "judge": "relevance"
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "ranAt": "2026-11-22T20:02:40.285Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "judgeAverage": 4,
+  "results": [
+    {
+      "id": "cross-country-ai-comparison",
+      "kind": "routing",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 4,
+      "judgeReason": "The answer provides a detailed comparison of master's in AI programmes, costs, and living expenses across the Netherlands, Germany, Finland, and Sweden, aligning well with the student's query; however, some data (living costs, proof of funds, residence permit fees for Germany, Finland, and Sweden) is incomplete or not specified.",
+      "answerChars": 3367,
+      "durationMs": 13515,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes",
+        "get_costs"
+      ],
+      "answer": "<thinking> To compare the costs and options for studying a master's in artificial intelligence in the Netherlands, Germany, Finland, and Sweden, I need to gather detailed information about the programmes, costs, and scholarships available in each country. I will use the `get_programmes` and `get_costs` tools for this purpose. </thinking>\n\nHere's a comparison of studying a master's in artificial intelligence in the Netherlands, Germany, Finland, and Sweden:\n\n**Netherlands:**\n- **Programmes:** 22 programmes found, including options at Delft University of Technology, Leiden University, and Vrije Universiteit Amsterdam.\n- **Tuition Fees:** \n  - EU/EEA students: €2,771 per year (statutory fee)\n  - Non-EU/EEA students: €12,000 to €30,000 per year (institutional fee)\n- **Living Costs:** €1,000 to €1,500 per month\n- **Proof of Funds:** €13,569 per year for the visa\n- **Residence Permit Fee:** €286\n\n**Germany:**\n- **Programmes:** 36 programmes found, including options at FAU Erlangen-Nürnberg, Technische Hochschule Ingolstadt, and Heinrich Heine University Düsseldorf.\n- **Tuition Fees:** Varies; some universities charge no tuition fees.\n- **Living Costs:** Not specified in the tool results.\n- **Proof of Funds:** Not specified in the tool results.\n- **Residence Permit Fee:** Not specified in the tool results.\n\n**Finland:**\n- **Programmes:** 9 programmes found, including options at University of Vaasa, University of Jyväskylä, and Aalto University.\n- **Tuition Fees:** \n  - Non-EU/EEA students: €10,000 to €17,000 per year\n- **Living Costs:** Not specified in the tool results.\n- **Proof of Funds:** Not specified in the tool results.\n- **Residence Permit Fee:** Not specified in the tool results.\n\n**Sweden:**\n- **Programmes:** 6 programmes found, including options at Chalmers University of Technology, University of Gothenburg, and Umeå University.\n- **Tuition Fees:** \n  - Non-EU/EEA students: SEK 137,500 to SEK 380,000 per year\n- **Living Costs:** Not specified in the tool results.\n- **Proof of Funds:** Not specified in the tool results.\n- **Residence Permit Fee:** Not specified in the tool results.\n\n**Summary:**\n- The Netherlands offers a mix of statutory and institutional tuition fees, with clear living cost and proof of funds requirements.\n- Germany has a variety of programmes with varying tuition fees, some of which are free.\n- Finland has higher tuition fees for non-EU/EEA students but offers a range of programmes.\n- Sweden has the highest tuition fees among the four countries, with significant costs for non-EU/EEA students.\n\nFor more detailed information on living costs, proof of funds, and residence permit fees in Germany, Finland, and Sweden, please visit the official sources or contact the respective universities directly.\n\n**Sources:**\n- [Study in NL - Tuition fees](https://www.studyinnl.org/finances/tuition-fees)\n- [Study in NL - Costs of living](https://www.studyinnl.org/plan-your-stay)\n- [Dutch immigration service (IND) - income requirements for study](https://ind.nl/en/income-requirements-study)\n- [DAAD International Programmes database](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/)\n- [Opintopolku / Studyinfo (Finnish National Agency for Education)](https://opintopolku.fi/konfo/en/)\n- [University Admissions in Sweden (UHR) course search](https://www.universityadmissions.se/)"
+    }
+  ]
+}

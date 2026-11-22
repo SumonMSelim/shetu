@@ -1,1 +1,53 @@
-[]
+[
+  {
+    "id": "tuition-non-eu",
+    "label": "Tuition fee (non-EU/EEA, English-taught degrees)",
+    "category": "tuition",
+    "amount": 9000,
+    "currency": "EUR",
+    "per": "year",
+    "rangeLow": 9000,
+    "rangeHigh": 20000,
+    "notes": "Non-EU/EEA students in English-taught bachelor's and master's programmes pay tuition, typically EUR 9,000-20,000 per year depending on the university and programme. EU/EEA students and doctoral programmes are tuition-free. Individual programme fees on our catalogue come from each implementation's own record.",
+    "provenance": {
+      "source": "Study in Finland - Fees and Cost of Living",
+      "sourceUrl": "https://www.studyinfinland.fi/funding-your-studies/fees-and-cost-living",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "living-costs",
+    "label": "Living costs",
+    "category": "living",
+    "amount": 900,
+    "currency": "EUR",
+    "per": "month",
+    "rangeLow": 700,
+    "rangeHigh": 1200,
+    "notes": "The Finnish Immigration Service (Migri) minimum is EUR 800 per month (EUR 9,600 per year); the official portal recommends budgeting roughly EUR 900-1,200 per month depending on location, with Helsinki and southern cities pricier. This is money you live on, not a fee you pay to anyone.",
+    "provenance": {
+      "source": "Study in Finland - Fees and Cost of Living (incl. Migri minimum)",
+      "sourceUrl": "https://www.studyinfinland.fi/funding-your-studies/fees-and-cost-living",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  },
+  {
+    "id": "student-healthcare-and-union",
+    "label": "Student healthcare fee and student union fee",
+    "category": "insurance",
+    "amount": 120,
+    "currency": "EUR",
+    "per": "year",
+    "rangeLow": 85,
+    "rangeHigh": 140,
+    "notes": "University students pay the FSHS healthcare fee of about EUR 35 per term (about EUR 70 per year) plus a student union fee of about EUR 50-70 per academic year. Students at universities of applied sciences arrange private insurance instead, which varies in price.",
+    "provenance": {
+      "source": "Study in Finland - Fees and Cost of Living",
+      "sourceUrl": "https://www.studyinfinland.fi/funding-your-studies/fees-and-cost-living",
+      "retrieved": "2026-11-22",
+      "period": "2026-2027"
+    }
+  }
+]

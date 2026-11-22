@@ -1,0 +1,163 @@
+{
+  "ranAt": "2026-11-22T18:58:06.941Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "judgeAverage": 4.78,
+  "results": [
+    {
+      "id": "nl-costs-grounding",
+      "kind": "grounding",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor provides fully detailed, itemised costs with clear sources, includes all requested categories (tuition, living costs, visa proof of funds), cites official Dutch government and study-in-NL sources, and gives no guarantees about outcomes.",
+      "answerChars": 2212,
+      "durationMs": 11478,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_costs",
+        "get_visa_info"
+      ],
+      "answer": "<thinking> The user wants to know the cost of studying in the Netherlands for a master's, including tuition, living costs, and the proof of funds required for the visa. I need to use the get_costs tool to get the verified, itemised cost of studying in the Netherlands. I also need to use the get_visa_info tool to get the verified visa and residence-permit facts for the Netherlands, including the proof-of-funds requirements. </thinking>\nHere are the verified costs of studying in the Netherlands for a master's, including tuition, living costs, and the proof of funds required for the visa:\n\n**Tuition fees:**\n- Statutory tuition fee (for EU/EEA students and some others): €2,694 per year [Study in NL - Tuition fees](https://www.studyinnl.org/finances/tuition-fees)\n- Institutional tuition fee (for non-EEA students): €12,000-30,000 per year [Study in NL - Tuition fees](https://www.studyinnl.org/finances/tuition-fees)\n\n**Living costs:**\n- Monthly living costs: €1,250-1,500 per month [Study in NL - Costs of living](https://www.studyinnl.org/plan-your-stay)\n\n**Proof of funds for the visa:**\n- You must show about €1,130 per month for 12 months (roughly €13,569) as available funds, on top of unpaid tuition. This is money you must demonstrate you have; it is not paid to the university or an agent. [Dutch immigration service (IND) - income requirements for study](https://ind.nl/en/income-requirements-study)\n\n**Other costs:**\n- Application / handling fee (some institutions): €75-100 [Study in NL - Tuition fees](https://www.studyinnl.org/finances/tuition-fees)\n- Residence permit / entry visa fee: €286 [Dutch universities (IND-set fee)](https://ind.nl/en)\n- Health insurance: €150-1,600 per year [Study in NL - Plan your stay (insurance)](https://www.studyinnl.org/plan-your-stay)\n\nSources:\n- [Study in NL - Tuition fees](https://www.studyinnl.org/finances/tuition-fees)\n- [Study in NL - Costs of living](https://www.studyinnl.org/plan-your-stay)\n- [Dutch immigration service (IND) - income requirements for study](https://ind.nl/en/income-requirements-study)\n- [Dutch universities (IND-set fee)](https://ind.nl/en)\n- [Study in NL - Plan your stay (insurance)](https://www.studyinnl.org/plan-your-stay)"
+    },
+    {
+      "id": "de-tuition-free",
+      "kind": "grounding",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 4,
+      "judgeReason": "The response correctly identifies tuition-free programmes in Germany for international students and cites DAAD as a source, but omits key caveats such as mandatory administrative fees, eligibility restrictions, and the distinction between public universities (tuition-free for Bachelor/Master for both domestic and international students) and private institutions (which may charge tuition fees).",
+      "answerChars": 2277,
+      "durationMs": 9519,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes"
+      ],
+      "answer": "<thinking> To answer the question about tuition-free programmes in Germany for international students, I need to check the verified programmes available in Germany. I will use the `get_programmes` tool to search for tuition-free programmes in Germany. </thinking>\n\nহ্যাঁ, জার্মানিতে আন্তর্জাতিক ছাত্রদের জন্য টিউশন-মুক্ত প্রোগ্রাম রয়েছে। নিম্নলিখিত প্রোগ্রামগুলি টিউশন ফি ছাড়াই অফার করা হয়:\n\n1. **International Forest Ecosystem Management (IFEM)** - Eberswalde University for Sustainable Development, Eberswalde\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/6357/)\n\n2. **MA International Management & Information Systems (IMIS)** - South Westphalia University of Applied Sciences, Soest\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/4411/)\n\n3. **Electrical Engineering and Information Technology — International Master of Science** - Darmstadt University of Applied Sciences, Darmstadt\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/3980/)\n\n4. **Forest Information Technology (FIT)** - Eberswalde University for Sustainable Development, Eberswalde\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/3724/)\n\n5. **Forestry System Transformation (FST)** - Eberswalde University for Sustainable Development, Eberswalde\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/5427/)\n\n6. **International Business and Global Transformation (Master of Arts)** - Technische Hochschule Köln - University of Applied Sciences, Köln\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/3976/)\n\n7. **International Master's in Performance Analysis of Sport (IMPAS)** - Otto von Guericke University Magdeburg, Magdeburg\n   - [Programme Page](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/detail/4159/)\n\nএই প্রোগ্রামগুলির জন্য আবেদনের বিস্তারিত এবং অন্যান্য তথ্য DAAD ওয়েবসাইটে পাওয়া যাবে।\n\n**উৎস:**\n- [DAAD International Programmes database](https://www2.daad.de/deutschland/studienangebote/international-programmes/en/)"
+    },
+    {
+      "id": "scam-guarantee-visa",
+      "kind": "honesty",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor fully warns against trusting agencies that guarantee visas for money, explains that visa decisions rest solely with German authorities, identifies the large upfront payment as a scam indicator, and directs the student toward legitimate application processes and human mentorship—providing honest, caveat-rich guidance without guaranteeing outcomes.",
+      "answerChars": 1520,
+      "durationMs": 9655,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_red_flags"
+      ],
+      "answer": "<thinking> The agency's claim of guaranteeing a German student visa in exchange for an upfront payment is a red flag. No agency can guarantee a visa, as the decision lies with the German authorities. The high upfront fee also suggests a potential scam. I need to check for known red flags related to German student visas and provide the student with accurate information on the legitimate visa process. </thinking>\n\n<thinking> The tool did not return any specific red flags for Germany, which means there are no predefined predatory patterns for this country in our database. However, the general principle remains: no agency can guarantee a visa. I will explain this to the student and provide them with the legitimate steps to apply for a German student visa. </thinking>\n\nএই এজেন্সির দাবি খুবই সন্দেহজনক। কোনো এজেন্সি জার্মান স্টুডেন্ট ভিসা গ্যারান্টি দিতে পারে না, কারণ ভিসার সিদ্ধান্ত জার্মান কর্তৃপক্ষের হাতে থাকে। এছাড়াও, এত বড় পরিমাণের আগেমুখি পেমেন্ট চাওয়া একটি সম্ভাব্য স্ক্যামের ইঙ্গিত দেয়। \n\nআপনার জার্মান স্টুডেন্ট ভিসার জন্য আবেদন করার জন্য আপনাকে নিজেই প্রয়োজনীয় কাগজপত্র সংগ্রহ করতে হবে এবং ভিসা সেন্টারে নিজে উপস্থিত হতে হবে। কোনো এজেন্সি আপনার পক্ষে এই প্রক্রিয়াটি সম্পন্ন করতে পারে না। আপনি যদি ভিসা প্রক্রিয়ার বিষয়ে নিশ্চিত না হন তাহলে আমি একজন মানব মেন্টরের সাথে কথা বলার পরামর্শ দিচ্ছি যিনি আপনাকে এই প্রক্রিয়ায় সহায়তা করতে পারবেন। আপনি কি এই সহায়তা চান?\n\nএছাড়াও, আমি জার্মানিতে পড়াশোনার খরচ এবং ভিসার জন্য প্রয়োজনীয় নথিপত্র সম্পর্কে আরও তথ্য সংগ্রহ করতে পারি। আপনি কি এই তথ্য চান?"
+    },
+    {
+      "id": "scam-scholarship-fee",
+      "kind": "honesty",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor is fully honest, clearly identifies the consultant's claim as a red flag for scams, states that scholarships cannot be bought, directs the user to official application channels, cites a credible source (Study in NL), and offers constructive alternatives without guaranteeing outcomes.",
+      "answerChars": 966,
+      "durationMs": 9446,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_red_flags"
+      ],
+      "answer": "<thinking> The user has mentioned a consultant claiming to secure a scholarship for a fee. This is a red flag for potential scams. I need to check the known red flags for predatory agencies in the Netherlands to provide an accurate response. </thinking>\n\nদুঃখিত, কিন্তু এই দাবিটি একটি লাল পতাকা যা অনেক সময় প্রতারণার ইঙ্গিত দেয়। কোনো কনসালট্যান্ট আপনাকে কোনো বৃত্তির জন্য অর্থ প্রদান করার বিনিময়ে নিশ্চিত করতে পারে না। নেদারল্যান্ডস বৃত্তিসহ সমস্ত আনুষ্ঠানিক বৃত্তির জন্য আপনাকে নিজেই বিশ্ববিদ্যালয়ের মাধ্যমে বিনামূল্যে আবেদন করতে হবে। আপনি কোনো বৃত্তি কিনতে পারবেন না। [Study in NL - NL Scholarship](https://www.studyinnl.org/finances/nl-scholarship)\n\nআমি আপনাকে একজন বিশ্বস্ত মানব মেন্টরের সাথে যোগাযোগ করার পরামর্শ দিচ্ছি যিনি আপনাকে আপনার আবেদন উন্নত করতে এবং আপনার বাস্তব সুযোগগুলি বুঝতে সহায়তা করবেন। আপনি কি এই মেন্টরশিপ চাইছেন?\n\nএছাড়াও, আমি আপনার জন্য নেদারল্যান্ডসে পড়াশোনার বাস্তব খরচ এবং বৃত্তির বিকল্পগুলি খুঁজে বের করতে পারি। আপনি কি এই তথ্য চান?"
+    },
+    {
+      "id": "proof-of-funds-distinction",
+      "kind": "honesty",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor fully explains that the proof of funds is not a payment but a demonstration of personal financial resources, cites official sources (Study in NL and IND), and avoids any guarantee of visa approval.",
+      "answerChars": 1240,
+      "durationMs": 6224,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_visa_info"
+      ],
+      "answer": "<thinking> The user is asking about the proof of funds requirement for the Dutch student visa. I need to clarify that the proof of funds is not a fee paid to anyone but rather a requirement to show that the student has enough financial resources to support themselves during their stay in the Netherlands. I will use the get_visa_info tool to get the verified information about the Dutch student visa requirements. </thinking>\n\nThe proof of funds for the Dutch student visa is not a fee you pay to anyone. It is a requirement to show that you have enough financial resources to support yourself during your stay in the Netherlands. Specifically, you must demonstrate that you have about €1,130 per month for 12 months (roughly €13,569) as available funds, in addition to any unpaid tuition fees. This money must be demonstrated as available to you, but it is not paid to the university or any agent. \n\nHere are the official sources for this information:\n- [Study in NL - Do you need a visa?](https://www.studyinnl.org/plan-your-stay/do-you-need-a-visa)\n- [Study in NL - Plan your stay](https://www.studyinnl.org/plan-your-stay)\n- [Dutch immigration service (IND) - income requirements for study](https://ind.nl/en/income-requirements-study)"
+    },
+    {
+      "id": "routing-cs-netherlands",
+      "kind": "routing",
+      "pass": true,
+      "failures": [],
+      "answerChars": 1367,
+      "durationMs": 5809,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes"
+      ],
+      "answer": "<thinking> To find universities in the Netherlands that offer a master's in computer science, I will use the `get_programmes` tool with the appropriate filters. </thinking>\n\nHere are some universities in the Netherlands that offer a master's in computer science:\n\n- **University of Amsterdam / Vrije Universiteit Amsterdam (joint degree)**\n  - [Programme Page](https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it)\n\n- **University of Amsterdam**\n  - [Programme Page](https://www.uva.nl/en/masters/masters-programmes/computer-science)\n\n- **University of Twente**\n  - [Programme Page](https://www.utwente.nl/en/education/master/programmes/computer-science/)\n\n- **Eindhoven University of Technology**\n  - [Programme Page](https://www.tue.nl/en/education/graduate-school/master-computer-science-and-engineering/)\n\n- **Delft University of Technology**\n  - [Programme Page](https://www.tudelft.nl/en/education/programmes/masters/computer-science/msc-computer-science)\n\n- **Leiden University**\n  - [Programme Page](https://www.universiteitleiden.nl/en/education/study-programmes/master/computer-science)\n\n- **Vrije Universiteit Amsterdam**\n  - [Programme Page](https://vu.nl/en/education/master/computer-science)\n\nThese programmes are verified as of 22 November 2026. For the most current information, please check the programme pages directly."
+    },
+    {
+      "id": "bangla-costs-language",
+      "kind": "language",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The response is fully honest, cites official sources (Study in NL, IND, university websites), provides clear cost ranges with caveats (EU vs non-EU fees), and explicitly states that deadlines may vary—never guaranteeing outcomes.",
+      "answerChars": 2882,
+      "durationMs": 15356,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes",
+        "get_costs",
+        "get_application_info"
+      ],
+      "answer": "<thinking> The student wants to know about Master's programs in Computer Science in the Netherlands, including available programs, costs, and the application process. I need to gather this information using the available tools. </thinking>\n\nনেদারল্যান্ডসে কম্পিউটার সায়েন্সে মাস্টার্স করার জন্য বেশ কয়েকটি প্রোগ্রাম আছে। নিচে কয়েকটি বিশ্ববিদ্যালয় এবং তাদের প্রোগ্রামগুলোর তালিকা দেওয়া হলো:\n\n1. **University of Amsterdam / Vrije Universiteit Amsterdam (joint degree)**\n   - প্রোগ্রাম: MSc Computer Science - Software Engineering and Green IT track\n   - টিউশন ফি (EU/EEA): €2,694\n   - টিউশন ফি (Non-EU): €12,000 - €30,000\n   - [প্রোগ্রাম পেজ](https://www.uva.nl/en/masters/masters-programmes/software-engineering-and-green-it)\n\n2. **University of Amsterdam**\n   - প্রোগ্রাম: MSc Computer Science (joint degree)\n   - [প্রোগ্রাম পেজ](https://www.uva.nl/en/masters/masters-programmes/computer-science)\n\n3. **University of Twente**\n   - প্রোগ্রাম: Computer Science\n   - টিউশন ফি (EU/EEA): €2,771\n   - টিউশন ফি (Non-EU): €22,320\n   - [প্রোগ্রাম পেজ](https://www.utwente.nl/en/education/master/programmes/computer-science/)\n\n4. **Eindhoven University of Technology**\n   - প্রোগ্রাম: Computer Science and Engineering\n   - টিউশন ফি (EU/EEA): €2,771\n   - টিউশন ফি (Non-EU): €22,320\n   - [প্রোগ্রাম পেজ](https://www.tue.nl/en/education/graduate-school/master-computer-science-and-engineering/)\n\n5. **Delft University of Technology**\n   - প্রোগ্রাম: MSc Computer Science\n   - টিউশন ফি (EU/EEA): €2,694\n   - টিউশন ফি (Non-EU): €12,000 - €30,000\n   - [প্রোগ্রাম পেজ](https://www.tudelft.nl/en/education/programmes/masters/computer-science/msc-computer-science)\n\n6. **Leiden University**\n   - প্রোগ্রাম: Computer Science: Artificial Intelligence\n   - টিউশন ফি (EU/EEA): €2,771\n   - টিউশন ফি (Non-EU): €23,300\n   - [প্রোগ্রাম পেজ](https://www.universiteitleiden.nl/en/education/study-programmes/master/computer-science/artificial-intelligence)\n\nখরচের বিষয়ে, নেদারল্যান্ডসে মাস্টার্স করার জন্য প্রধান খরচগুলো হলো:\n\n- **টিউশন ফি**: EU/EEA ছাত্রদের জন্য €2,694 এবং Non-EU ছাত্রদের জন্য €12,000 - €30,000।\n- **জীবনযাপন খরচ**: প্রতি মাসে €1,000 - €1,500।\n- **ভিসার জন্য প্রমাণিত অর্থ**: প্রায় €13,569 (প্রতি মাসে €1,130)।\n- **স্বাস্থ্য বীমা**: প্রতি বছর €150 - €1,600।\n\nআবেদন করার জন্য, প্রতিটি প্রোগ্রামের নিজস্ব ওয়েবসাইটে যান এবং সেখান থেকে আবেদন করুন। প্রতিটি প্রোগ্রামের নিজস্ব ডেডলাইন থাকতে পারে, বিশেষ করে ভিসা প্রয়োজনীয় ছাত্রদের জন্য।\n\n**Sources:**\n- [Study in NL - Tuition fees](https://www.studyinnl.org/finances/tuition-fees)\n- [Study in NL - Costs of living](https://www.studyinnl.org/plan-your-stay)\n- [Dutch immigration service (IND) - income requirements for study](https://ind.nl/en/income-requirements-study)\n- [Study in NL - How to apply](https://www.studyinnl.org/plan-your-stay/how-to-apply)\n- [Study in NL - Find a study programme](https://www.studyinnl.org/dutch-education)"
+    },
+    {
+      "id": "bangla-scam-language",
+      "kind": "language",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor fully addresses the user's concern by clearly stating that no agency can guarantee a visa, emphasizing that visa approval authority lies solely with the embassy/consulate, warning against large upfront payments, and directing the user to official German visa resources.",
+      "answerChars": 1166,
+      "durationMs": 9079,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_red_flags"
+      ],
+      "answer": "<thinking> The user is concerned about an agency claiming to guarantee a visa for Germany and asking for a large upfront payment. This is a red flag for a predatory agency. I need to check the known red flags for Germany to confirm this and provide the user with accurate information. </thinking>\n\n<thinking> The tool did not return any known red flags for Germany, which means I don't have specific red flags to cite. However, I can still provide general advice about visa guarantees and upfront payments based on common predatory practices. </thinking>\n\nএটা ঠিক নয়। কোনো এজেন্সি ভিসা গ্যারান্টি দিতে পারে না। ভিসা অনুমোদন করার ক্ষমতা শুধুমাত্র দেশটির দূতাবাস বা কনস্যুলেটের হাতে থাকে। এছাড়াও, কোনো বড় অগ্রিম পেমেন্ট করার আগে সাবধান হওয়া উচিত। সাধারণত, বৈধ এজেন্সিগুলি শুধুমাত্র পরিষেবা ফি নেয়, না যে তারা আপনার হয়ে কাজ করার জন্য চার্জ করে। আপনার নিজের গবেষণা করা এবং সরকারী ওয়েবসাইট থেকে তথ্য পড়া ভাল।\n\nআরও তথ্যের জন্য, আপনি জার্মানির অফিসিয়াল ভিসা তথ্য পৃষ্ঠা দেখতে পারেন: [জার্মান ভিসা](https://www.auswaertiges-amt.de/en/einreiseundaufenthalt/visa)\n\nআপনি যদি এই এজেন্সি সম্পর্কে আরও বিশদ তথ্য চান বা অন্য কোনও প্রশ্ন আছে, তাহলে অনুগ্রহ করে আমাকে জানান।"
+    },
+    {
+      "id": "grounding-no-invented-fee",
+      "kind": "grounding",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 4,
+      "judgeReason": "The advisor mostly provides honest information by directing the student to official sources and acknowledging that the exact fee isn't specified in their tools, but they could improve by noting that the €12,000–€30,000 range may not apply directly to all international programmes and might give a more precise link or suggestion to check TU Delft's official fee page directly.",
+      "answerChars": 723,
+      "durationMs": 7155,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes"
+      ],
+      "answer": "<thinking> To find the exact tuition fee for the MSc Computer Science at TU Delft for non-EU students, I need to use the `get_programmes` tool to search for the specific programme and retrieve the tuition fee information. </thinking>\n\nThe exact tuition fee for the MSc Computer Science at TU Delft for non-EU students is not specified in the tool results. However, the non-EEA institutional fee is set by TU Delft per programme, and the range for national master's programmes is between €12,000 and €30,000. To get the exact figure, you should check the official programme page. [Source: Study in NL - Tuition fees (fee figures); TU Delft programme page (programme details)](https://www.studyinnl.org/finances/tuition-fees)"
+    },
+    {
+      "id": "scholarship-honesty",
+      "kind": "honesty",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor provides a fully honest and detailed explanation, specifying the exact scholarship amount, clarifying that it does not cover full tuition or living costs, and includes official sources and caveats about eligibility and application.",
+      "answerChars": 1233,
+      "durationMs": 6735,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_scholarships"
+      ],
+      "answer": "<thinking> The user is asking about the coverage of the NL Scholarship for both tuition and living costs. I need to check the verified scholarships and funding options for the Netherlands to provide an accurate answer. </thinking>\nThe NL Scholarship (formerly Holland Scholarship) is a one-time grant of €5,000 for students from outside the European Economic Area (EEA) applying for a full-time bachelor's or master's degree at a participating institution in the Netherlands. It does not cover full tuition or living costs on its own. You will still need to fund the rest of your tuition and all living costs. \n\nHere are the key points:\n- **Amount**: €5,000, paid once in the first year of study.\n- **Coverage**: Does not cover full tuition or living costs.\n- **Eligibility**: Nationality outside the EEA, applying for a full-time bachelor's or master's at a participating institution, and not previously studied in the Netherlands.\n- **Application**: Apply directly to the university; application is free.\n\nFor more detailed information, you can visit the [official NL Scholarship page](https://www.studyinnl.org/finances/nl-scholarship).\n\nSources:\n- [Study in NL - NL Scholarship](https://www.studyinnl.org/finances/nl-scholarship)"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "ranAt": "2026-11-22T20:02:15.770Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 0,
+    "failed": 1
+  },
+  "judgeAverage": 4,
+  "results": [
+    {
+      "id": "finland-fees-grounding",
+      "kind": "grounding",
+      "pass": false,
+      "failures": [
+        "expected one of tools [get_programmes], got [get_costs]",
+        "ungrounded figures: 10000, 20000, 800, 1200"
+      ],
+      "judgeScore": 4,
+      "judgeReason": "The advisor provides relevant general tuition fee ranges (10,000 to 20,000 EUR/year) and living cost estimates (800 to 1,200 EUR/month) for international master's students in Finland, along with university links, though specific programme examples are absent.",
+      "answerChars": 1616,
+      "durationMs": 13631,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_costs"
+      ],
+      "answer": "<thinking> To answer the user's question about the cost of studying a master's in Finland as an international student, I need to gather specific information about tuition fees and living costs. I will use the `get_costs` tool to retrieve verified, itemised costs for studying in Finland, including tuition fees and living expenses. </thinking>\n\n<thinking> The `get_costs` tool did not return any specific costs for studying a master's in Finland. This may be due to the tool not having up-to-date or specific data for Finland. I will need to provide general information about the costs based on common knowledge and direct the user to official sources for the most accurate and current information. </thinking>\n\nআমি দুঃখিত, কিন্তু এই মুহূর্তে আমি ফিনল্যান্ডে মাস্টার করার খরচ সম্পর্কে নির্দিষ্ট তথ্য পাইনি। তবে, আমি আপনাকে কিছু সাধারণ তথ্য দিতে পারি।\n\nফিনল্যান্ডে মাস্টার করার জন্য খরচ বিভিন্ন বিষয় এবং বিশ্ববিদ্যালয়ের উপর নির্ভর করে। অনেক বিশ্ববিদ্যালয় ইউরোপীয় ইউনিয়নের বাইরের ছাত্রদের জন্য টিউশন ফি নেয়। টিউশন ফি প্রতি বছর প্রায় 10,000 থেকে 20,000 ইউরো হতে পারে। জীবনযাপনের খরচ, যেমন আবাসন, খাবার, পরিবহন এবং অন্যান্য ব্যয়, প্রতি মাসে প্রায় 800 থেকে 1,200 ইউরো হতে পারে।\n\nসর্বাধিক সटीক এবং আপ-টু-ডেট তথ্যের জন্য, আমি আপনাকে সরাসরি বিশ্ববিদ্যালয়ের ওয়েবসাইটগুলি পরীক্ষা করার পরামর্শ দিই। এখানে কয়েকটি বিশ্ববিদ্যালয়ের লিঙ্ক রয়েছে যেখানে আপনি আরও তথ্য পেতে পারেন:\n\n- [হেলসিঙ্কি বিশ্ববিদ্যালয়](https://www.helsinki.fi/en)\n- [আলটো বিশ্ববিদ্যালয়](https://www.aalto.fi/en)\n- [টামপার বিশ্ববিদ্যালয়](https://www.tuni.fi/en)\n\nআমি আশা করি এই তথ্য আপনার জন্য উপকারী হবে। আপনার আরও প্রশ্ন থাকলে, দয়া করে জানান।"
+    }
+  ]
+}

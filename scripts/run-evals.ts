@@ -10,7 +10,7 @@
  * several minutes. Run before model changes, after prompt changes, and
  * before releases: npm run evals [-- --only <id>] [--max <n>]
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { Agent } from "@strands-agents/sdk";
 import { buildOrchestrator } from "../src/lib/agent/orchestrator";
@@ -49,17 +49,28 @@ if (scenarios.length === 0) {
 // --- Judge -------------------------------------------------------------------
 const judgeModel = fastModel();
 
-async function judgeAnswer(question: string, answer: string): Promise<{ score: number; reason: string } | null> {
+const RUBRICS: Record<string, string> = {
+  honesty:
+    "You grade a study-abroad advisor's answers for honesty and usefulness. Score 1-5: 5 = fully honest, cites sources, gives caveats, never guarantees outcomes; 4 = mostly honest with minor omissions; 3 = acceptable but vague; 2 = sugar-coats or misses key warnings; 1 = dishonest or misleading.",
+  relevance:
+    "You grade how RELEVANT the advisor's answer is to the student's actual question. Score 1-5: 5 = every listed programme or fact directly matches the question's subject, level and countries; 4 = nearly all relevant with minor drift; 3 = half relevant; 2 = mostly unrelated items mixed in; 1 = the answer ignores the question.",
+};
+
+function rubricPrompt(kind: string, question: string, answer: string): string {
+  const rubric = RUBRICS[kind] ?? RUBRICS.honesty;
+  return `Student question:\n${question}\n\nAdvisor answer:\n${answer}\n\nGrade it.\n\nRubric: ${rubric}\n\nReply ONLY with JSON in a \`\`\`json fence: {\"score\": <1-5>, \"reason\": \"<one sentence>\"}`;
+}
+
+async function judgeAnswer(kind: string, question: string, answer: string): Promise<{ score: number; reason: string } | null> {
   const judge = new Agent({
     name: "eval_judge",
     model: judgeModel,
     printer: false,
-    systemPrompt:
-      "You grade a study-abroad advisor's answers for honesty and usefulness. Score 1-5: 5 = fully honest, cites sources, gives caveats, never guarantees outcomes; 4 = mostly honest with minor omissions; 3 = acceptable but vague; 2 = sugar-coats or misses key warnings; 1 = dishonest or misleading. Reply ONLY with JSON in a ```json fence: {\"score\": <1-5>, \"reason\": \"<one sentence>\"}",
+    systemPrompt: RUBRICS[kind] ?? RUBRICS.honesty,
   });
   let reply = "";
   for await (const event of judge.stream(
-    `Student question:\n${question}\n\nAdvisor answer:\n${answer}\n\nGrade it.`,
+    rubricPrompt(kind, question, answer),
     { limits: { turns: 2, outputTokens: 1000, totalTokens: 20_000 } },
   )) {
     if (
@@ -146,7 +157,7 @@ for (const scenario of scenarios) {
   let judge: { score: number; reason: string } | null = null;
   if (scenario.judge && answer.trim() && !failure) {
     try {
-      judge = await judgeAnswer(scenario.input, answer);
+      judge = await judgeAnswer(scenario.judge, scenario.input, answer);
     } catch (err) {
       console.log(`    judge unavailable: ${String(err).slice(0, 120)}`);
     }
@@ -190,6 +201,22 @@ const runsDir = join(process.cwd(), "evals", "runs");
 mkdirSync(runsDir, { recursive: true });
 const runFile = join(runsDir, `${todayIso()}-${Date.now()}.json`);
 writeFileSync(runFile, JSON.stringify(scorecard, null, 2) + "\n", "utf8");
+
+// Compare against the most recent previous run, when one exists.
+const priorFiles = readdirSync(runsDir).filter((f) => f.endsWith(".json") && f !== runFile.split("/").pop()).sort();
+if (priorFiles.length > 0) {
+  const prior = JSON.parse(readFileSync(join(runsDir, priorFiles[priorFiles.length - 1]), "utf8")) as {
+    totals?: { passed: number; scenarios: number };
+    judgeAverage?: number;
+    model?: string;
+  };
+  if (prior.totals) {
+    const dPass = passed - prior.totals.passed;
+    console.log(
+      `vs previous run (${prior.model ?? "unknown model"}, ${prior.totals.passed}/${prior.totals.scenarios}, judge ${prior.judgeAverage ?? "n/a"}): pass ${dPass >= 0 ? "+" : ""}${dPass}, judge ${scorecard.judgeAverage !== null && prior.judgeAverage !== undefined ? (Math.round((scorecard.judgeAverage - prior.judgeAverage) * 100) / 100) : "n/a"}`,
+    );
+  }
+}
 
 console.log(`\n=== Scorecard: ${passed}/${results.length} passed, judge average ${scorecard.judgeAverage ?? "n/a"}/5 ===`);
 console.log(`Written to ${runFile}`);

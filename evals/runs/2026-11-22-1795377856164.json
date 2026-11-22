@@ -1,0 +1,27 @@
+{
+  "ranAt": "2026-11-22T20:04:16.164Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "judgeAverage": 5,
+  "results": [
+    {
+      "id": "finland-fees-grounding",
+      "kind": "grounding",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor directly addresses the student's query by providing specific tuition fee examples for master's programs in Finland for international students, including verified sources and relevant details.",
+      "answerChars": 1935,
+      "durationMs": 11260,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes"
+      ],
+      "answer": "<thinking> To answer the user's question about the cost of studying a master's in Finland as an international student, I need to gather specific information about tuition fees for master's programs in Finland. I will use the `get_programmes` tool to search for verified study programmes in Finland at the master's level, which will provide me with the tuition fees for a few examples. </thinking>\n\nHere are some examples of the cost to study a master's in Finland as an international student:\n\n- **Accessible and Sustainable Digital Services, Computing Sciences and Electrical Engineering, Master of Science (2 yrs)** at Tampere University: €12,000 per year [Opintopolku / Studyinfo](https://opintopolku.fi/konfo/en/koulutus/1.2.246.562.13.00000000000000012723)\n- **Accounting and Auditing, Master of Science (Economics and Business Administration) (2 years)** at University of Vaasa: €14,000 per year [Opintopolku / Studyinfo](https://opintopolku.fi/konfo/en/koulutus/1.2.246.562.13.00000000000000001318)\n- **Accounting and Finance, Master of Science (Economics and Business Administration) (2 years)** at University of Eastern Finland: €12,000 per year [Opintopolku / Studyinfo](https://opintopolku.fi/konfo/en/koulutus/1.2.246.562.13.00000000000000007904)\n- **Accounting, Master of Science (Economics and Business Administration) (2 yrs)** at Aalto University: €15,000 per year [Opintopolku / Studyinfo](https://opintopolku.fi/konfo/en/koulutus/1.2.246.562.13.00000000000000002702)\n- **Acoustics and Audio Technology, Master of Science (Technology) (2 yrs)** at Aalto University: €17,000 per year [Opintopolku / Studyinfo](https://opintopolku.fi/konfo/en/koulutus/1.2.246.562.13.00000000000000002744)\n\nThese figures are verified as of November 22, 2026. Tuition fees can vary depending on the programme and institution. \n\nSources:\n- [Opintopolku / Studyinfo (Finnish National Agency for Education)](https://opintopolku.fi/konfo/en/)"
+    }
+  ]
+}

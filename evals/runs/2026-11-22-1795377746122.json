@@ -1,0 +1,28 @@
+{
+  "ranAt": "2026-11-22T20:02:26.121Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "judgeAverage": 5,
+  "results": [
+    {
+      "id": "bangla-finland-fees",
+      "kind": "language",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor directly addresses the student's question about the cost of a master's degree in Finland, providing a clear cost range and a specific example program from Tampere University with exact tuition fees, matching the subject, level, and country precisely.",
+      "answerChars": 1104,
+      "durationMs": 9827,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_costs",
+        "get_programmes"
+      ],
+      "answer": "<thinking> To answer the user's question about the cost of studying for a master's degree in Finland and to provide an example program, I need to use the `get_costs` tool to get the verified, itemised cost of studying in Finland and the `get_programmes` tool to search for a concrete master's program in Finland. </thinking>\n\nফিনল্যান্ডে মাস্টার্স করার খরচ বিদেশী ছাত্রদের জন্য প্রতি বছর 8,000 থেকে 20,000 ইউরো পর্যন্ত হতে পারে। এটি বিভিন্ন বিশ্ববিদ্যালয় এবং প্রোগ্রামের উপর নির্ভর করে।\n\nএখানে একটি উদাহরণ প্রোগ্রাম দেওয়া হল:\n\n- **প্রোগ্রামের নাম:** Accessible and Sustainable Digital Services, Computing Sciences and Electrical Engineering, Master of Science (2 yrs)\n- **বিশ্ববিদ্যালয়:** Tampere University\n- **শিক্ষা খরচ:** 12,000 ইউরো প্রতি বছর\n- **ভাষা:** ইংরেজি\n- **আরও তথ্য:** [প্রোগ্রামের ওয়েবসাইট](https://opintopolku.fi/konfo/en/koulutus/1.2.246.562.13.00000000000000012723)\n\nআরও অনেক প্রোগ্রাম রয়েছে। আপনি আরও নির্দিষ্ট ক্ষেত্র, শহর বা শিক্ষার স্তর নির্বাচন করে আরও অনুসন্ধান করতে পারেন।\n\n**উৎস:**\n- [Opintopolku / Studyinfo (Finnish National Agency for Education)](https://opintopolku.fi)"
+    }
+  ]
+}
