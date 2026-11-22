@@ -9,9 +9,11 @@ import { signOut } from "@/auth";
 export function AppHeader({
   active,
   showMentor = false,
+  showAdmin = false,
 }: {
-  active: "chat" | "vault" | "mentorship" | "mentor";
+  active: "chat" | "vault" | "mentorship" | "mentor" | "admin";
   showMentor?: boolean;
+  showAdmin?: boolean;
 }) {
   const link = (href: string, key: string, label: string) => (
     <Link
@@ -59,6 +61,7 @@ export function AppHeader({
           {link("/vault", "vault", "Vault")}
           {link("/mentorship", "mentorship", "Mentorship")}
           {showMentor ? link("/mentor", "mentor", "Mentor") : null}
+          {showAdmin ? link("/admin", "admin", "Admin") : null}
         </nav>
 
         <form

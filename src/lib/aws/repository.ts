@@ -415,3 +415,57 @@ export async function putTurnTrace(trace: TurnTrace): Promise<void> {
     }),
   );
 }
+
+// --- Admin triage -----------------------------------------------------------
+
+/** Every mentorship request, newest first. Admin triage only (filtered scan:
+ *  the mentorship population is small; a GSI arrives with volume). */
+export async function listAllMentorshipRequests(): Promise<MentorshipRequest[]> {
+  const res = await ddb().send(
+    new ScanCommand({
+      TableName: TABLE,
+      FilterExpression: "begins_with(SK, :sk)",
+      ExpressionAttributeValues: { ":sk": "MENTORSHIP#" },
+    }),
+  );
+  const items = (res.Items as MentorshipRequest[] | undefined) ?? [];
+  return items.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/** Every mentor profile, including paused/unavailable ones (admin view). */
+export async function listAllMentorProfiles(): Promise<MentorProfile[]> {
+  const res = await ddb().send(
+    new ScanCommand({
+      TableName: TABLE,
+      FilterExpression: "SK = :sk",
+      ExpressionAttributeValues: { ":sk": "MENTOR_PROFILE" },
+    }),
+  );
+  return (res.Items as MentorProfile[] | undefined) ?? [];
+}
+
+/** Admin-direct assignment to a specific mentor (bypasses matching scores). */
+export async function assignMentorToRequest(
+  userId: string,
+  requestId: string,
+  mentor: { userId: string; displayName: string },
+): Promise<MentorshipRequest | null> {
+  const res = await ddb().send(
+    new GetCommand({
+      TableName: TABLE,
+      Key: { PK: `USER#${userId}`, SK: `MENTORSHIP#${requestId}` },
+    }),
+  );
+  const request = res.Item as MentorshipRequest | undefined;
+  if (!request) return null;
+  request.status = "matched";
+  request.mentorId = mentor.userId;
+  request.mentorName = mentor.displayName;
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: { PK: `USER#${request.userId}`, SK: `MENTORSHIP#${request.requestId}`, ...request },
+    }),
+  );
+  return request;
+}

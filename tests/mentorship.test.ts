@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { mentorMatchScore, pickMentor } from "../src/lib/mentorship/matching";
+import { groupRequests } from "../src/lib/mentorship/admin";
 
 /**
  * Mentor matching tests (Track C): deterministic scoring over country, level,
@@ -48,4 +49,12 @@ test("pickMentor prefers the higher-scoring mentor and breaks ties by load", () 
 
 test("pickMentor returns null with no candidates", () => {
   assert.equal(pickMentor([], request), null);
+});
+
+test("groupRequests buckets the admin triage view", () => {
+  const mk = (id: string, status: string) => ({ requestId: id, status }) as never;
+  const g = groupRequests([mk("1", "open"), mk("2", "open"), mk("3", "matched"), mk("4", "accepted"), mk("5", "completed")]);
+  assert.equal(g.open.length, 2);
+  assert.equal(g.active.length, 2);
+  assert.equal(g.completed.length, 1);
 });
