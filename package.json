@@ -18,6 +18,7 @@
     "harvest": "node --import tsx scripts/harvest.ts",
     "clean:stale": "node --import tsx scripts/clean-stale.ts",
     "migrate:programmes": "node --import tsx scripts/migrate-programmes.ts",
+    "enrich:finland-fees": "node --import tsx scripts/enrich-finland-fees.ts",
     "set-role": "node --import tsx scripts/set-role.ts",
     "harden-storage": "node --import tsx scripts/harden-storage.ts"
   },
