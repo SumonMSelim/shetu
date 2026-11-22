@@ -16,6 +16,14 @@ import fiApplicationsJson from "../../../data/countries/fi/applications.json";
 import fiVisaJson from "../../../data/countries/fi/visa.json";
 import fiRedFlagsJson from "../../../data/countries/fi/red-flags.json";
 import fiProgrammesJson from "../../../data/countries/fi/programmes.json";
+import eeCountryJson from "../../../data/countries/ee/country.json";
+import eeScholarshipsJson from "../../../data/countries/ee/scholarships.json";
+import eeCostsJson from "../../../data/countries/ee/costs.json";
+import eeInstitutionsJson from "../../../data/countries/ee/institutions.json";
+import eeApplicationsJson from "../../../data/countries/ee/applications.json";
+import eeVisaJson from "../../../data/countries/ee/visa.json";
+import eeRedFlagsJson from "../../../data/countries/ee/red-flags.json";
+import eeProgrammesJson from "../../../data/countries/ee/programmes.json";
 import seCountryJson from "../../../data/countries/se/country.json";
 import seScholarshipsJson from "../../../data/countries/se/scholarships.json";
 import seCostsJson from "../../../data/countries/se/costs.json";
@@ -87,14 +95,26 @@ const SE = countryDataSchema.parse({
   programmes: seProgrammesJson,
 });
 
+const EE = countryDataSchema.parse({
+  meta: eeCountryJson,
+  scholarships: eeScholarshipsJson,
+  costs: eeCostsJson,
+  institutions: eeInstitutionsJson,
+  applications: eeApplicationsJson,
+  visa: eeVisaJson,
+  redFlags: eeRedFlagsJson,
+  programmes: eeProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
   DE: toKnowledgeBase(DE),
   FI: toKnowledgeBase(FI),
   SE: toKnowledgeBase(SE),
+  EE: toKnowledgeBase(EE),
 };
 
-function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }

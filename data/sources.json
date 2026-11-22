@@ -48,5 +48,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "University Admissions in Sweden (UHR) course search API (POST /intl/api/sok). Master + bachelor sweeps, English-instruction filter applied client-side. Deterministic, no LLM."
+  },
+  {
+    "id": "studyinestonia-tables",
+    "country": "EE",
+    "kind": "portal-finder",
+    "url": "https://studyinestonia.ee/study/programmes",
+    "adapter": "ee-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "Study in Estonia (Education and Youth Board) server-rendered programme tables for bachelor/master/doctoral. Plain fetch + table parsing, no LLM, no browser."
   }
 ]

@@ -1,0 +1,1568 @@
+[
+  {
+    "id": "ee-communication-management-tallinn-university-m4",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Communication Management",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/comman",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-contemporary-art-estonian-academy-of-arts-m5",
+    "institution": "Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Contemporary Art",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Arts",
+    "tuitionNonEu": 3000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.artun.ee/en/curricula/contemporary-art/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-contemporary-performance-and-c-estonian-academy-of-music-and--m6",
+    "institution": "Estonian Academy of Music and Theatre",
+    "institutionType": "university",
+    "name": "Contemporary Performance and Composition (CoPeCo) (no intake)",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre",
+    "tuitionNonEu": 7700,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/composition-and-improvisational-music/copeco/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-contemporary-physical-performa-estonian-academy-of-music-and--m7",
+    "institution": "Estonian Academy of Music and Theatre",
+    "institutionType": "university",
+    "name": "Contemporary Physical Performance Making (CPPM) (no intake)",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre",
+    "tuitionNonEu": 14000,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/theatre/cppm/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-craft-studies-estonian-academy-of-arts-m8",
+    "institution": "Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Craft Studies",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Arts",
+    "tuitionNonEu": 3000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.artun.ee/en/curricula/craft-studies/overview/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-service-design-strategies-and--estonian-academy-of-arts-m9",
+    "institution": "Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Service Design Strategies and Innovations",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Arts",
+    "tuitionNonEu": 8000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.artun.ee/en/curricula/sdsi/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-documentary-film-tallinn-university-m10",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Documentary Film",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/node/2208",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-estonian-and-finno-ugric-langu-university-of-tartu-m11",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Estonian and Finno-Ugric Languages",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/estonian-and-finno-ugric-languages",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-estonian-studies-tallinn-university-m12",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Estonian Studies",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 3800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/estonian-studies",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-graphic-design-estonian-academy-of-arts-m15",
+    "institution": "Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Graphic Design",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Arts",
+    "tuitionNonEu": 3000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.artun.ee/en/curricula/ma-gd/master-in-graphic-design/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-interaction-design-estonian-academy-of-arts-m16",
+    "institution": "Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Interaction Design",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Arts",
+    "tuitionNonEu": 4200,
+    "currency": "EUR",
+    "applicationUrl": "https://www.artun.ee/ixd",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-interactive-storytelling-university-of-tartu-m17",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Interactive Storytelling",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/interactive-storytelling",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-literature-visual-culture-and--tallinn-university-estonian-ac-m18",
+    "institution": "Tallinn University/ Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Literature, Visual Culture and Film Studies",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Tallinn University/ Estonian Academy of Arts",
+    "tuitionNonEu": 3800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/literature-visual-culture-film-studies",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-classical-music-performance-estonian-academy-of-music-and--m19",
+    "institution": "Estonian Academy of Music and Theatre",
+    "institutionType": "university",
+    "name": "Classical Music Performance",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre",
+    "tuitionNonEu": 7700,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/classical-music-performance/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-composition-and-improvisationa-estonian-academy-of-music-and--m20",
+    "institution": "Estonian Academy of Music and Theatre",
+    "institutionType": "university",
+    "name": "Composition and Improvisational Music",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre",
+    "tuitionNonEu": 7700,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/composition-and-improvisational-music/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-philosophy-in-practice-university-of-tartu-m21",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Philosophy in Practice",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/philosophy-practice",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-creative-project-management-1--university-of-tartu-m23",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Creative Project Management ( 1-year programme, partly online)",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/creative",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-urban-studies-estonian-academy-of-arts-m24",
+    "institution": "Estonian Academy of Arts",
+    "institutionType": "university",
+    "name": "Urban Studies",
+    "level": "master",
+    "field": "arts and humanities",
+    "language": "English",
+    "city": "Estonian Academy of Arts",
+    "tuitionNonEu": 2200,
+    "currency": "EUR",
+    "applicationUrl": "https://www.artun.ee/en/curricula/urban-studies/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-cultural-management-no-intake-estonian-academy-of-music-and--m26",
+    "institution": "Estonian Academy of Music and Theatre/ EBS",
+    "institutionType": "university",
+    "name": "Cultural Management (no intake)",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre/ EBS",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/musicology/cultural-management/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-educational-technology-1-year--university-of-tartu-m27",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Educational Technology (1-year mostly online programme)",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/educational-technology",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-educational-innovation-and-lea-tallinn-university-m28",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Educational Innovation and Leadership",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4200,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/hti/educational-innovation-and-leadership",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-politics-and-governance-in-the-university-of-tartu-m29",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Politics and Governance in the Digital Age",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/politics-and-governance-digital-age",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-international-relations-tallinn-university-m30",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "International Relations",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/yti/international-relations",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-social-entrepreneurship-tallinn-university-m32",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Social Entrepreneurship",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/yti/social-entrepreneurship",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-disinformation-and-societal-re-university-of-tartu-m33",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Disinformation and Societal Resilience (1-year programme)",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 7000,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/disinformation-and-societal-resilience",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-technology-governance-and-sust-tallinn-university-of-technolo-m34",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Technology Governance and Sustainability",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 3800,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/technology-governance-and-sustainability",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-public-sector-innovation-and-e-tallinn-university-of-technolo-m35",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Public Sector Innovation and e-Governance",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 613,
+    "currency": "EUR",
+    "applicationUrl": "https://pioneer-master.eu/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-artificial-intelligence-for-su-tallinn-university-m36",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Artificial Intelligence for Sustainable Societies",
+    "level": "master",
+    "field": "social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/dt/aissma",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-entrepreneurial-management-mba-tallinn-university-of-technolo-m38",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Entrepreneurial Management MBA",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 8400,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/entrepreneurial-management-mba",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-entrepreneurship-in-economic-p-university-of-tartu-m39",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Entrepreneurship in Economic Policymaking (1-year programme)",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/economic",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-ma-in-international-management-estonian-business-school-m41",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "MA in International Management",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 8400,
+    "currency": "EUR",
+    "applicationUrl": "https://ebs.ee/en/ma",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-international-business-in-the--tallinn-university-of-technolo-m42",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "International Business In The Digital Era",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 5000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/international-business-administration",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-international-business-adminis-estonian-entrepreneurship-univ-m43",
+    "institution": "Estonian Entrepreneurship University of Applied Sciences",
+    "institutionType": "university",
+    "name": "International Business Administration",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Entrepreneurship University of Applied Sciences",
+    "tuitionNonEu": 7880,
+    "currency": "EUR",
+    "applicationUrl": "https://euas.eu/program/international_business_administration",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-strategic-management-mba-estonian-business-school-m44",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "Strategic Management MBA",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 9000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ebs.ee/en/university/masters-studies/strategic-management-mba",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-digital-product-management-mba-estonian-business-school-m45",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "Digital Product Management MBA (2 years)",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 9000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ebs.ee/en/university/masters-studies/digital-product-management-mba",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-digital-product-management-mba-estonian-business-school-m46",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "Digital Product Management MBA (1-year programme)",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 9000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ebs.ee/en/university/masters-studies/digital-product-management-mba",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-strategic-management-mba-1-yea-estonian-business-school-m47",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "Strategic Management MBA (1-year programme)",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 9000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ebs.ee/en/university/masters-studies/strategic-management-mba",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-wellness-and-spa-service-desig-university-of-tartu-m49",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Wellness and Spa Service Design and Management",
+    "level": "master",
+    "field": "business and economics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/wellness-and-spa-service-design-and-management",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-human-rights-in-the-digital-so-tallinn-university-m51",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Human Rights in the Digital Society",
+    "level": "master",
+    "field": "law",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 5000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/yti/human-rights-digital-society",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-law-tallinn-university-of-technolo-m53",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Law",
+    "level": "master",
+    "field": "law",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/law",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-clinical-nutrition-university-of-tartu-m55",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Clinical Nutrition",
+    "level": "master",
+    "field": "medicine",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 6800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/clinical-nutrition",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-radiography-radiotherapy-tartu-applied-health-sciences--m56",
+    "institution": "Tartu Applied Health Sciences University",
+    "institutionType": "university",
+    "name": "Radiography (Radiotherapy)",
+    "level": "master",
+    "field": "medicine",
+    "language": "English",
+    "city": "Tartu Applied Health Sciences University",
+    "tuitionNonEu": 4500,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tartuh.ee/en/admission/radiography/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-clinical-pharmacy-university-of-tartu-m57",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Clinical Pharmacy",
+    "level": "master",
+    "field": "medicine",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 6800,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/clinical-pharmacy",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-physiotherapy-tartu-applied-health-sciences--m58",
+    "institution": "Tartu Applied Health Sciences University",
+    "institutionType": "university",
+    "name": "Physiotherapy",
+    "level": "master",
+    "field": "medicine",
+    "language": "English",
+    "city": "Tartu Applied Health Sciences University",
+    "tuitionNonEu": 4500,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tartuh.ee/en/admission/physiotherapy/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-cybersecurity-tallinn-university-of-technolo-m61",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Cybersecurity",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 7000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/cybersecurity",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-digital-health-tallinn-university-of-technolo-m62",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Digital Health",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 7000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/digital-health",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-digital-learning-games-tallinn-university-m63",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Digital Learning Games",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/dlg",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-e-governance-technologies-and--tallinn-university-of-technolo-m64",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "e-Governance Technologies and Services",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 7000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/e-governance-technologies-and-services",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-human-computer-interaction-tallinn-university-m65",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Human-Computer Interaction",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/humancomputerinteraction",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-interaction-design-100-online--tallinn-university-m66",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Interaction Design (100% online programme)",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/interactiondesign",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-computer-science-and-artificia-tallinn-university-of-technolo-m69",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Computer Science and Artificial Intelligence",
+    "level": "master",
+    "field": "computing",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 7000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/computer-science-and-artificial-intelligence",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-industrial-engineering-and-man-tallinn-university-of-technolo-m71",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Industrial Engineering and Management",
+    "level": "master",
+    "field": "engineering and architecture",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/industrial-engineering-and-management",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-landscape-architecture-estonian-university-of-life-sc-m72",
+    "institution": "Estonian University of Life Sciences",
+    "institutionType": "university",
+    "name": "Landscape Architecture",
+    "level": "master",
+    "field": "engineering and architecture",
+    "language": "English",
+    "city": "Estonian University of Life Sciences",
+    "tuitionNonEu": 4000,
+    "currency": "EUR",
+    "applicationUrl": "https://www.emu.ee/en/landscape-architecture",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-technology-of-wood-plastics-an-tallinn-university-of-technolo-m73",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Technology of Wood, Plastics and Textiles",
+    "level": "master",
+    "field": "engineering and architecture",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/masters-programmes/technology-of-wood-plastics-and-textiles",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-marine-engineering-tallinn-university-of-technolo-m75",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Marine Engineering",
+    "level": "master",
+    "field": "maritime studies and engineering",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/marine-engineering",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-maritime-digital-solutions-tallinn-university-of-technolo-m76",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Maritime Digital Solutions",
+    "level": "master",
+    "field": "maritime studies and engineering",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/maritime-digital-solutions",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-planning-and-analysis-in-multi-estonian-university-of-life-sc-m78",
+    "institution": "Estonian University of Life Sciences",
+    "institutionType": "university",
+    "name": "Planning and Analysis in Multifunctional Forestry (no intake for 2026/2027)",
+    "level": "master",
+    "field": "agriculture and forestry",
+    "language": "English",
+    "city": "Estonian University of Life Sciences",
+    "tuitionNonEu": 3800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.emu.ee/en/planning-and-analysis-in-multifunctional-forestry",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-environmental-governance-and-a-estonian-university-of-life-sc-m80",
+    "institution": "Estonian University of Life Sciences / University of Tartu",
+    "institutionType": "university",
+    "name": "Environmental Governance and Adaptation to Climate Change",
+    "level": "master",
+    "field": "climate change",
+    "language": "English",
+    "city": "Estonian University of Life Sciences / University of Tartu",
+    "tuitionNonEu": 5600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.emu.ee/en/environmental-governance-and-adaptation-to-climate-change",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-actuarial-and-financial-engine-university-of-tartu-m82",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Actuarial and Financial Engineering",
+    "level": "master",
+    "field": "natural sciences, mathematics and statistics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 7200,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/fineng",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-bioengineering-university-of-tartu-m83",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Bioengineering",
+    "level": "master",
+    "field": "natural sciences, mathematics and statistics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 7200,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/bioeng",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-innovation-in-bioengineering-university-of-tartu-m84",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Innovation in Bioengineering",
+    "level": "master",
+    "field": "natural sciences, mathematics and statistics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 7200,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/en/curriculum/innovation-bioengineering",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-excellence-in-analytical-chemi-university-of-tartu-m85",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Excellence in Analytical Chemistry (Erasmus Mundus Programme)",
+    "level": "master",
+    "field": "natural sciences, mathematics and statistics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 9000,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/each",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-geoinformatics-for-urbanised-s-university-of-tartu-m86",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Geoinformatics for Urbanised Society",
+    "level": "master",
+    "field": "natural sciences, mathematics and statistics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 7200,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/gis",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-materials-science-and-technolo-university-of-tartu-m87",
+    "institution": "University of Tartu",
+    "institutionType": "university",
+    "name": "Materials Science and Technology",
+    "level": "master",
+    "field": "natural sciences, mathematics and statistics",
+    "language": "English",
+    "city": "University of Tartu",
+    "tuitionNonEu": 7200,
+    "currency": "EUR",
+    "applicationUrl": "https://ut.ee/matsci",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-veterinary-medicine-integrated-estonian-university-of-life-sc-b3",
+    "institution": "Estonian University of Life Sciences",
+    "institutionType": "university",
+    "name": "Veterinary Medicine (integrated Bachelor's and Master's studies, 6 years)",
+    "level": "bachelor",
+    "field": "agriculture and veterinary medicine",
+    "language": "English",
+    "city": "Estonian University of Life Sciences",
+    "tuitionNonEu": 9800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.emu.ee/en/veterinary-medicine",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-classical-music-perfomance-estonian-academy-of-music-and--b5",
+    "institution": "Estonian Academy of Music and Theatre",
+    "institutionType": "university",
+    "name": "Classical Music Perfomance",
+    "level": "bachelor",
+    "field": "arts",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre",
+    "tuitionNonEu": 7700,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/classical-music-performance/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-composition-and-improvisationa-estonian-academy-of-music-and--b6",
+    "institution": "Estonian Academy of Music and Theatre",
+    "institutionType": "university",
+    "name": "Composition and Improvisational Music",
+    "level": "bachelor",
+    "field": "arts",
+    "language": "English",
+    "city": "Estonian Academy of Music and Theatre",
+    "tuitionNonEu": 7700,
+    "currency": "EUR",
+    "applicationUrl": "https://eamt.ee/en/departments/composition-and-improvisational-music/",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-commercial-air-transport-pilot-estonian-aviation-academy-b9",
+    "institution": "Estonian Aviation Academy",
+    "institutionType": "university",
+    "name": "Commercial Air Transport Pilot",
+    "level": "bachelor",
+    "field": "aviation",
+    "language": "English",
+    "city": "Estonian Aviation Academy",
+    "tuitionNonEu": 8100,
+    "currency": "EUR",
+    "applicationUrl": "https://lennuakadeemia.ee/admissions/catp",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-creativity-and-business-innova-estonian-entrepreneurship-univ-b12",
+    "institution": "Estonian Entrepreneurship University of Applied Sciences",
+    "institutionType": "university",
+    "name": "Creativity and Business Innovation",
+    "level": "bachelor",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Entrepreneurship University of Applied Sciences",
+    "tuitionNonEu": 7520,
+    "currency": "EUR",
+    "applicationUrl": "https://euas.eu/program/creativity_and_business_innovation",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-impactful-entrepreneurship-estonian-business-school-b13",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "Impactful Entrepreneurship",
+    "level": "bachelor",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 7730,
+    "currency": "EUR",
+    "applicationUrl": "https://ebs.ee/en/impactful-entrepreneurship",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-international-business-adminis-estonian-business-school-b14",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "International Business Administration",
+    "level": "bachelor",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 7730,
+    "currency": "EUR",
+    "applicationUrl": "https://ebs.ee/en/international-business-administration-ba",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-product-and-technology-managem-estonian-business-school-b15",
+    "institution": "Estonian Business School",
+    "institutionType": "university",
+    "name": "Product and Technology Management",
+    "level": "bachelor",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Business School",
+    "tuitionNonEu": 8100,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ebs.ee/en/university/bachelors-studies/product-and-technology-management",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-international-business-adminis-tallinn-university-of-technolo-b16",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "International Business Administration",
+    "level": "bachelor",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 5000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/bachelors-programmes/international-business-administration",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-creativity-and-business-innova-estonian-entrepreneurship-univ-b17",
+    "institution": "Estonian Entrepreneurship University of Applied Sciences",
+    "institutionType": "university",
+    "name": "Creativity and Business Innovation Joint Programme",
+    "level": "bachelor",
+    "field": "business and economics",
+    "language": "English",
+    "city": "Estonian Entrepreneurship University of Applied Sciences",
+    "tuitionNonEu": 6080,
+    "currency": "EUR",
+    "applicationUrl": "https://euas.eu/program/creativity_and_business_innovations__jp_",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-cyber-security-engineering-tallinn-university-of-technolo-b19",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Cyber Security Engineering",
+    "level": "bachelor",
+    "field": "engineering, it & computing",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 7000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/bachelors-programmes/cyber-security-engineering",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-game-design-and-development-estonian-entrepreneurship-univ-b20",
+    "institution": "Estonian Entrepreneurship University of Applied Sciences",
+    "institutionType": "university",
+    "name": "Game Design and Development",
+    "level": "bachelor",
+    "field": "engineering, it & computing",
+    "language": "English",
+    "city": "Estonian Entrepreneurship University of Applied Sciences",
+    "tuitionNonEu": 7520,
+    "currency": "EUR",
+    "applicationUrl": "https://euas.eu/program/game_design_and_development",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-integrated-engineering-tallinn-university-of-technolo-b21",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Integrated Engineering",
+    "level": "bachelor",
+    "field": "engineering, it & computing",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 6000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/bachelors-programmes/integrated-engineering",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-software-development-and-entre-estonian-entrepreneurship-univ-b22",
+    "institution": "Estonian Entrepreneurship University of Applied Sciences",
+    "institutionType": "university",
+    "name": "Software Development and Entrepreneurship",
+    "level": "bachelor",
+    "field": "engineering, it & computing",
+    "language": "English",
+    "city": "Estonian Entrepreneurship University of Applied Sciences",
+    "tuitionNonEu": 7520,
+    "currency": "EUR",
+    "applicationUrl": "https://euas.eu/program/software_development_and_entrepreneurship",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-audiovisual-media-tallinn-university-b24",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Audiovisual Media",
+    "level": "bachelor",
+    "field": "humanities and social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/node/1822",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-crossmedia-tallinn-university-b25",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Crossmedia",
+    "level": "bachelor",
+    "field": "humanities and social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/node/2178",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-liberal-arts-in-humanities-tallinn-university-b26",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Liberal Arts in Humanities",
+    "level": "bachelor",
+    "field": "humanities and social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4200,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/node/2288",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-liberal-arts-in-social-science-tallinn-university-b27",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Liberal Arts in Social Sciences",
+    "level": "bachelor",
+    "field": "humanities and social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/yti/liberal-arts-social-sciences",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-politics-and-governance-tallinn-university-b28",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Politics and Governance",
+    "level": "bachelor",
+    "field": "humanities and social sciences",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 4800,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/node/1831",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-theology-and-mission-baltic-methodist-theological-s-b29",
+    "institution": "Baltic Methodist Theological Seminary",
+    "institutionType": "university",
+    "name": "Theology and Mission",
+    "level": "bachelor",
+    "field": "humanities and social sciences",
+    "language": "English",
+    "city": "Baltic Methodist Theological Seminary",
+    "tuitionNonEu": 2600,
+    "currency": "EUR",
+    "applicationUrl": "https://www.emkts.ee/index.php/en/admission/theology-and-mission",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-law-tallinn-university-b31",
+    "institution": "Tallinn University",
+    "institutionType": "university",
+    "name": "Law",
+    "level": "bachelor",
+    "field": "law",
+    "language": "English",
+    "city": "Tallinn University",
+    "tuitionNonEu": 5400,
+    "currency": "EUR",
+    "applicationUrl": "https://www.tlu.ee/en/yti/law",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-law-tallinn-university-of-technolo-b32",
+    "institution": "Tallinn University of Technology",
+    "institutionType": "university",
+    "name": "Law",
+    "level": "bachelor",
+    "field": "law",
+    "language": "English",
+    "city": "Tallinn University of Technology",
+    "tuitionNonEu": 5000,
+    "currency": "EUR",
+    "applicationUrl": "https://taltech.ee/en/bachelors-programmes/law",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  },
+  {
+    "id": "ee-assistant-pharmacist-tallinn-health-university-of-a-b34",
+    "institution": "Tallinn Health University of Applied Sciences",
+    "institutionType": "university",
+    "name": "Assistant Pharmacist",
+    "level": "bachelor",
+    "field": "medicine",
+    "language": "English",
+    "city": "Tallinn Health University of Applied Sciences",
+    "tuitionNonEu": 6200,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ttk.ee/en/assistant-pharmacist",
+    "provenance": {
+      "source": "Study in Estonia (Education and Youth Board) programme tables",
+      "sourceUrl": "https://studyinestonia.ee/study/programmes",
+      "retrieved": "2026-11-22"
+    }
+  }
+]

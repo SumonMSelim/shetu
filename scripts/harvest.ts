@@ -28,6 +28,7 @@ import { applyFigureUpdates, isDue } from "../src/lib/knowledge/sources/schedule
 import { runFinderHarvest } from "../src/lib/knowledge/sources/studyinnl-finder";
 import { runOpintopolkuHarvest } from "../src/lib/knowledge/sources/opintopolku-finder";
 import { runSeFinderHarvest } from "../src/lib/knowledge/sources/se-finder";
+import { runEeFinderHarvest } from "../src/lib/knowledge/sources/ee-finder";
 import { runDaadHarvest } from "../src/lib/knowledge/sources/daad-finder";
 import { mergeProgrammes } from "../src/lib/knowledge/draft";
 import { htmlToText, todayIso } from "../src/lib/knowledge/draft";
@@ -99,6 +100,13 @@ for (const source of due) {
         programmes = run.programmes;
         total = run.total;
         skipped = run.skipped;
+      } else if (source.adapter === "ee-finder") {
+        const run = await runEeFinderHarvest(source.country, today, (fetched, t) =>
+          console.log(`  fetched ${fetched}/${t} programmes`),
+        );
+        programmes = run.programmes;
+        total = run.total;
+        skipped = [];
       } else if (source.adapter === "se-finder") {
         const run = await runSeFinderHarvest(source.country, today, (fetched, t) =>
           console.log(`  fetched ${fetched}/${t} programmes`),
