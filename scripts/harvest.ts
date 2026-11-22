@@ -27,6 +27,7 @@ import { getAdapter } from "../src/lib/knowledge/sources/studyinnl-tuition";
 import { applyFigureUpdates, isDue } from "../src/lib/knowledge/sources/schedule";
 import { runFinderHarvest } from "../src/lib/knowledge/sources/studyinnl-finder";
 import { runOpintopolkuHarvest } from "../src/lib/knowledge/sources/opintopolku-finder";
+import { runSeFinderHarvest } from "../src/lib/knowledge/sources/se-finder";
 import { runDaadHarvest } from "../src/lib/knowledge/sources/daad-finder";
 import { mergeProgrammes } from "../src/lib/knowledge/draft";
 import { htmlToText, todayIso } from "../src/lib/knowledge/draft";
@@ -93,6 +94,13 @@ for (const source of due) {
         skipped = run.skipped;
       } else if (source.adapter === "opintopolku-finder") {
         const run = await runOpintopolkuHarvest(source.country, today, (fetched, t) =>
+          console.log(`  fetched ${fetched}/${t} programmes`),
+        );
+        programmes = run.programmes;
+        total = run.total;
+        skipped = run.skipped;
+      } else if (source.adapter === "se-finder") {
+        const run = await runSeFinderHarvest(source.country, today, (fetched, t) =>
           console.log(`  fetched ${fetched}/${t} programmes`),
         );
         programmes = run.programmes;

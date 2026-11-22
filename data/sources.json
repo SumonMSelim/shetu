@@ -38,5 +38,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "Opintopolku / Studyinfo search API with kieli=en filter (Finnish National Agency for Education). Deterministic, no LLM. Fees not in the search payload; a per-implementation detail harvest can add them later."
+  },
+  {
+    "id": "uhr-se-finder",
+    "country": "SE",
+    "kind": "portal-finder",
+    "url": "https://www.universityadmissions.se/intl/search",
+    "adapter": "se-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "University Admissions in Sweden (UHR) course search API (POST /intl/api/sok). Master + bachelor sweeps, English-instruction filter applied client-side. Deterministic, no LLM."
   }
 ]
