@@ -6,15 +6,20 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 import { ddb } from "./clients";
 import { config } from "@/lib/config";
+import type { TurnTrace } from "@/lib/observability/trace";
 
 /**
  * Single-table DynamoDB repository.
  *
  * Key design (one table, `config.storage.tableName`):
  *   PK = USER#<userId>
- *   SK = PROFILE                       -> the student's profile
+ *   SK = PROFILE                       -> the student's profile (incl. role)
  *        DOC#<docId>                   -> a vault document's metadata
  *        MENTORSHIP#<requestId>        -> a mentorship request
+ *        CONV#<convId>                 -> conversation metadata
+ *        CONVMSG#<convId>#<seq>        -> one chat message
+ *        TRACE#<convId>#<turn>         -> one audit record per chat turn
+ *        RATE#<yyyy-mm-dd>             -> daily chat quota counter (has ttl)
  *
  * This keeps all of a user's data in one partition for cheap, consistent
  * reads, and needs no secondary indexes for the access patterns we have.
@@ -32,6 +37,8 @@ export interface StudentProfile {
   englishScore?: string;
   budgetPerYearEur?: number;
   notes?: string;
+  /** Platform role; "student" by default. Assigned via scripts/set-role.ts. */
+  role?: "student" | "mentor" | "admin";
   updatedAt: string;
 }
 
@@ -254,4 +261,26 @@ export async function listMessages(
 export async function countMessages(userId: string, convId: string): Promise<number> {
   const msgs = await listMessages(userId, convId);
   return msgs.length;
+}
+
+// --- Turn traces (observability/audit) -------------------------------------
+//
+// Written once when a chat turn completes. Records what the agents did
+// (model calls with token usage, tool calls, specialists, outcome) without
+// duplicating message content: messages stay in their CONVMSG items and the
+// trace references them by conversation id and turn number. Append-only,
+// never updated; consumed by cost dashboards, citation auditing, and the
+// offline evaluation suite.
+
+export async function putTurnTrace(trace: TurnTrace): Promise<void> {
+  await ddb().send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        PK: `USER#${trace.userId}`,
+        SK: `TRACE#${trace.convId}#${String(trace.turn).padStart(6, "0")}`,
+        ...trace,
+      },
+    }),
+  );
 }

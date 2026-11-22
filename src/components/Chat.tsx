@@ -93,7 +93,17 @@ export function Chat() {
           body: JSON.stringify({ message: trimmed, convId: convId ?? undefined, docId }),
         });
         if (!res.ok || !res.body) {
-          throw new Error(res.status === 401 ? "Your session has ended. Please sign in again." : "Request failed.");
+          let message = res.status === 401 ? "Your session has ended. Please sign in again." : "Request failed.";
+          if (res.status === 429) {
+            // Quota errors carry a friendly message from the server.
+            try {
+              const data = (await res.json()) as { error?: string };
+              if (data?.error) message = data.error;
+            } catch {
+              // Non-JSON body; keep the default message.
+            }
+          }
+          throw new Error(message);
         }
 
         const reader = res.body.getReader();

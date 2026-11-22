@@ -13,6 +13,18 @@ import { config } from "@/lib/config";
 
 let _s3: S3Client | undefined;
 let _ddb: DynamoDBDocumentClient | undefined;
+let _baseDdb: DynamoDBClient | undefined;
+
+/**
+ * The raw DynamoDB client, for control-plane calls that the document client
+ * does not expose (e.g. enabling TTL on the table once per process).
+ */
+export function baseDdb(): DynamoDBClient {
+  if (!_baseDdb) {
+    _baseDdb = new DynamoDBClient({ region: config.aws.region });
+  }
+  return _baseDdb;
+}
 
 export function s3(): S3Client {
   if (!_s3) {

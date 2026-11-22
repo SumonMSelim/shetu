@@ -9,18 +9,25 @@ import {
   appendMessage,
   putConversation,
   touchConversation,
+  putTurnTrace,
   type ChatMessageRecord,
 } from "@/lib/aws/repository";
+import { consumeChatQuota } from "@/lib/aws/rate-limit";
+import { TurnTraceCollector } from "@/lib/observability/trace";
+import { emitMetrics, logError, logInfo, logWarn } from "@/lib/observability/logger";
 import { config } from "@/lib/config";
 import { z } from "zod";
 
 /**
  * Chat endpoint.
  *
- * Authenticates the user, loads the conversation history from storage, rebuilds
- * the multi-agent orchestrator for them, streams the run back as newline-
- * delimited JSON (text chunks plus tool-activity markers), and persists both
- * the user message and the assistant reply so history survives reloads. Runs on
+ * Authenticates the user, counts the message against their daily quota, loads
+ * the conversation history from storage, rebuilds the multi-agent orchestrator
+ * for them, streams the run back as newline-delimited JSON (text chunks plus
+ * tool-activity markers), and persists both the user message and the assistant
+ * reply so history survives reloads. Every turn also writes an append-only
+ * TRACE# audit record (model calls, token usage, tool calls) and emits
+ * CloudWatch metrics, so cost and behaviour are observable per turn. Runs on
  * the Node runtime because the Strands SDK and AWS SDK need it.
  */
 export const runtime = "nodejs";
@@ -54,6 +61,13 @@ function formatFromName(fileName: string): DocumentFormat | null {
   return DOC_FORMATS[ext] ?? null;
 }
 
+/** Hard caps for the agent loop, shared by every specialist delegation. */
+const AGENT_LIMITS = {
+  turns: config.limits.agentTurns,
+  outputTokens: config.limits.agentOutputTokens,
+  totalTokens: config.limits.agentTotalTokens,
+};
+
 export async function POST(req: Request): Promise<Response> {
   const session = await auth();
   const userId = (session?.user as { id?: string } | undefined)?.id;
@@ -68,10 +82,23 @@ export async function POST(req: Request): Promise<Response> {
     return new Response("Bad request", { status: 400 });
   }
 
+  // Cost and abuse guardrail: one atomic counter per user per day.
+  const quota = await consumeChatQuota(userId);
+  if (!quota.allowed) {
+    logInfo("chat.quota_exceeded", { userId, used: quota.used, limit: quota.limit });
+    return new Response(
+      JSON.stringify({
+        error: `You have used all ${quota.limit} messages for today. Please come back tomorrow. If you need help sooner, you can request a human mentor from the Mentorship page.`,
+      }),
+      { status: 429, headers: { "Content-Type": "application/json; charset=utf-8" } },
+    );
+  }
+
   // Resolve the conversation: continue an existing one or start a new one.
   const convId = parsed.convId ?? randomUUID();
   const isNew = !parsed.convId;
   const now = new Date().toISOString();
+  logInfo("chat.request", { userId, convId, isNew, messageChars: parsed.message.length });
 
   // Load prior turns from storage (authoritative), not from the client.
   const prior = isNew ? [] : await listMessages(userId, convId);
@@ -131,30 +158,65 @@ export async function POST(req: Request): Promise<Response> {
       const send = (e: ChatStreamEvent) => controller.enqueue(encoder.encode(encodeEvent(e)));
       // Tell the client which conversation this is (so a new one is remembered).
       send({ kind: "meta", convId });
+      // Keepalive: Cloudflare terminates origins that stay silent for ~100s,
+      // and a specialist can be silent longer than that. Ping every 15s; the
+      // client ignores unknown event kinds.
+      const ping = setInterval(() => {
+        try {
+          send({ kind: "ping" });
+        } catch {
+          // Stream already closed; the finally block clears this timer.
+        }
+      }, 15000);
       // Avoid duplicate "tool" markers for the same tool within a burst.
       let lastTool = "";
       let answer = "";
+      const trace = new TurnTraceCollector();
+      // The orchestrator often speaks, calls tools, then speaks again. The
+      // client appends every text delta into one message, so without a
+      // separator the segments glue together mid-sentence. Insert one blank
+      // line before the first text that follows a tool call.
+      let afterToolCall = false;
+      let sentText = false;
       try {
-        for await (const event of agent.stream(turnInput)) {
+        for await (const event of agent.stream(turnInput, { limits: AGENT_LIMITS })) {
           switch (event.type) {
             case "modelStreamUpdateEvent": {
               const inner = event.event;
+              trace.onModelStreamEvent(inner);
               if (
                 inner.type === "modelContentBlockDeltaEvent" &&
                 inner.delta.type === "textDelta" &&
                 inner.delta.text
               ) {
+                if (afterToolCall && sentText) {
+                  const sep = "\n\n";
+                  answer += sep;
+                  send({ kind: "text", text: sep });
+                }
+                afterToolCall = false;
+                sentText = true;
                 answer += inner.delta.text;
                 send({ kind: "text", text: inner.delta.text });
               }
               break;
             }
             case "beforeToolCallEvent": {
+              trace.onBeforeToolCall(event.toolUse);
+              afterToolCall = true;
               const name = event.toolUse.name;
               if (name && name !== lastTool) {
                 lastTool = name;
                 send({ kind: "tool", name, label: toolLabel(name) });
               }
+              break;
+            }
+            case "afterToolCallEvent": {
+              trace.onAfterToolCall(event.toolUse, event.error);
+              break;
+            }
+            case "agentResultEvent": {
+              trace.onAgentResult(event.result as { stopReason?: string });
               break;
             }
             default:
@@ -173,15 +235,50 @@ export async function POST(req: Request): Promise<Response> {
           });
           await touchConversation(userId, convId, new Date().toISOString());
         }
+
+        // Audit record + metrics for this turn. Observability must never break
+        // the chat response; the user already has their answer at this point.
+        const turnTrace = trace.finish(userId, convId, nextSeq);
+        try {
+          await putTurnTrace(turnTrace);
+        } catch (err) {
+          logWarn("chat.trace_write_failed", err, { userId, convId, turn: nextSeq });
+        }
+        emitMetrics({
+          InputTokens: [turnTrace.totals.inputTokens, "Count"],
+          OutputTokens: [turnTrace.totals.outputTokens, "Count"],
+          TotalTokens: [turnTrace.totals.totalTokens, "Count"],
+          DurationMs: [turnTrace.durationMs, "Milliseconds"],
+          ToolCalls: [turnTrace.toolCalls.length, "Count"],
+        });
+        logInfo("chat.turn", {
+          userId,
+          convId,
+          turn: nextSeq,
+          modelCalls: turnTrace.modelCalls.length,
+          toolCalls: turnTrace.toolCalls.length,
+          specialists: turnTrace.specialists,
+          tokens: turnTrace.totals.totalTokens,
+          durationMs: turnTrace.durationMs,
+          stopReason: turnTrace.stopReason,
+        });
+
         send({ kind: "done" });
       } catch (err) {
-        console.error("chat stream error", err);
+        logError("chat.stream_error", err, { userId, convId, turn: nextSeq });
+        // Record the failed turn too: audit both what worked and what did not.
+        try {
+          await putTurnTrace(trace.finish(userId, convId, nextSeq, err));
+        } catch {
+          // Audit write is best-effort.
+        }
         send({
           kind: "error",
           message:
             "Something went wrong while answering. Please try again. If it keeps happening, you can request a human mentor.",
         });
       } finally {
+        clearInterval(ping);
         controller.close();
       }
     },

@@ -12,6 +12,8 @@ export type ChatStreamEvent =
   | { kind: "text"; text: string }
   /** A specialist or tool started working - drives the "thinking" indicator. */
   | { kind: "tool"; name: string; label: string }
+  /** Keepalive sent during silent stretches so proxies do not cut the stream. */
+  | { kind: "ping" }
   /** The turn finished successfully. */
   | { kind: "done" }
   /** Something failed; `message` is safe to show the user. */

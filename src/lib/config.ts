@@ -14,6 +14,13 @@ function required(name: string, value: string | undefined): string {
   return value;
 }
 
+/** Positive integer override from the environment, else the fallback. */
+function intFromEnv(name: string, fallback: number): number {
+  const raw = process.env[name];
+  const n = raw ? Number(raw) : NaN;
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : fallback;
+}
+
 export const config = {
   app: {
     url: process.env.AUTH_URL ?? "http://localhost:3000",
@@ -34,6 +41,18 @@ export const config = {
   storage: {
     vaultBucket: process.env.SHETU_VAULT_BUCKET ?? "shetu-vault",
     tableName: process.env.SHETU_TABLE_NAME ?? "shetu-app",
+  },
+  limits: {
+    /** Messages a user may send per day (abuse and cost guardrail). */
+    dailyChatMessages: intFromEnv("SHETU_DAILY_CHAT_LIMIT", 30),
+    /**
+     * Agent loop caps per chat turn. Set on the orchestrator's stream call,
+     * they also bind every specialist it delegates to (agents-as-tools joins
+     * the parent's limits), so a looping delegation cannot burn tokens freely.
+     */
+    agentTurns: intFromEnv("SHETU_AGENT_TURNS", 14),
+    agentOutputTokens: intFromEnv("SHETU_AGENT_OUTPUT_TOKENS", 24_000),
+    agentTotalTokens: intFromEnv("SHETU_AGENT_TOTAL_TOKENS", 240_000),
   },
 } as const;
 
