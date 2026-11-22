@@ -8,6 +8,14 @@ import applicationsJson from "../../../data/countries/nl/applications.json";
 import visaJson from "../../../data/countries/nl/visa.json";
 import redFlagsJson from "../../../data/countries/nl/red-flags.json";
 import programmesJson from "../../../data/countries/nl/programmes.json";
+import deCountryJson from "../../../data/countries/de/country.json";
+import deScholarshipsJson from "../../../data/countries/de/scholarships.json";
+import deCostsJson from "../../../data/countries/de/costs.json";
+import deInstitutionsJson from "../../../data/countries/de/institutions.json";
+import deApplicationsJson from "../../../data/countries/de/applications.json";
+import deVisaJson from "../../../data/countries/de/visa.json";
+import deRedFlagsJson from "../../../data/countries/de/red-flags.json";
+import deProgrammesJson from "../../../data/countries/de/programmes.json";
 
 /**
  * Registry of destination knowledge bases.
@@ -30,11 +38,23 @@ const NL = countryDataSchema.parse({
   programmes: programmesJson,
 });
 
+const DE = countryDataSchema.parse({
+  meta: deCountryJson,
+  scholarships: deScholarshipsJson,
+  costs: deCostsJson,
+  institutions: deInstitutionsJson,
+  applications: deApplicationsJson,
+  visa: deVisaJson,
+  redFlags: deRedFlagsJson,
+  programmes: deProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
+  DE: toKnowledgeBase(DE),
 };
 
-function toKnowledgeBase(data: typeof NL): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }

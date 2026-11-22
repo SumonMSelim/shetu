@@ -10,6 +10,16 @@
     "notes": "Official Study in NL fees page: statutory fee, non-EEA ranges, handling fee. Deterministic scraper, no LLM."
   },
   {
+    "id": "daad-international-programmes",
+    "country": "DE",
+    "kind": "portal-finder",
+    "url": "https://www2.daad.de/deutschland/studienangebote/international-programmes/en/",
+    "adapter": "daad-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "DAAD International Programmes database (official DAAD portal). Solr JSON API through a browser session; degree programmes only (courseType 1/2). Deterministic, no LLM."
+  },
+  {
     "id": "studyinnl-studyfinder",
     "country": "NL",
     "kind": "portal-finder",

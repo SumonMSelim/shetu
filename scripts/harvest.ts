@@ -26,6 +26,7 @@ import { sourceRegistrySchema } from "../src/lib/knowledge/schema";
 import { getAdapter } from "../src/lib/knowledge/sources/studyinnl-tuition";
 import { applyFigureUpdates, isDue } from "../src/lib/knowledge/sources/schedule";
 import { runFinderHarvest } from "../src/lib/knowledge/sources/studyinnl-finder";
+import { runDaadHarvest } from "../src/lib/knowledge/sources/daad-finder";
 import { mergeProgrammes } from "../src/lib/knowledge/draft";
 import { htmlToText, todayIso } from "../src/lib/knowledge/draft";
 import type { Programme } from "../src/lib/knowledge/types";
@@ -76,17 +77,31 @@ let anyFailed = false;
 for (const source of due) {
   console.log(`\n=== ${source.id} (${source.kind}, every ${source.intervalDays} days) ===`);
 
-  // Bulk programme finder: its own deterministic fetch + mapping path.
+  // Bulk programme finders: their own deterministic fetch + mapping path.
   if (source.kind === "portal-finder") {
-    if (source.adapter !== "studyinnl-finder") {
-      console.log(`  no finder adapter implemented for "${source.adapter}"; skipping.`);
-      anyFailed = true;
-      continue;
-    }
     try {
-      const run = await runFinderHarvest(source.country, today, (fetched, total) =>
-        console.log(`  fetched ${fetched}/${total} programmes`),
-      );
+      let programmes: Programme[];
+      let total = 0;
+      let skipped: { id: string; reason: string }[] = [];
+      if (source.adapter === "studyinnl-finder") {
+        const run = await runFinderHarvest(source.country, today, (fetched, t) =>
+          console.log(`  fetched ${fetched}/${t} programmes`),
+        );
+        programmes = run.programmes;
+        total = run.total;
+        skipped = run.skipped;
+      } else if (source.adapter === "daad-finder") {
+        const run = await runDaadHarvest(today, (fetched, t) =>
+          console.log(`  fetched ${fetched}/${t} programmes`),
+        );
+        programmes = run.programmes;
+        total = run.total;
+        skipped = run.skipped;
+      } else {
+        console.log(`  no finder adapter implemented for "${source.adapter}"; skipping.`);
+        anyFailed = true;
+        continue;
+      }
       const programmesPath = join(
         ROOT,
         "data",
@@ -95,12 +110,12 @@ for (const source of due) {
         "programmes.json",
       );
       const existing = JSON.parse(readFileSync(programmesPath, "utf8")) as Programme[];
-      const { added, updated, unchanged } = mergeProgrammes(existing, run.programmes);
+      const { added, updated, unchanged } = mergeProgrammes(existing, programmes);
       if (added.length > 0 || updated.length > 0) {
         writeFileSync(programmesPath, JSON.stringify([...existing, ...added], null, 2) + "\n", "utf8");
       }
       console.log(
-        `  API total: ${run.total}, mapped: ${run.programmes.length}, non-degree skipped: ${run.skipped.length}`,
+        `  API total: ${total}, mapped: ${programmes.length}, non-degree skipped: ${skipped.length}`,
       );
       console.log(`  added: ${added.length}, updated: ${updated.length}, unchanged: ${unchanged}`);
       for (const u of updated.slice(0, 5)) console.log(`  CHANGED ${u.id}: ${u.changes.join(", ")}`);
@@ -110,7 +125,7 @@ for (const source of due) {
       state.sources[source.id] = {
         lastRunAt: today,
         lastStatus: "ok",
-        lastSummary: `mapped ${run.programmes.length}, added ${added.length}, updated ${updated.length}`,
+        lastSummary: `mapped ${programmes.length}, added ${added.length}, updated ${updated.length}`,
       };
     } catch (err) {
       anyFailed = true;
