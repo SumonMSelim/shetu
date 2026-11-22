@@ -1,0 +1,22 @@
+[
+  {
+    "id": "studyinnl-tuition-fees",
+    "country": "NL",
+    "kind": "fees-page",
+    "url": "https://www.studyinnl.org/finances/tuition-fees",
+    "adapter": "studyinnl-tuition",
+    "intervalDays": 60,
+    "enabled": true,
+    "notes": "Official Study in NL fees page: statutory fee, non-EEA ranges, handling fee. Deterministic scraper, no LLM."
+  },
+  {
+    "id": "studyinnl-studyfinder",
+    "country": "NL",
+    "kind": "portal-finder",
+    "url": "https://www.studyinnl.org/dutch-education/studies",
+    "adapter": "studyinnl-finder",
+    "intervalDays": 30,
+    "enabled": false,
+    "notes": "Bulk programme discovery. Requires the headless-render adapter (JS app, empty HTML on plain fetch); enable once that adapter ships."
+  }
+]

@@ -141,6 +141,26 @@ Programmes grow through AI-drafted, human-approved records:
 
 The drafter costs about one cent of Bedrock usage per page.
 
+## Keeping figures fresh (the harvesting scheduler)
+
+Fees change yearly, so sources are re-checked on a schedule. `data/sources.json`
+is the registry: one entry per source with its re-check interval in days and
+the deterministic extractor that reads it. `npm run harvest` fetches every
+enabled source that is due, re-verifies the stored figures, and reports three
+outcomes:
+
+- **re-verified unchanged**: the provenance date is re-stamped, nothing else.
+- **changed**: the record is updated; the git diff shows the old and new value
+  for your review.
+- **failed or pattern not found**: reported, nothing guessed. The 400-day
+  freshness budget in CI eventually flags any record that stops verifying.
+
+A scheduled GitHub Action (`harvest.yml`) runs the same command weekly and
+opens a pull request whenever the diff is non-empty, so freshness maintenance
+is a review, not a chore. New sources are added by appending an entry to the
+registry and, when a portal needs selectors or a headless render, adding an
+adapter under `src/lib/knowledge/sources/`.
+
 ## Running and deploying
 
 ### Prerequisites

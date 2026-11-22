@@ -119,3 +119,32 @@ export const countryDataSchema = z.object({
 });
 
 export type CountryData = z.infer<typeof countryDataSchema>;
+
+/**
+ * A harvesting source: one page the scheduler re-checks every intervalDays.
+ * `adapter` names a deterministic extractor in src/lib/knowledge/sources/.
+ */
+export const sourceSchema = z.object({
+  id: z.string().min(3),
+  country: z.string().length(2),
+  kind: z.enum(["fees-page", "portal-finder", "programme-page"]),
+  url: httpsUrl,
+  adapter: z.string().min(3),
+  intervalDays: z.number().int().min(1).max(365),
+  enabled: z.boolean().default(true),
+  notes: z.string().optional(),
+});
+
+export const sourceRegistrySchema = z.array(sourceSchema);
+
+/** A figure an adapter extracted from a source page, keyed by cost record id. */
+export const costFigureUpdateSchema = z.object({
+  costId: z.string().min(3),
+  amount: z.number().optional(),
+  rangeLow: z.number().optional(),
+  rangeHigh: z.number().optional(),
+  period: z.string().optional(),
+});
+
+export type CostFigureUpdate = z.infer<typeof costFigureUpdateSchema>;
+export type SourceConfig = z.infer<typeof sourceSchema>;

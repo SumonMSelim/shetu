@@ -1,0 +1,44 @@
+name: Data harvest
+
+on:
+  schedule:
+    # Weekly, Mondays 06:00 UTC. The scheduler itself applies each source's
+    # own intervalDays, so this only bounds how often due sources are checked.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run due sources
+        continue-on-error: true
+        run: npm run harvest
+      - name: Open PR with refreshed data
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/data-refresh
+          delete-branch: true
+          title: "chore(data): harvest refresh"
+          body: |
+            Automated run of the deterministic harvesting scheduler
+            (`npm run harvest`). Each change below is a figure that differs
+            from the stored record; unchanged figures only had their
+            verification date re-stamped.
+
+            Review the diff against the cited sources before merging: the
+            human review is the integrity of the knowledge base.
+          commit-message: "chore(data): harvest refresh"
+          labels: |
+            data
+            automated
