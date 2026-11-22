@@ -128,7 +128,20 @@ export const getProgrammes = tool({
         (p) => p.field.toLowerCase().includes(f) || p.name.toLowerCase().includes(f),
       );
     }
-    return { country: kb.country, count: list.length, programmes: withTime(list) };
+    // The catalogue runs to hundreds of records; cap what enters the context
+    // and tell the model to refine instead of dumping everything.
+    const MAX_RESULTS = 15;
+    const total = list.length;
+    const shown = list.slice(0, MAX_RESULTS);
+    return {
+      country: kb.country,
+      total,
+      shown: shown.length,
+      programmes: withTime(shown),
+      ...(total > MAX_RESULTS
+        ? { hint: `${total - MAX_RESULTS} more match. Ask for a narrower field, city, or level.` }
+        : {}),
+    };
   },
 });
 

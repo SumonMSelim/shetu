@@ -162,25 +162,26 @@ for (const draft of drafts) {
   if (p) valid.push(p);
 }
 
-const { added, skippedDuplicates } = mergeProgrammes(existing, valid);
+const { added, updated, unchanged } = mergeProgrammes(existing, valid);
 
-console.log(`\nDrafts: ${drafts.length}, valid: ${valid.length}, new: ${added.length}, duplicates skipped: ${skippedDuplicates.length}`);
-for (const d of skippedDuplicates) console.log(`  duplicate: ${d.id} (${d.url})`);
+console.log(`\nDrafts: ${drafts.length}, valid: ${valid.length}, new: ${added.length}, updated: ${updated.length}, unchanged: ${unchanged}`);
+for (const u of updated.slice(0, 10)) console.log(`  updated: ${u.id} (${u.changes.join(", ")})`);
 for (const problem of problems) console.log(`  rejected: ${problem}`);
 for (const p of added) {
   console.log(`  + ${p.id}: ${p.name} @ ${p.institution} (${p.level}, ${p.city})`);
 }
 
-if (added.length === 0) {
+if (added.length === 0 && updated.length === 0) {
   console.log("\nNothing new to add. programmes.json left unchanged.");
   process.exit(0);
 }
 
 // --- Write ----------------------------------------------------------------------
-const updated = [...existing, ...added];
-writeFileSync(programmesPath, JSON.stringify(updated, null, 2) + "\n", "utf8");
+// mergeProgrammes already applied updates to `existing` in place.
+const mergedAll = [...existing, ...added];
+writeFileSync(programmesPath, JSON.stringify(mergedAll, null, 2) + "\n", "utf8");
 console.log(
-  `\nWrote ${added.length} new programme(s) to data/countries/${countryLabel.toLowerCase()}/programmes.json.`,
+  `\nWrote ${added.length} new and ${updated.length} updated programme(s) to data/countries/${countryLabel.toLowerCase()}/programmes.json.`,
 );
 console.log("Review the git diff carefully against the source page, then commit and open a PR.");
 console.log(`CI will re-validate the file (schema, ids, provenance freshness for ${countryLabel}).`);

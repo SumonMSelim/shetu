@@ -25,7 +25,10 @@ import { join } from "node:path";
 import { sourceRegistrySchema } from "../src/lib/knowledge/schema";
 import { getAdapter } from "../src/lib/knowledge/sources/studyinnl-tuition";
 import { applyFigureUpdates, isDue } from "../src/lib/knowledge/sources/schedule";
+import { runFinderHarvest } from "../src/lib/knowledge/sources/studyinnl-finder";
+import { mergeProgrammes } from "../src/lib/knowledge/draft";
 import { htmlToText, todayIso } from "../src/lib/knowledge/draft";
+import type { Programme } from "../src/lib/knowledge/types";
 
 const ROOT = join(import.meta.dirname, "..");
 const STATE_DIR = join(ROOT, "data", "state");
@@ -72,6 +75,51 @@ let anyFailed = false;
 
 for (const source of due) {
   console.log(`\n=== ${source.id} (${source.kind}, every ${source.intervalDays} days) ===`);
+
+  // Bulk programme finder: its own deterministic fetch + mapping path.
+  if (source.kind === "portal-finder") {
+    if (source.adapter !== "studyinnl-finder") {
+      console.log(`  no finder adapter implemented for "${source.adapter}"; skipping.`);
+      anyFailed = true;
+      continue;
+    }
+    try {
+      const run = await runFinderHarvest(source.country, today, (fetched, total) =>
+        console.log(`  fetched ${fetched}/${total} programmes`),
+      );
+      const programmesPath = join(
+        ROOT,
+        "data",
+        "countries",
+        source.country.toLowerCase(),
+        "programmes.json",
+      );
+      const existing = JSON.parse(readFileSync(programmesPath, "utf8")) as Programme[];
+      const { added, updated, unchanged } = mergeProgrammes(existing, run.programmes);
+      if (added.length > 0 || updated.length > 0) {
+        writeFileSync(programmesPath, JSON.stringify([...existing, ...added], null, 2) + "\n", "utf8");
+      }
+      console.log(
+        `  API total: ${run.total}, mapped: ${run.programmes.length}, non-degree skipped: ${run.skipped.length}`,
+      );
+      console.log(`  added: ${added.length}, updated: ${updated.length}, unchanged: ${unchanged}`);
+      for (const u of updated.slice(0, 5)) console.log(`  CHANGED ${u.id}: ${u.changes.join(", ")}`);
+      if (added.length > 0 || updated.length > 0) {
+        console.log("  ^ review the git diff before merging the PR.");
+      }
+      state.sources[source.id] = {
+        lastRunAt: today,
+        lastStatus: "ok",
+        lastSummary: `mapped ${run.programmes.length}, added ${added.length}, updated ${updated.length}`,
+      };
+    } catch (err) {
+      anyFailed = true;
+      console.log(`  FAILED: ${String(err).slice(0, 200)}`);
+      state.sources[source.id] = { lastRunAt: today, lastStatus: "failed", lastSummary: String(err).slice(0, 200) };
+    }
+    continue;
+  }
+
   const adapter = getAdapter(source.adapter);
   if (!adapter) {
     console.log(`  adapter "${source.adapter}" not implemented yet; skipping.`);

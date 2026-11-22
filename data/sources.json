@@ -16,7 +16,7 @@
     "url": "https://www.studyinnl.org/dutch-education/studies",
     "adapter": "studyinnl-finder",
     "intervalDays": 30,
-    "enabled": false,
-    "notes": "Bulk programme discovery. Requires the headless-render adapter (JS app, empty HTML on plain fetch); enable once that adapter ships."
+    "enabled": true,
+    "notes": "Bulk programme discovery via the finder's public JSON API (api/programs). Deterministic, no LLM, no browser needed: the API returns structured records."
   }
 ]

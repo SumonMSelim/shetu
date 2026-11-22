@@ -123,17 +123,20 @@ test("statutory fee enrichment is labelled, and skipped when the page stated its
   assert.equal(ownFacts!.tuitionEu, undefined, "no enrichment when the page stated its own facts");
 });
 
-test("mergeProgrammes dedupes by url and id, keeps order", () => {
+test("mergeProgrammes keys identity on id, not on shared application URLs", () => {
   const existing = [program("https://a.example/one", "p1")];
   const drafts = [
-    program("https://a.example/one", "p1-dup-url"),
-    program("https://b.example/two", "p1"), // duplicate id
+    program("https://a.example/one", "p1"), // identical record -> unchanged
+    program("https://a.example/one", "p2"), // DIFFERENT programme sharing one website URL -> must be added, not collapsed
     program("https://c.example/three", "p3"),
   ];
-  const { added, skippedDuplicates } = mergeProgrammes(existing, drafts);
-  assert.equal(added.length, 1);
-  assert.equal(added[0].applicationUrl, "https://c.example/three");
-  assert.equal(skippedDuplicates.length, 2);
+  const { added, unchanged } = mergeProgrammes(existing, drafts);
+  assert.equal(added.length, 2, "both new programmes survive even with a shared URL");
+  assert.equal(unchanged, 1);
+  assert.deepEqual(
+    added.map((p) => p.id).sort(),
+    ["p2", "p3"],
+  );
 });
 
 test("htmlToText strips scripts, tags and entities", () => {

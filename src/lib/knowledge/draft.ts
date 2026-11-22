@@ -65,9 +65,13 @@ export function stampAndValidate(
     );
   }
 
-  // Fields the pipeline knows better than the model: the programme page is the
-  // page being processed, and the currency comes from the country meta.
-  raw.applicationUrl = opts.sourceUrl;
+  // Fields the pipeline knows better than the model: fill the programme page
+  // from the source URL only when the record does not carry one (structured
+  // sources like the Studyfinder API provide the real page), and take the
+  // currency from the country meta.
+  if (typeof raw.applicationUrl !== "string" || raw.applicationUrl.trim() === "") {
+    raw.applicationUrl = opts.sourceUrl;
+  }
   if (typeof raw.currency !== "string" && opts.currency) {
     raw.currency = opts.currency;
   }
@@ -106,8 +110,28 @@ export function stampAndValidate(
 
 export interface MergeResult {
   added: Programme[];
-  skippedDuplicates: { url: string; id: string }[];
+  updated: { id: string; changes: string[] }[];
+  unchanged: number;
 }
+
+/** Fields compared when deciding whether an existing record needs updating. */
+const COMPARED_FIELDS = [
+  "name",
+  "level",
+  "field",
+  "language",
+  "city",
+  "durationMonths",
+  "tuitionEu",
+  "tuitionNonEu",
+  "tuitionNonEuRangeLow",
+  "tuitionNonEuRangeHigh",
+  "applicationDeadline",
+  "numerusFixus",
+  "englishRequirement",
+  "notes",
+  "currency",
+] as const;
 
 /** Deterministic record id: `cc-slug(name)-slug(institution)`, capped at 80 chars. */
 export function slugId(countryCode: string, name: string, institution: string): string {
@@ -120,22 +144,40 @@ export function slugId(countryCode: string, name: string, institution: string): 
   return `${countryCode.toLowerCase()}-${slug(name)}-${slug(institution)}`.slice(0, 80);
 }
 
-/** Dedupe drafts against existing programmes by applicationUrl, then id. */
+/**
+ * Merge drafts into existing programmes. Identity is the deterministic id
+ * (slug-based), NOT the application URL: two different programmes can share
+ * one institution website, and collapsing them would lose a programme.
+ *   - new id -> added
+ *   - same id -> update in place when any compared field differs (the draft's
+ *     provenance is the fresh verification stamp), else unchanged
+ */
 export function mergeProgrammes(existing: Programme[], drafts: Programme[]): MergeResult {
-  const seenUrls = new Set(existing.map((p) => p.applicationUrl));
-  const seenIds = new Set(existing.map((p) => p.id));
+  const byId = new Map(existing.map((p) => [p.id, p]));
   const added: Programme[] = [];
-  const skippedDuplicates: MergeResult["skippedDuplicates"] = [];
+  const updated: MergeResult["updated"] = [];
+  let unchanged = 0;
   for (const draft of drafts) {
-    if (seenUrls.has(draft.applicationUrl) || seenIds.has(draft.id)) {
-      skippedDuplicates.push({ url: draft.applicationUrl, id: draft.id });
+    const twin = byId.get(draft.id);
+    if (twin) {
+      const changes: string[] = [];
+      for (const field of COMPARED_FIELDS) {
+        const was = (twin as unknown as Record<string, unknown>)[field];
+        const now = (draft as unknown as Record<string, unknown>)[field];
+        if (JSON.stringify(was ?? null) !== JSON.stringify(now ?? null)) {
+          changes.push(field);
+          (twin as unknown as Record<string, unknown>)[field] = now;
+        }
+      }
+      twin.provenance = draft.provenance;
+      if (changes.length > 0) updated.push({ id: twin.id, changes });
+      else unchanged += 1;
       continue;
     }
-    seenUrls.add(draft.applicationUrl);
-    seenIds.add(draft.id);
+    byId.set(draft.id, draft);
     added.push(draft);
   }
-  return { added, skippedDuplicates };
+  return { added, updated, unchanged };
 }
 
 /** Strip markup down to readable text for the extraction model. */
