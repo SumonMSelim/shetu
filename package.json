@@ -11,7 +11,9 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test tests/**/*.test.ts"
+    "test": "node --import tsx --test tests/**/*.test.ts",
+    "set-role": "node --import tsx scripts/set-role.ts",
+    "harden-storage": "node --import tsx scripts/harden-storage.ts"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.682.0",

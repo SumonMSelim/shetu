@@ -97,7 +97,7 @@ orchestrator talks to the student and delegates to focused specialists.
 | Auth | Auth.js v5, Google sign-in |
 | Vault | Amazon S3 (encrypted, private, presigned uploads/downloads) |
 | Data | Amazon DynamoDB (single-table: profiles, documents, mentorship) |
-| Infra | AWS CDK (TypeScript) → App Runner + ECR + S3 + DynamoDB |
+| Infra | AWS CDK (TypeScript) → ECS Fargate + Cloudflare Tunnel + S3 + DynamoDB |
 | Container | Docker (Next.js standalone, non-root) |
 
 ## Project layout
@@ -152,24 +152,50 @@ task IAM role in production (never hard-coded).
 ### Deploy to AWS
 
 Infrastructure is defined with AWS CDK in `infra/` and provisions a VPC, an ECS
-Fargate service behind an Application Load Balancer, and an IAM task role scoped
-to Bedrock plus the S3 bucket and DynamoDB table. The container image is built
-from the `Dockerfile` at deploy time.
+Fargate service running the app container with a `cloudflared` sidecar, and an
+IAM task role scoped to Bedrock plus the S3 bucket and DynamoDB table. The
+container image is built from the `Dockerfile` at deploy time.
+
+All traffic arrives through a **Cloudflare Tunnel**: the task has no public
+inbound endpoint, and Cloudflare terminates TLS at the edge. Secrets are read
+from SSM SecureString parameters at task start, so the deploy command carries
+no secrets.
+
+One-time setup:
+
+```bash
+# 1. Store secrets (values never enter source control or deploy flags).
+aws ssm put-parameter --name /shetu/prod/auth-secret --type SecureString \
+  --value "$(sed -n 's/^AUTH_SECRET=//p' .env.local)" --overwrite
+aws ssm put-parameter --name /shetu/prod/google-id --type SecureString \
+  --value "$AUTH_GOOGLE_ID" --overwrite
+aws ssm put-parameter --name /shetu/prod/google-secret --type SecureString \
+  --value "$AUTH_GOOGLE_SECRET" --overwrite
+
+# 2. In Cloudflare Zero Trust: Networks -> Tunnels -> Create tunnel
+#    (cloudflared), copy the token, and store it:
+aws ssm put-parameter --name /shetu/prod/cloudflared-token --type SecureString \
+  --value "$TUNNEL_TOKEN" --overwrite
+
+# 3. In the tunnel config, add a public hostname shetu.mol.la -> HTTP
+#    localhost:3000, and delete the old DNS CNAME that pointed at the ALB.
+
+# 4. Harden the data resources once (idempotent; verifies PITR + versioning).
+npm run harden-storage
+```
+
+Deploy (no secrets in the command):
 
 ```bash
 cd infra
 npm install
 npx cdk bootstrap          # first time per account/region
-npx cdk deploy \
-  -c appUrl=https://your-domain \
-  -c authSecret="$(openssl rand -base64 33)" \
-  -c googleId=YOUR_GOOGLE_CLIENT_ID \
-  -c googleSecret=YOUR_GOOGLE_CLIENT_SECRET \
-  -c certArn=YOUR_ACM_CERT_ARN
+npx cdk deploy -c appUrl=https://shetu.mol.la -c alarmEmail=you@example.com
 ```
 
-Put your domain in front with your DNS provider (a CNAME to the load balancer),
-and terminate TLS with an ACM certificate on the load balancer.
+The stack also provisions CloudWatch alarms routed to an SNS email topic
+(task health, memory, CPU, application errors, daily token spend) and an AWS
+Budgets alert. Autoscaling runs min 1 / max 4 tasks on CPU utilisation.
 
 ## A note on scope
 
