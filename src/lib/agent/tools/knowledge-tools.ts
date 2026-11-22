@@ -2,6 +2,10 @@ import { tool } from "@strands-agents/sdk";
 import { z } from "zod";
 import { getKnowledgeBase, availableCountries, DEFAULT_COUNTRY } from "@/lib/knowledge";
 import { isStaleProvenance } from "@/lib/knowledge/schema";
+import { dbConfigured, dbPool } from "@/lib/db/postgres";
+import { embedQuery } from "@/lib/db/embed";
+import { fuseResults, rowToProgramme, type DbProgrammeRow } from "@/lib/knowledge/retrieval";
+import { logWarn } from "@/lib/observability/logger";
 
 /**
  * Time metadata every figure carries into the retrieval path: when it was last
@@ -109,28 +113,112 @@ export const getRedFlags = tool({
 export const getProgrammes = tool({
   name: "get_programmes",
   description:
-    "Get verified study programmes for a destination, with fees, language, duration and the official programme page link. Use this when matching programmes or naming concrete options, and always give the programme page link so the student can verify figures themselves.",
+    "Search verified study programmes for a destination: fees, language, duration and the official programme page link. Supports natural-language search (query) plus filters (level, field, city). Use this when matching programmes or naming concrete options, and always give the programme page link so the student can verify figures themselves.",
   inputSchema: z.object({
     country: countryField,
+    query: z
+      .string()
+      .optional()
+      .describe("Natural-language search, e.g. 'master in artificial intelligence in Amsterdam'."),
     level: z.enum(["bachelor", "master", "phd"]).optional().describe("Filter by study level."),
     field: z
       .string()
       .optional()
-      .describe("Filter by field or programme name, e.g. 'Computer Science'."),
+      .describe("Filter by field or subject, e.g. 'Computer Science'."),
+    city: z.string().optional().describe("Filter by city."),
   }),
-  callback: ({ country, level, field }) => {
+  callback: async ({ country, level, field, city, query }) => {
+    const cc = country.toLowerCase();
+    const MAX_RESULTS = 15;
+
+    // DB-backed hybrid retrieval (production): full-text + vector candidates
+    // fused by reciprocal rank, over the validated records. On any database
+    // problem the bundled JSON records take over, so the tool never fails.
+    if (dbConfigured()) {
+      try {
+        const pool = dbPool();
+        const cols =
+          "id, name, institution, institution_type, level, field, language, city, duration_months, tuition_eu, tuition_non_eu, application_deadline, english_requirement, application_url, notes, provenance, verified_on, stale";
+        const where =
+          "country = $1 AND ($2::text IS NULL OR level = $2) AND ($3::text IS NULL OR city ILIKE '%' || $3 || '%') AND ($4::text IS NULL OR field ILIKE '%' || $4 || '%')";
+        const params: unknown[] = [cc, level ?? null, city ?? null, field ?? null];
+        const searchText = (query ?? field ?? "").trim();
+
+        const countQ = await pool.query(
+          `SELECT count(*)::int AS total FROM programmes WHERE ${where}`,
+          params,
+        );
+        const total = countQ.rows[0].total as number;
+        let rows: DbProgrammeRow[] = [];
+
+        if (searchText && total > 0) {
+          const ftsParams = [...params, searchText];
+          const fts = await pool.query(
+            `SELECT ${cols} FROM programmes WHERE ${where}
+             AND search @@ websearch_to_tsquery('english', $5)
+             ORDER BY ts_rank(search, websearch_to_tsquery('english', $5)) DESC
+             LIMIT ${MAX_RESULTS}`,
+            ftsParams,
+          );
+          let vectorRows: DbProgrammeRow[] = [];
+          try {
+            const embeddingText = await embedQuery(searchText);
+            const vec = await pool.query(
+              `SELECT ${cols} FROM programmes WHERE ${where}
+               AND embedding IS NOT NULL
+               ORDER BY embedding <=> $5::vector
+               LIMIT ${MAX_RESULTS}`,
+              ftsParams,
+            );
+            vectorRows = vec.rows;
+          } catch {
+            // Vector path is an enhancement: keyword results still stand.
+          }
+          rows = fuseResults(fts.rows as DbProgrammeRow[], vectorRows);
+        } else {
+          const browse = await pool.query(
+            `SELECT ${cols} FROM programmes WHERE ${where}
+             ORDER BY verified_on DESC, id LIMIT ${MAX_RESULTS}`,
+            params,
+          );
+          rows = browse.rows;
+        }
+
+        const programmes = rows.map(rowToProgramme);
+        return {
+          country: cc,
+          total,
+          shown: programmes.length,
+          programmes,
+          ...(total > programmes.length
+            ? {
+                hint: `${total - programmes.length} more match. Narrow the search text, city, field, or level.`,
+              }
+            : {}),
+        };
+      } catch (err) {
+        logWarn("programmes.db_fallback", err, { country: cc });
+      }
+    }
+
+    // Bundled-JSON fallback (local dev without DB access, CI, DB outage).
     const kb = getKnowledgeBase(country);
     let list = kb.programmes;
     if (level) list = list.filter((p) => p.level === level);
-    if (field) {
-      const f = field.toLowerCase();
+    if (city) {
+      const c = city.toLowerCase();
+      list = list.filter((p) => p.city.toLowerCase().includes(c));
+    }
+    if (field || query) {
+      const f = (query ?? field ?? "").toLowerCase();
       list = list.filter(
-        (p) => p.field.toLowerCase().includes(f) || p.name.toLowerCase().includes(f),
+        (p) =>
+          p.field.toLowerCase().includes(f) ||
+          p.name.toLowerCase().includes(f) ||
+          p.institution.toLowerCase().includes(f) ||
+          (p.notes ?? "").toLowerCase().includes(f),
       );
     }
-    // The catalogue runs to hundreds of records; cap what enters the context
-    // and tell the model to refine instead of dumping everything.
-    const MAX_RESULTS = 15;
     const total = list.length;
     const shown = list.slice(0, MAX_RESULTS);
     return {
