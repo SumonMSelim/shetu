@@ -31,12 +31,16 @@ export const config = {
     region: process.env.AWS_REGION ?? "us-east-1",
   },
   bedrock: {
-    /** Primary reasoning model (orchestrator + specialists). Current, non-legacy. */
-    modelId: process.env.SHETU_MODEL_ID ?? "us.anthropic.claude-sonnet-4-6",
-    /** Cheaper/faster model for lightweight side calls. Current, non-legacy. */
+    /**
+     * Primary reasoning model (orchestrator + specialists). Amazon Nova Pro:
+     * a first-party model, billed under the generic "Amazon Bedrock" service
+     * row, which the account's credits cover (the Anthropic rows bill gross).
+     * Rollback to Claude if quality regresses: SHETU_MODEL_ID=us.anthropic.claude-sonnet-4-6
+     */
+    modelId: process.env.SHETU_MODEL_ID ?? "amazon.nova-pro-v1:0",
+    /** Cheaper/faster model for lightweight side calls (e.g. IELTS drills). */
     fastModelId:
-      process.env.SHETU_FAST_MODEL_ID ??
-      "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      process.env.SHETU_FAST_MODEL_ID ?? "amazon.nova-2-lite-v1:0",
   },
   storage: {
     vaultBucket: process.env.SHETU_VAULT_BUCKET ?? "shetu-vault",

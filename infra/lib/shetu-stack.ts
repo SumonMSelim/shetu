@@ -10,6 +10,8 @@ import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
 import * as cw_actions from "aws-cdk-lib/aws-cloudwatch-actions";
 import * as sns from "aws-cdk-lib/aws-sns";
 import * as ssm from "aws-cdk-lib/aws-ssm";
+import * as secretsmanager from "aws-cdk-lib/aws-secretsmanager";
+import * as rds from "aws-cdk-lib/aws-rds";
 import * as budgets from "aws-cdk-lib/aws-budgets";
 import * as path from "path";
 
@@ -56,8 +58,11 @@ export class ShetuStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: ShetuStackProps = {}) {
     super(scope, id, props);
 
-    const modelId = props.modelId ?? "us.anthropic.claude-sonnet-4-6";
-    const fastModelId = props.fastModelId ?? "us.anthropic.claude-haiku-4-5-20251001-v1:0";
+    // Amazon Nova Pro / Nova 2 Lite: first-party models billed under the
+    // generic "Amazon Bedrock" service row, which the account's credits
+    // cover. Rollback to Claude = change these two defaults.
+    const modelId = props.modelId ?? "amazon.nova-pro-v1:0";
+    const fastModelId = props.fastModelId ?? "amazon.nova-2-lite-v1:0";
     const alarmEmail = props.alarmEmail ?? (this.node.tryGetContext("alarmEmail") as string | undefined) ?? "";
     const appUrl = props.appUrl ?? (this.node.tryGetContext("appUrl") as string | undefined) ?? "";
 
@@ -138,9 +143,47 @@ export class ShetuStack extends cdk.Stack {
     taskRole.addToPolicy(
       new iam.PolicyStatement({
         actions: ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"],
-        resources: [...bedrockArnsFor(modelId), ...bedrockArnsFor(fastModelId)],
+        resources: [
+          ...bedrockArnsFor(modelId),
+          ...bedrockArnsFor(fastModelId),
+          // Query embeddings for hybrid programme retrieval (retrieval
+          // component, not a second answering model).
+          ...bedrockArnsFor("amazon.titan-embed-text-v2:0"),
+        ],
       }),
     );
+
+    // --- Programme database (Postgres + pgvector + FTS) -------------------
+    // The structured catalogue lives here once the bundled-JSON approach
+    // outgrows itself (30+ countries target). Placed in the public subnets
+    // with PubliclyAccessible=false: reachable from tasks over the local VPC
+    // route, never from the internet, no NAT gateway needed (cost).
+    const dbSecret = new secretsmanager.Secret(this, "DbSecret", {
+      description: "Shetu Postgres master credentials",
+      generateSecretString: {
+        secretStringTemplate: JSON.stringify({ username: "shetu" }),
+        generateStringKey: "password",
+        excludeCharacters: "\"@/\\ ",
+      },
+    });
+    const database = new rds.DatabaseInstance(this, "ProgrammesDb", {
+      engine: rds.DatabaseInstanceEngine.postgres({ version: rds.PostgresEngineVersion.VER_16 }),
+      vpc,
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
+      publiclyAccessible: false,
+      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T4G, ec2.InstanceSize.MICRO),
+      credentials: { username: "shetu", password: dbSecret.secretValueFromJson("password") },
+      databaseName: "shetu",
+      allocatedStorage: 20,
+      storageEncrypted: true,
+      deletionProtection: true,
+      backupRetention: cdk.Duration.days(7),
+      multiAz: false, // cost: single-AZ now; flip for HA at public release
+    });
+    new cdk.CfnOutput(this, "DbEndpoint", {
+      value: database.dbInstanceEndpointAddress,
+      description: "Postgres endpoint for the migration script (data/state or SSM for password)",
+    });
 
     // --- Task definition: App + cloudflared sidecar ----------------------
     // Minimum viable size for cost; CPU and memory alarms watch utilization,
@@ -184,6 +227,10 @@ export class ShetuStack extends cdk.Stack {
         SHETU_VAULT_BUCKET: vaultBucketName,
         SHETU_TABLE_NAME: tableName,
         SHETU_DAILY_CHAT_LIMIT: String(dailyChatLimit),
+        SHETU_DB_HOST: database.dbInstanceEndpointAddress,
+        SHETU_DB_PORT: "5432",
+        SHETU_DB_NAME: "shetu",
+        SHETU_DB_USER: "shetu",
         AUTH_URL: appUrl,
         AUTH_TRUST_HOST: "true",
         // ECS sets HOSTNAME to the task ENI IP, and Next standalone's
@@ -196,6 +243,7 @@ export class ShetuStack extends cdk.Stack {
         AUTH_SECRET: ecs.Secret.fromSsmParameter(secureParam("AuthSecret", authSecretName)),
         AUTH_GOOGLE_ID: ecs.Secret.fromSsmParameter(secureParam("GoogleId", googleIdName)),
         AUTH_GOOGLE_SECRET: ecs.Secret.fromSsmParameter(secureParam("GoogleSecret", googleSecretName)),
+        SHETU_DB_PASSWORD: ecs.Secret.fromSecretsManager(dbSecret, "password"),
       },
     });
     appContainer.addPortMappings({ containerPort: 3000 });
@@ -269,6 +317,9 @@ export class ShetuStack extends cdk.Stack {
       scaleInCooldown: cdk.Duration.seconds(300),
       scaleOutCooldown: cdk.Duration.seconds(60),
     });
+
+    // Tasks reach the database over the VPC local route only.
+    database.connections.allowDefaultPortFrom(service.connections);
 
     // --- Alarms: one SNS topic, email subscription when an address exists -
     const alarmTopic = new sns.Topic(this, "AlarmTopic", {
