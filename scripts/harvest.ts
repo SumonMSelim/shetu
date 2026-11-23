@@ -30,6 +30,7 @@ import { runOpintopolkuHarvest } from "../src/lib/knowledge/sources/opintopolku-
 import { runSeFinderHarvest } from "../src/lib/knowledge/sources/se-finder";
 import { runEeFinderHarvest } from "../src/lib/knowledge/sources/ee-finder";
 import { runNoFinderHarvest } from "../src/lib/knowledge/sources/no-finder";
+import { runDkFinderHarvest } from "../src/lib/knowledge/sources/dk-finder";
 import { runDaadHarvest } from "../src/lib/knowledge/sources/daad-finder";
 import { mergeProgrammes } from "../src/lib/knowledge/draft";
 import { htmlToText, todayIso } from "../src/lib/knowledge/draft";
@@ -103,6 +104,13 @@ for (const source of due) {
         skipped = run.skipped;
       } else if (source.adapter === "no-finder") {
         const run = await runNoFinderHarvest(source.country, today, (fetched, t) =>
+          console.log(`  fetched ${fetched}/${t} programmes`),
+        );
+        programmes = run.programmes;
+        total = run.total;
+        skipped = run.skipped;
+      } else if (source.adapter === "dk-finder") {
+        const run = await runDkFinderHarvest(source.country, today, (fetched, t) =>
           console.log(`  fetched ${fetched}/${t} programmes`),
         );
         programmes = run.programmes;
