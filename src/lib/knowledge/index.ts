@@ -40,6 +40,14 @@ import frApplicationsJson from "../../../data/countries/fr/applications.json";
 import frVisaJson from "../../../data/countries/fr/visa.json";
 import frRedFlagsJson from "../../../data/countries/fr/red-flags.json";
 import frProgrammesJson from "../../../data/countries/fr/programmes.json";
+import beCountryJson from "../../../data/countries/be/country.json";
+import beScholarshipsJson from "../../../data/countries/be/scholarships.json";
+import beCostsJson from "../../../data/countries/be/costs.json";
+import beInstitutionsJson from "../../../data/countries/be/institutions.json";
+import beApplicationsJson from "../../../data/countries/be/applications.json";
+import beVisaJson from "../../../data/countries/be/visa.json";
+import beRedFlagsJson from "../../../data/countries/be/red-flags.json";
+import beProgrammesJson from "../../../data/countries/be/programmes.json";
 import seCountryJson from "../../../data/countries/se/country.json";
 import seScholarshipsJson from "../../../data/countries/se/scholarships.json";
 import seCostsJson from "../../../data/countries/se/costs.json";
@@ -144,6 +152,17 @@ const FR = countryDataSchema.parse({
   programmes: frProgrammesJson,
 });
 
+const BE = countryDataSchema.parse({
+  meta: beCountryJson,
+  scholarships: beScholarshipsJson,
+  costs: beCostsJson,
+  institutions: beInstitutionsJson,
+  applications: beApplicationsJson,
+  visa: beVisaJson,
+  redFlags: beRedFlagsJson,
+  programmes: beProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
   DE: toKnowledgeBase(DE),
@@ -152,9 +171,10 @@ const REGISTRY: Record<string, KnowledgeBase> = {
   EE: toKnowledgeBase(EE),
   NO: toKnowledgeBase(NO),
   FR: toKnowledgeBase(FR),
+  BE: toKnowledgeBase(BE),
 };
 
-function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO | typeof FR): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO | typeof FR | typeof BE): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }

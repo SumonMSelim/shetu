@@ -1,0 +1,1478 @@
+[
+  {
+    "id": "be-https-www-vives-be-en-applied-engineering-and-technology-manned-aviation",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor in Aviation - Aeronautical Engineering - Manned Aviation",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/applied-engineering-and-technology/manned-aviation",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/applied-engineering-and-technology/manned-aviation",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-vives-be-en-applied-engineering-and-technology-aspiring-airline-pilot",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor in Aviation - Aspiring Airline Pilot",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/applied-engineering-and-technology/aspiring-airline-pilot",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/applied-engineering-and-technology/aspiring-airline-pilot",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-vives-be-en-commercial-sciences-business-management-and-informatics-bachelor-hotel-management-culinary-arts",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor in Hotel Management - Culinary Arts",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/commercial-sciences-business-management-and-informatics/bachelor-hotel-management-culinary-arts",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/commercial-sciences-business-management-and-informatics/bachelor-hotel-management-culinary-arts",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-vives-be-en-commercial-sciences-business-management-and-informatics-bachelor-hotel-management-hospitality",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor in Hotel Management-Hospitality Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/commercial-sciences-business-management-and-informatics/bachelor-hotel-management-hospitality",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/commercial-sciences-business-management-and-informatics/bachelor-hotel-management-hospitality",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-uantwerpen-be-en-study-programmes-all-programmes-urban-sustainability-studies",
+    "institution": "University of Antwerp",
+    "institutionType": "research-university",
+    "name": "Bachelor in Urban Sustainability Studies (YUFE)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/urban-sustainability-studies/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/urban-sustainability-studies/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kdg-be-en-programmes-applied-computer-science",
+    "institution": "KdG University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of Applied Computer Science",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kdg.be/en/programmes/applied-computer-science",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kdg.be/en/programmes/applied-computer-science",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-ucll-be-en-bachelor-degree-programme-applied-computer-science",
+    "institution": "UCLL University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Applied Computer Science",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ucll.be/en/bachelor-degree/programme/applied-computer-science",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.ucll.be/en/bachelor-degree/programme/applied-computer-science",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-pxl-be-departementen-pxl-digital-applied-computer-science",
+    "institution": "PXL University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of Applied Computer Science",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.pxl.be/departementen/pxl-digital/applied-computer-science/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.pxl.be/departementen/pxl-digital/applied-computer-science/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-applied-computer-science-artificial-intelligence-geel-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Applied Computer Science - Artificial Intelligence",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/applied-computer-science/artificial-intelligence/geel/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/applied-computer-science/artificial-intelligence/geel/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-applied-computer-science-artificial-intelligence-geel-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-applied-computer-science",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Applied Computer Science - Artificial Intelligence (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/applied-computer-science/artificial-intelligence/geel/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=applied_computer_science",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/applied-computer-science/artificial-intelligence/geel/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=applied_computer_science",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-applied-computer-science-digital-innovation-geel-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Applied Computer Science - Digital Innovation",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/applied-computer-science/digital-innovation/geel/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/applied-computer-science/digital-innovation/geel/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-ap-arts-be-en-education-bachelor-dance",
+    "institution": "AP University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Arts in Dance",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ap-arts.be/en/education/bachelor-dance",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.ap-arts.be/en/education/bachelor-dance",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-automotive-technology-automotive-technology-sint-katelijne-waver-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Automotive Technology",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/automotive-technology/automotive-technology/sint-katelijne-waver/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/automotive-technology/automotive-technology/sint-katelijne-waver/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-vives-be-en-applied-engineering-and-technology-air-traffic-control-0",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Aviation - Air Traffic Control",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/applied-engineering-and-technology/air-traffic-control-0",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/applied-engineering-and-technology/air-traffic-control-0",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-vives-be-en-commercial-sciences-business-management-and-informatics-business-management-english-programme",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Business Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/commercial-sciences-business-management-and-informatics/business-management-english-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/commercial-sciences-business-management-and-informatics/business-management-english-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-odisee-be-en-programmes-bachelor-business-management-major-marketing",
+    "institution": "Odisee University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Business Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.odisee.be/en/programmes/bachelor-business-management-major-marketing",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.odisee.be/en/programmes/bachelor-business-management-major-marketing",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-howest-be-en-programmes-bachelor-creative-technologies-and-artificial-intelligence",
+    "institution": "Howest University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Creative Technologies & AI",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.howest.be/en/programmes/bachelor/creative-technologies-and-artificial-intelligence",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.howest.be/en/programmes/bachelor/creative-technologies-and-artificial-intelligence",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-howest-be-en-programmes-bachelor-cybersecurity",
+    "institution": "Howest University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Cybersecurity",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.howest.be/en/programmes/bachelor/cybersecurity",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.howest.be/en/programmes/bachelor/cybersecurity",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-devine-be-en",
+    "institution": "Howest University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Digital Design and Development",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.devine.be/en/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.devine.be/en/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-electronics-ict-embedded-hardware-sint-katelijne-waver-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-electronics-and-ict",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Electronics-ICT: Electronics: Embedded Hardware",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/embedded-hardware/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/embedded-hardware/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-electronics-ict-embedded-software-sint-katelijne-waver-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-electronics-and-ict",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Electronics-ICT: Electronics: Embedded Software",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/embedded-software/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/embedded-software/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-electronics-ict-application-development-sint-katelijne-waver-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-electronics-and-ict",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Electronics-ICT: ICT: Application Development",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/application-development/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/application-development/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-electronics-ict-applied-artificial-intelligence-sint-katelijne-waver-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-electronics-and-ict",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Electronics-ICT: ICT: Applied Artificial Intelligence",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/applied-artificial-intelligence/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/applied-artificial-intelligence/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-electronics-ict-security-systems-and-services-sint-katelijne-waver-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-electronics-and-ict",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Electronics-ICT: ICT: Security Systems and Services",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/security-systems-and-services/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/electronics-ict/security-systems-and-services/sint-katelijne-waver/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=electronics_and_ict",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-howest-be-en-programmes-bachelor-industrial-product-design",
+    "institution": "Howest University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Industrial Product Design",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.howest.be/en/programmes/bachelor/industrial-product-design",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.howest.be/en/programmes/bachelor/industrial-product-design",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-arteveldehogeschool-be-en-programmes-bachelor-international-business-management",
+    "institution": "Artevelde University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-business-management",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-business-management",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-ucll-be-en-programmes-degree-programmes-complete-bachelor-international-business-management-marketing-track-in-belgium",
+    "institution": "UCLL University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management, Marketing - track in Belgium",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ucll.be/en/programmes/degree-programmes/complete-bachelor/international-business-management-marketing/track-in-belgium",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.ucll.be/en/programmes/degree-programmes/complete-bachelor/international-business-management-marketing/track-in-belgium",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-ucll-be-en-programmes-degree-programmes-bachelor-international-business-management-marketing-track-across-europe",
+    "institution": "UCLL University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management, Marketing across Europe - track across Europe",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.ucll.be/en/programmes/degree-programmes/bachelor/international-business-management-marketing/track-across-europe",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.ucll.be/en/programmes/degree-programmes/bachelor/international-business-management-marketing/track-across-europe",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kdg-be-en-global-business",
+    "institution": "KdG University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management: Global Business",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kdg.be/en/global-business",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kdg.be/en/global-business",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kdg-be-en-global-supply-chain-management",
+    "institution": "KdG University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management: Global Supply Chain Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kdg.be/en/global-supply-chain-management",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kdg.be/en/global-supply-chain-management",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-business-management-global-supply-chain-management-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management: Global Supply Chain Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-business-management/global-supply-chain-management/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-business-management/global-supply-chain-management/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-business-management-international-applied-data-intelligence-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management: International Applied Data Intelligence",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-business-management/international-applied-data-intelligence/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-business-management/international-applied-data-intelligence/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-business-management-international-business-and-trade-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management: International Business and Trade",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-business-management/international-business-and-trade/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-business-management/international-business-and-trade/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kdg-be-en-international-entrepreneurship",
+    "institution": "KdG University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Business Management: International Entrepreneurship",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kdg.be/en/international-entrepreneurship",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kdg.be/en/international-entrepreneurship",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-branding-and-activation-mechelen-short-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/branding-and-activation/mechelen/short-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/branding-and-activation/mechelen/short-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-branding-and-activation-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media: Branding and Activation",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/branding-and-activation/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/branding-and-activation/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-branding-and-activation-mechelen-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-international-communication-and-media",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media: Branding and Activation (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/branding-and-activation/mechelen/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=international_communication_and_media",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/branding-and-activation/mechelen/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=international_communication_and_media",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-content-strategy-and-engagement-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media: Content Strategy & Engagement",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/content-strategy-and-engagement/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/content-strategy-and-engagement/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-content-strategy-and-engagement-mechelen-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-international-communication-and-media",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media: Content Strategy & Engagement (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/content-strategy-and-engagement/mechelen/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=international_communication_and_media",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/content-strategy-and-engagement/mechelen/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=international_communication_and_media",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-public-and-corporate-affairs-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media: Public and Corporate Affairs",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/public-and-corporate-affairs/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/public-and-corporate-affairs/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-communication-and-media-public-and-corporate-affairs-mechelen-full-programme-source-studyinflanders-amp-medium-listing-amp-opleiding-international-communication-and-media",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication and Media: Public and Corporate Affairs (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/public-and-corporate-affairs/mechelen/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=international_communication_and_media",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-communication-and-media/public-and-corporate-affairs/mechelen/full-programme?source=studyinflanders&amp;medium=listing&amp;opleiding=international_communication_and_media",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-arteveldehogeschool-be-en-programmes-bachelor-international-communication-management",
+    "institution": "Artevelde University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-communication-management",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-communication-management",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-pxl-be-pub-international-international-students-programmes-degree-programmes-html",
+    "institution": "PXL University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Communication Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.pxl.be/Pub/International/International-Students/Programmes/Degree-Programmes.html",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.pxl.be/Pub/International/International-Students/Programmes/Degree-Programmes.html",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-arteveldehogeschool-be-en-programmes-bachelor-international-graphic-and-digital-media",
+    "institution": "Artevelde University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Graphic and Digital Media",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-graphic-and-digital-media",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-graphic-and-digital-media",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-journalism-international-journalism-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Journalism",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-journalism/international-journalism/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-journalism/international-journalism/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-arteveldehogeschool-be-en-programmes-bachelor-international-journalism",
+    "institution": "Artevelde University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Journalism",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-journalism",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-journalism",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-media-and-entertainment-business-international-media-and-entertainment-business-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Media and Entertainment Business",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-media-and-entertainment-business/international-media-and-entertainment-business/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-media-and-entertainment-business/international-media-and-entertainment-business/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-media-and-entertainment-business-international-media-and-entertainment-business-mechelen-short-programme-tab-detail",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Media and Entertainment Business (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-media-and-entertainment-business/international-media-and-entertainment-business/mechelen/short-programme#tab-detail",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-media-and-entertainment-business/international-media-and-entertainment-business/mechelen/short-programme#tab-detail",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-arteveldehogeschool-be-en-programmes-bachelor-international-organisation-and-management",
+    "institution": "Artevelde University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Organisation and Management",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-organisation-and-management",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.arteveldehogeschool.be/en/programmes/bachelor/international-organisation-and-management",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-tourism-and-leisure-international-tourism-and-leisure-mechelen-full-programme",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Tourism and Leisure",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-tourism-and-leisure/international-tourism-and-leisure/mechelen/full-programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-tourism-and-leisure/international-tourism-and-leisure/mechelen/full-programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-thomasmore-be-en-educations-degree-students-international-tourism-and-leisure-international-tourism-and-leisure-mechelen-short-programme-tab-detail",
+    "institution": "Thomas More University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of International Tourism and Leisure (short programme)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://thomasmore.be/en/educations/degree-students/international-tourism-and-leisure/international-tourism-and-leisure/mechelen/short-programme#tab-detail",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://thomasmore.be/en/educations/degree-students/international-tourism-and-leisure/international-tourism-and-leisure/mechelen/short-programme#tab-detail",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kdg-be-en-bachelor-multimedia-creative-technologies",
+    "institution": "KdG University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of Multimedia and Creative Technologies",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kdg.be/en/bachelor-multimedia-creative-technologies",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kdg.be/en/bachelor-multimedia-creative-technologies",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kdg-be-en-nursing",
+    "institution": "KdG University of Applied Sciences and Arts",
+    "institutionType": "research-university",
+    "name": "Bachelor of Nursing",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 48,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kdg.be/en/nursing",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kdg.be/en/nursing",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-vives-be-en-health-care-bachelor-nursing",
+    "institution": "VIVES University of Applied Sciences",
+    "institutionType": "research-university",
+    "name": "Bachelor of Nursing",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 48,
+    "currency": "EUR",
+    "applicationUrl": "https://www.vives.be/en/health-care/bachelor-nursing",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.vives.be/en/health-care/bachelor-nursing",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-uantwerpen-be-en-study-programmes-all-programmes-social-economic-sciences",
+    "institution": "University of Antwerp",
+    "institutionType": "research-university",
+    "name": "Bachelor of Social-Economic Sciences",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/social-economic-sciences/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/social-economic-sciences/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-luca-arts-be-en-joint-international-bachelor-pathfinder",
+    "institution": "LUCA School of Arts",
+    "institutionType": "university-college",
+    "name": "Joint International Bachelor in Film (Pathfinder)",
+    "level": "bachelor",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 36,
+    "currency": "EUR",
+    "applicationUrl": "https://www.luca-arts.be/en/joint-international-bachelor-pathfinder",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.luca-arts.be/en/joint-international-bachelor-pathfinder",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-meeitl",
+    "institution": "University of Antwerp",
+    "institutionType": "research-university",
+    "name": "EIT-KIC Master of Science in Energy",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/MEEITL",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/MEEITL",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-mfstbgt",
+    "institution": "University of Antwerp",
+    "institutionType": "research-university",
+    "name": "Erasmus Mundus European Master in Sustainable Food Systems Engineering, Technology and Business",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/MFSTBGT",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/MFSTBGT",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-onderwijsaanbod-kuleuven-be-opleidingen-e-cq-56129004-htm",
+    "institution": "LUCA School of Arts",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus European Master of Radiation and its Effects on Microelectronics and Photonics Technologies",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://onderwijsaanbod.kuleuven.be/opleidingen/e/CQ_56129004.htm#",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://onderwijsaanbod.kuleuven.be/opleidingen/e/CQ_56129004.htm#",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-surpave-eu",
+    "institution": "LUCA School of Arts",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Joint Master in Sustainable and Resilient Pavement Engineering (SURPAVE)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 12,
+    "currency": "EUR",
+    "applicationUrl": "https://www.surpave.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.surpave.eu/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-uantwerpen-be-en-study-programmes-all-programmes-applied-ecohydrology",
+    "institution": "Flemish higher education institution",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Joint Master of Applied Ecohydrology (IMDO)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/applied-ecohydrology/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/applied-ecohydrology/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-filmmemory-eu",
+    "institution": "Flemish higher education institution",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Joint Master of Arts in European Film Heritage, History and Cultures (FilmMemory)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.filmmemory.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.filmmemory.eu/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-replaymasters-eu",
+    "institution": "Flemish higher education institution",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Joint Master of Arts in Game Design (REPLAY)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.replaymasters.eu",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.replaymasters.eu",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-maseil",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Joint Master of Arts in Sports Ethics and Integrity",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/MASEIL",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/MASEIL",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-response-able-futures-eu-programme",
+    "institution": "LUCA School of Arts",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Joint Master of Fine Arts in Design & Health care (Response_Able Futures)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.response-able-futures.eu/programme",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.response-able-futures.eu/programme",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-uantwerpen-be-en-study-programmes-all-programmes-leading-international-vaccinology-education",
+    "institution": "University of Antwerp",
+    "institutionType": "research-university",
+    "name": "Erasmus Mundus Joint Master of Leading International Vaccinology Education (LIVE)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/leading-international-vaccinology-education/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.uantwerpen.be/en/study/programmes/all-programmes/leading-international-vaccinology-education/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-programmes-master-imaging-light-extended-reality-utm-source-vluhr",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Master of Science in Imaging and Light in Extended Reality",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/programmes/master-imaging-light-extended-reality?utm_source=vluhr",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/programmes/master-imaging-light-extended-reality?utm_source=vluhr",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-mnnemml",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Master of Science in Nanoscience and Nanotechnology",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/MNNEMML",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/MNNEMML",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-pioneer",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Master of Science in Public Sector Innovation and eGovernance",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/PIONEER",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/PIONEER",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-mtccml",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "Erasmus Mundus Master of Science in Theoretical Chemistry and Computational Modelling",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/MTCCML",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/MTCCML",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-reanima-eu",
+    "institution": "LUCA School of Arts",
+    "institutionType": "university-college",
+    "name": "European Joint Master of Arts in Animation (RE:Anima)",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.reanima.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.reanima.eu/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-emcl-eu",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "European Master of Science in Clinical Linguistics",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.emcl.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.emcl.eu/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-em-master-fusion-org",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "European Master of Science in Nuclear Fusion and Engineering Physics",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.em-master-fusion.org/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.em-master-fusion.org/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-iupfood",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "ICP Master of Science in Food Technology",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/IUPFOOD",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/IUPFOOD",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-kuleuven-be-ma-iupware",
+    "institution": "KU Leuven",
+    "institutionType": "university-college",
+    "name": "ICP Master of Science in Water Resources Engineering",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.kuleuven.be/ma/IUPWARE",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.kuleuven.be/ma/IUPWARE",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-internationalmastercriminology-eu",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Advanced Research in Criminology: Border Crossing, Security and Social Justice",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.internationalmastercriminology.eu",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.internationalmastercriminology.eu",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-imanema-ugent-be",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Agro- and Environmental Nematology",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.imanema.ugent.be/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.imanema.ugent.be/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-www-imete-eu",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Environmental Technology and Engineering",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://www.imete.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://www.imete.eu/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-imfse-be",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Fire Safety Engineering",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://imfse.be/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://imfse.be/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-aquah-eu",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Health Management in Aquaculture",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://aquah.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://aquah.eu/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-studiekiezer-ugent-be-international-master-of-science-in-rural-development-imrdvc-en",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Rural Development",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://studiekiezer.ugent.be/international-master-of-science-in-rural-development-IMRDVC-en/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://studiekiezer.ugent.be/international-master-of-science-in-rural-development-IMRDVC-en/",
+      "retrieved": "2026-11-23"
+    }
+  },
+  {
+    "id": "be-https-imsoglo-eu",
+    "institution": "Ghent University",
+    "institutionType": "research-university",
+    "name": "International Master of Science in Soils and Global Change: Physical Land Resources and Global Change",
+    "level": "master",
+    "field": "General",
+    "language": "English",
+    "city": "Flanders",
+    "durationMonths": 24,
+    "currency": "EUR",
+    "applicationUrl": "https://imsoglo.eu/",
+    "provenance": {
+      "source": "Study in Flanders (Flemish government) programme listing",
+      "sourceUrl": "https://imsoglo.eu/",
+      "retrieved": "2026-11-23"
+    }
+  }
+]

@@ -88,5 +88,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "TaughtIE / Campus France catalogue API (tie-api.campusfrance.org). List + per-programme detail fetches. English-taught only (levels 12/26); fee text kept verbatim in notes. Deterministic, no LLM."
+  },
+  {
+    "id": "studyinflanders-programmes",
+    "country": "BE",
+    "kind": "portal-finder",
+    "url": "https://www.studyinflanders.be/programmes",
+    "adapter": "be-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "Study in Flanders (Flemish government) programme listing. Server-rendered cards, plain fetch + regex parsing. No fees or city published on cards."
   }
 ]
