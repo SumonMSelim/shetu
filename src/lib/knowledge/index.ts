@@ -32,6 +32,14 @@ import noApplicationsJson from "../../../data/countries/no/applications.json";
 import noVisaJson from "../../../data/countries/no/visa.json";
 import noRedFlagsJson from "../../../data/countries/no/red-flags.json";
 import noProgrammesJson from "../../../data/countries/no/programmes.json";
+import frCountryJson from "../../../data/countries/fr/country.json";
+import frScholarshipsJson from "../../../data/countries/fr/scholarships.json";
+import frCostsJson from "../../../data/countries/fr/costs.json";
+import frInstitutionsJson from "../../../data/countries/fr/institutions.json";
+import frApplicationsJson from "../../../data/countries/fr/applications.json";
+import frVisaJson from "../../../data/countries/fr/visa.json";
+import frRedFlagsJson from "../../../data/countries/fr/red-flags.json";
+import frProgrammesJson from "../../../data/countries/fr/programmes.json";
 import seCountryJson from "../../../data/countries/se/country.json";
 import seScholarshipsJson from "../../../data/countries/se/scholarships.json";
 import seCostsJson from "../../../data/countries/se/costs.json";
@@ -125,6 +133,17 @@ const NO = countryDataSchema.parse({
   programmes: noProgrammesJson,
 });
 
+const FR = countryDataSchema.parse({
+  meta: frCountryJson,
+  scholarships: frScholarshipsJson,
+  costs: frCostsJson,
+  institutions: frInstitutionsJson,
+  applications: frApplicationsJson,
+  visa: frVisaJson,
+  redFlags: frRedFlagsJson,
+  programmes: frProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
   DE: toKnowledgeBase(DE),
@@ -132,9 +151,10 @@ const REGISTRY: Record<string, KnowledgeBase> = {
   SE: toKnowledgeBase(SE),
   EE: toKnowledgeBase(EE),
   NO: toKnowledgeBase(NO),
+  FR: toKnowledgeBase(FR),
 };
 
-function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO | typeof FR): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }

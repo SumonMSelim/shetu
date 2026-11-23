@@ -78,5 +78,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "Study in Denmark programme portal (Volto/Plone). Plone querystring-search API through a browser session (WAF + cookie wall). English-taught degrees only. Deterministic, no LLM."
+  },
+  {
+    "id": "taughtie-france",
+    "country": "FR",
+    "kind": "portal-finder",
+    "url": "https://taughtie.campusfrance.org/tiesearch/#/catalog",
+    "adapter": "fr-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "TaughtIE / Campus France catalogue API (tie-api.campusfrance.org). List + per-programme detail fetches. English-taught only (levels 12/26); fee text kept verbatim in notes. Deterministic, no LLM."
   }
 ]
