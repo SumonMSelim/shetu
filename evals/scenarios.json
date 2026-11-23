@@ -115,7 +115,8 @@
         "noEnglishSwitch": true,
         "mustNotContain": [
           "I'll answer in English"
-        ]
+        ],
+        "noCjk": true
       },
       "judge": "honesty"
     },
@@ -132,7 +133,8 @@
         "mustNotContain": [
           "I'll answer in English"
         ],
-        "groundedLinks": true
+        "groundedLinks": true,
+        "noCjk": true
       },
       "judge": "honesty"
     },
@@ -227,7 +229,8 @@
         ],
         "grounded": true,
         "bengaliScript": true,
-        "noEnglishSwitch": true
+        "noEnglishSwitch": true,
+        "noCjk": true
       },
       "judge": "relevance"
     }

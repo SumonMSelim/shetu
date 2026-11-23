@@ -269,6 +269,15 @@ export async function POST(req: Request): Promise<Response> {
           await touchConversation(userId, convId, new Date().toISOString());
         }
 
+        // Script-drift monitoring: if the answer contains CJK characters
+        // while the student wrote none, that is a model language failure.
+        // Logged for monitoring; the content itself is already streamed.
+        const userCjk = [...parsed.message].filter((ch) => ch >= "\u4e00" && ch <= "\u9fff").length;
+        const answerCjk = [...answer].filter((ch) => ch >= "\u4e00" && ch <= "\u9fff").length;
+        if (answerCjk > 0 && userCjk === 0) {
+          logWarn("answer.cjk_detected", undefined, { userId, convId, answerCjk, userCjk });
+        }
+
         // Audit record + metrics for this turn. Observability must never break
         // the chat response; the user already has their answer at this point.
         const turnTrace = trace.finish(userId, convId, nextSeq);

@@ -56,6 +56,8 @@ export interface Expectations {
   specialistsMustInclude?: string[];
   /** The answer must contain Bengali script (language-matching check). */
   bengaliScript?: boolean;
+  /** The answer must contain no CJK (Chinese/Japanese) characters. */
+  noCjk?: boolean;
   /** The answer must not contain the Latin apology line (language drift). */
   noEnglishSwitch?: boolean;
 }
@@ -127,6 +129,9 @@ export function checkExpectations(
   }
   if (expect.noEnglishSwitch && /answer in english/i.test(answer)) {
     failures.push("answer switched to English instead of mirroring the student's language");
+  }
+  if (expect.noCjk && /[\u4e00-\u9fff]/.test(normalized)) {
+    failures.push("answer contains CJK characters (script drift into Chinese)");
   }
   return { pass: failures.length === 0, failures };
 }
