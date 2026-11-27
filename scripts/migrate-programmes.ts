@@ -141,39 +141,104 @@ for (const cc of countryDirs) {
   }[];
 
   const seenIds: string[] = [];
-  for (const r of records) {
+
+  // One SELECT for the whole country instead of one per record: the seed run
+  // did everything sequentially and took ~30 minutes for 3,585 records over
+  // the public internet. Batching brings a full refresh to minutes.
+  const priorRes = await client.query(
+    "SELECT id, content_hash, embedding::text AS embedding FROM programmes WHERE country = $1",
+    [cc],
+  );
+  const priorById = new Map<string, { content_hash: string; embedding: string }>(
+    (priorRes.rows as { id: string; content_hash: string; embedding: string }[]).map((row) => [row.id, row]),
+  );
+
+  interface Prepared {
+    r: (typeof records)[number];
+    hash: string;
+    embeddingText: string | null;
+  }
+  const prepared: Prepared[] = [];
+
+  // Phase 1: decide embeddings needed, embed with a small worker pool
+  // (Bedrock rate limits apply; 6 concurrent calls is polite and fast).
+  const toEmbed: { index: number; searchable: string }[] = [];
+  for (let i = 0; i < records.length; i++) {
+    const r = records[i];
     const searchable = `${r.name} ${r.institution} ${r.field} ${r.city} ${r.level}`.toLowerCase();
     const hash = hashText(searchable);
     seenIds.push(r.id);
+    const priorRow = priorById.get(r.id);
+    if (!priorRow || priorRow.content_hash !== hash) toEmbed.push({ index: i, searchable });
+    prepared.push({ r, hash, embeddingText: priorRow?.embedding ?? null });
+  }
 
-    const prior = await client.query(
-      "SELECT content_hash, embedding::text AS embedding FROM programmes WHERE country = $1 AND id = $2",
-      [cc, r.id],
-    );
-    const priorRow = prior.rows[0];
-    let embeddingText: string | null = null;
-    if (!priorRow || priorRow.content_hash !== hash) {
+  const CONCURRENCY = 6;
+  let next = 0;
+  let done = 0;
+  const worker = async () => {
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const job = toEmbed[next];
+      next += 1;
+      if (job === undefined) return;
       try {
-        const vec = await embed(searchable);
-        embeddingText = `[${vec.join(",")}]`;
+        const vec = await embed(job.searchable);
+        prepared[job.index].embeddingText = `[${vec.join(",")}]`;
         embedded += 1;
       } catch (err) {
         // Embedding is an enhancement, not a requirement: full-text search
         // still works without it. Report and continue.
         failedEmbeds += 1;
-        if (failedEmbeds <= 3) console.log(`  embed failed for ${r.id}: ${String(err).slice(0, 120)}`);
+        if (failedEmbeds <= 3) console.log(`  embed failed for ${prepared[job.index].r.id}: ${String(err).slice(0, 120)}`);
       }
-    } else {
-      embeddingText = priorRow.embedding;
-      reused += 1;
+      done += 1;
+      if (done % 200 === 0) console.log(`  ${cc}: embedded ${done}/${toEmbed.length}`);
     }
+  };
+  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, toEmbed.length) }, worker));
+  reused += records.length - toEmbed.length;
 
-    const upsert = await client.query(
+  // Phase 2: chunked multi-row upserts (25 rows x 21 cols per statement).
+  for (let i = 0; i < prepared.length; i += 25) {
+    const chunk = prepared.slice(i, i + 25);
+    const values: unknown[] = [];
+    const rowsSql: string[] = [];
+    chunk.forEach((p, j) => {
+      const b = j * 21;
+      rowsSql.push(
+        `($${b + 1},$${b + 2},$${b + 3},$${b + 4},$${b + 5},$${b + 6},$${b + 7},$${b + 8},$${b + 9},$${b + 10},$${b + 11},$${b + 12},$${b + 13},$${b + 14},$${b + 15},$${b + 16},$${b + 17}::jsonb,$${b + 18}::date,$${b + 19}::boolean,$${b + 20},$${b + 21}::vector)`,
+      );
+      values.push(
+        cc,
+        p.r.id,
+        p.r.name,
+        p.r.institution,
+        p.r.institutionType,
+        p.r.level,
+        p.r.field,
+        p.r.language,
+        p.r.city,
+        p.r.durationMonths ?? null,
+        p.r.tuitionEu ?? null,
+        p.r.tuitionNonEu ?? null,
+        p.r.applicationDeadline ?? null,
+        p.r.englishRequirement ?? null,
+        p.r.applicationUrl,
+        p.r.notes ?? null,
+        JSON.stringify(p.r.provenance),
+        p.r.provenance.retrieved,
+        isStaleProvenance(p.r.provenance, new Date()),
+        p.hash,
+        p.embeddingText,
+      );
+    });
+    await client.query(
       `INSERT INTO programmes
         (country, id, name, institution, institution_type, level, field, language, city,
          duration_months, tuition_eu, tuition_non_eu, application_deadline, english_requirement,
          application_url, notes, provenance, verified_on, stale, content_hash, embedding)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21::vector)
+       VALUES ${rowsSql.join(",")}
        ON CONFLICT (country, id) DO UPDATE SET
          name = EXCLUDED.name, institution = EXCLUDED.institution,
          institution_type = EXCLUDED.institution_type, level = EXCLUDED.level,
@@ -182,33 +247,15 @@ for (const cc of countryDirs) {
          tuition_non_eu = EXCLUDED.tuition_non_eu, application_deadline = EXCLUDED.application_deadline,
          english_requirement = EXCLUDED.english_requirement, application_url = EXCLUDED.application_url,
          notes = EXCLUDED.notes, provenance = EXCLUDED.provenance, verified_on = EXCLUDED.verified_on,
-         stale = EXCLUDED.stale, content_hash = EXCLUDED.content_hash, embedding = EXCLUDED.embedding`,
-      [
-        cc,
-        r.id,
-        r.name,
-        r.institution,
-        r.institutionType,
-        r.level,
-        r.field,
-        r.language,
-        r.city,
-        r.durationMonths ?? null,
-        r.tuitionEu ?? null,
-        r.tuitionNonEu ?? null,
-        r.applicationDeadline ?? null,
-        r.englishRequirement ?? null,
-        r.applicationUrl,
-        r.notes ?? null,
-        JSON.stringify(r.provenance),
-        r.provenance.retrieved,
-        isStaleProvenance(r.provenance, new Date()),
-        hash,
-        embeddingText,
-      ],
+         stale = EXCLUDED.stale, content_hash = EXCLUDED.content_hash,
+         embedding = COALESCE(EXCLUDED.embedding, programmes.embedding)`,
+      values,
     );
-    if (upsert.rowCount === 1 && priorRow) updated += 1;
-    else if (upsert.rowCount === 1) inserted += 1;
+    for (const p of chunk) {
+      if (priorById.has(p.r.id)) updated += 1;
+      else inserted += 1;
+    }
+    console.log(`  ${cc}: upserted ${Math.min(i + 25, prepared.length)}/${prepared.length}`);
   }
 
   // Remove DB rows for records that left the JSON files (retired/cleaned).
