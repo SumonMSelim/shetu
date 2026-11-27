@@ -30,6 +30,44 @@ export function Chat() {
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Sidebar visibility. The CSS decides the per-breakpoint default (drawer
+  // closed on phones, panel open on desktop); this override records only the
+  // user's explicit hide/show choice, persisted for desktop sessions.
+  const [sidebarOverride, setSidebarOverride] = useState<"open" | "closed" | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 900px)");
+    const apply = () => setIsDesktop(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    // On phones the drawer always starts closed, whatever the desktop chose.
+    if (!window.matchMedia("(min-width: 900px)").matches) return;
+    const saved = localStorage.getItem("shetu.sidebar");
+    if (saved === "open" || saved === "closed") setSidebarOverride(saved);
+  }, []);
+
+  const effectiveSidebarOpen = sidebarOverride ? sidebarOverride === "open" : isDesktop;
+
+  const toggleSidebar = useCallback(() => {
+    setSidebarOverride((prev) => {
+      const open = prev ? prev === "open" : window.matchMedia("(min-width: 900px)").matches;
+      const next = open ? "closed" : "open";
+      localStorage.setItem("shetu.sidebar", next);
+      return next;
+    });
+  }, []);
+
+  // On phones the drawer covers the chat, so picking a chat or starting one
+  // must close it again. Desktop panels stay put.
+  const closeSidebarOnMobile = useCallback(() => {
+    if (!window.matchMedia("(min-width: 900px)").matches) setSidebarOverride("closed");
+  }, []);
+
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, activeTool]);
@@ -51,6 +89,7 @@ export function Chat() {
 
   const openConversation = useCallback(async (id: string) => {
     if (streaming) return;
+    closeSidebarOnMobile();
     setError(null);
     try {
       const r = await fetch(`/api/conversations?convId=${encodeURIComponent(id)}`);
@@ -62,15 +101,16 @@ export function Chat() {
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not open conversation.");
     }
-  }, [streaming]);
+  }, [streaming, closeSidebarOnMobile]);
 
   const newChat = useCallback(() => {
     if (streaming) return;
+    closeSidebarOnMobile();
     setMessages([]);
     setConvId(null);
     setAttachedDoc(null);
     setError(null);
-  }, [streaming]);
+  }, [streaming, closeSidebarOnMobile]);
 
   const send = useCallback(
     async (text: string) => {
@@ -158,18 +198,50 @@ export function Chat() {
   );
 
   const empty = messages.length === 0;
+  const shellClass =
+    sidebarOverride === "open"
+      ? "app-shell sidebar-open"
+      : sidebarOverride === "closed"
+        ? "app-shell sidebar-closed"
+        : "app-shell";
 
   return (
-    <div style={{ display: "flex", height: "calc(100vh - 60px)" }}>
+    <div className={shellClass}>
       <Sidebar
         conversations={conversations}
         activeConvId={convId}
         onNew={newChat}
         onOpen={openConversation}
       />
-
+      <button
+        type="button"
+        className="shetu-backdrop"
+        onClick={toggleSidebar}
+        aria-label="Close chats panel"
+      />
       <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
-        <div ref={scrollRef} style={{ flex: 1, overflowY: "auto" }}>
+        <div className="chat-toolbar">
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={toggleSidebar}
+            aria-expanded={effectiveSidebarOpen}
+            aria-controls="chat-sidebar"
+            aria-label={effectiveSidebarOpen ? "Hide chats panel" : "Show chats panel"}
+            title={effectiveSidebarOpen ? "Hide chats panel" : "Show chats panel"}
+          >
+            {effectiveSidebarOpen ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            )}
+          </button>
+        </div>
+        <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", minHeight: 0 }}>
           <div className="container" style={{ paddingTop: 28, paddingBottom: 20, maxWidth: 820 }}>
             {empty ? (
               <EmptyState onPick={send} />
@@ -217,24 +289,16 @@ function Sidebar({
   onNew: () => void;
   onOpen: (id: string) => void;
 }) {
+  // Layout (display, width, borders) lives in the .shetu-sidebar CSS rules so
+  // the same markup works as an inline panel on desktop and a drawer on phones.
   return (
-    <aside
-      style={{
-        width: 260,
-        flexShrink: 0,
-        borderRight: "1px solid var(--border)",
-        background: "var(--surface)",
-        display: "flex",
-        flexDirection: "column",
-      }}
-      className="shetu-sidebar"
-    >
+    <aside className="shetu-sidebar" id="chat-sidebar">
       <div style={{ padding: 14 }}>
         <button className="btn btn-primary" onClick={onNew} style={{ width: "100%", justifyContent: "center" }}>
           + New chat
         </button>
       </div>
-      <div style={{ overflowY: "auto", padding: "0 10px 14px" }}>
+      <div style={{ overflowY: "auto", padding: "0 10px 14px", minHeight: 0 }}>
         <div className="muted" style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, padding: "6px 8px" }}>
           Your chats
         </div>
@@ -269,9 +333,6 @@ function Sidebar({
           ))
         )}
       </div>
-      <style>{`
-        @media (max-width: 720px) { .shetu-sidebar { display: none; } }
-      `}</style>
     </aside>
   );
 }

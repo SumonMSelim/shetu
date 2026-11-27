@@ -148,7 +148,7 @@ export function MentorDashboard({ userId, fallbackName }: { userId: string; fall
           <p className="muted" style={{ margin: 0 }}>Loading…</p>
         ) : (
           <div style={{ display: "grid", gap: 12 }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
               <label style={{ fontSize: 14 }}>
                 Display name
                 <input
@@ -178,7 +178,7 @@ export function MentorDashboard({ userId, fallbackName }: { userId: string; fall
                 onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
               />
             </label>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 12 }}>
               <label style={{ fontSize: 14 }}>
                 Countries you know well (comma-separated ISO codes, e.g. NL, DE)
                 <input
