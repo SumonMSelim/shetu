@@ -21,6 +21,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # The browser-session adapters (DK studyindenmark, SE, DAAD) need a
+      # real Chromium: without it every browser-based source fails and the
+      # run degrades to plain-fetch sources only.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
       - name: Run due sources
         continue-on-error: true
         run: npm run harvest
