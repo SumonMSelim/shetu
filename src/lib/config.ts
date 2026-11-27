@@ -60,6 +60,7 @@ export const config = {
       vault: intFromEnv("SHETU_BURST_VAULT", 20),
       mentorship: intFromEnv("SHETU_BURST_MENTORSHIP", 5),
       gdpr: intFromEnv("SHETU_BURST_GDPR", 3),
+      conversationDelete: intFromEnv("SHETU_BURST_CONV_DELETE", 10),
     },
     agentTurns: intFromEnv("SHETU_AGENT_TURNS", 14),
     agentOutputTokens: intFromEnv("SHETU_AGENT_OUTPUT_TOKENS", 24_000),

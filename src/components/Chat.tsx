@@ -112,6 +112,40 @@ export function Chat() {
     setError(null);
   }, [streaming, closeSidebarOnMobile]);
 
+  const deleteConversation = useCallback(
+    async (id: string) => {
+      if (streaming) return;
+      if (!window.confirm("Delete this chat? This cannot be undone.")) return;
+      setError(null);
+      try {
+        const r = await fetch(`/api/conversations?convId=${encodeURIComponent(id)}`, { method: "DELETE" });
+        if (!r.ok) {
+          let message = "Could not delete this chat.";
+          try {
+            const data = (await r.json()) as { error?: string };
+            if (data?.error) message = data.error;
+          } catch {
+            // Non-JSON body; keep the default message.
+          }
+          throw new Error(message);
+        }
+        // If the open chat was deleted, drop it from the view too.
+        setConvId((active) => {
+          if (active === id) {
+            setMessages([]);
+            setAttachedDoc(null);
+            return null;
+          }
+          return active;
+        });
+        void loadConversations();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Could not delete this chat.");
+      }
+    },
+    [streaming, loadConversations],
+  );
+
   const send = useCallback(
     async (text: string) => {
       const trimmed = text.trim();
@@ -212,6 +246,7 @@ export function Chat() {
         activeConvId={convId}
         onNew={newChat}
         onOpen={openConversation}
+        onDelete={(id) => void deleteConversation(id)}
       />
       <button
         type="button"
@@ -283,11 +318,13 @@ function Sidebar({
   activeConvId,
   onNew,
   onOpen,
+  onDelete,
 }: {
   conversations: ConvRef[];
   activeConvId: string | null;
   onNew: () => void;
   onOpen: (id: string) => void;
+  onDelete: (id: string) => void;
 }) {
   // Layout (display, width, borders) lives in the .shetu-sidebar CSS rules so
   // the same markup works as an inline panel on desktop and a drawer on phones.
@@ -308,28 +345,42 @@ function Sidebar({
           </div>
         ) : (
           conversations.map((c) => (
-            <button
-              key={c.convId}
-              onClick={() => onOpen(c.convId)}
-              title={c.title}
-              style={{
-                display: "block",
-                width: "100%",
-                textAlign: "left",
-                background: c.convId === activeConvId ? "var(--bg)" : "transparent",
-                border: "none",
-                borderRadius: 8,
-                padding: "9px 10px",
-                fontSize: 13.5,
-                color: "var(--text)",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {c.title}
-            </button>
+            <div key={c.convId} style={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <button
+                onClick={() => onOpen(c.convId)}
+                title={c.title}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  display: "block",
+                  textAlign: "left",
+                  background: c.convId === activeConvId ? "var(--bg)" : "transparent",
+                  border: "none",
+                  borderRadius: 8,
+                  padding: "9px 10px",
+                  fontSize: 13.5,
+                  color: "var(--text)",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {c.title}
+              </button>
+              <button
+                type="button"
+                className="icon-btn"
+                onClick={() => onDelete(c.convId)}
+                aria-label={`Delete chat: ${c.title}`}
+                title="Delete this chat"
+                style={{ width: 30, height: 30, flexShrink: 0 }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
           ))
         )}
       </div>

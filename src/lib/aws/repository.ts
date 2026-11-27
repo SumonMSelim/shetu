@@ -395,6 +395,39 @@ export async function countMessages(userId: string, convId: string): Promise<num
   return msgs.length;
 }
 
+/**
+ * Delete one conversation and all its messages (per-chat self-service
+ * deletion, complementing the whole-partition GDPR erasure). Turn traces
+ * are intentionally kept: they are the audit trail. Returns the number of
+ * items removed (0 when the conversation does not exist).
+ */
+export async function deleteConversation(userId: string, convId: string): Promise<number> {
+  const keys: { PK: string; SK: string }[] = [];
+  for (const prefix of [`CONV#${convId}`, `CONVMSG#${convId}#`]) {
+    let lastEvaluated: Record<string, unknown> | undefined;
+    do {
+      const res = await ddb().send(
+        new QueryCommand({
+          TableName: TABLE,
+          KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
+          ExpressionAttributeValues: { ":pk": `USER#${userId}`, ":sk": prefix },
+          ProjectionExpression: "PK, SK",
+          ExclusiveStartKey: lastEvaluated,
+        }),
+      );
+      for (const item of (res.Items as { PK: string; SK: string }[] | undefined) ?? []) {
+        keys.push({ PK: item.PK, SK: item.SK });
+      }
+      lastEvaluated = res.LastEvaluatedKey;
+    } while (lastEvaluated);
+  }
+  for (let i = 0; i < keys.length; i += 25) {
+    const batch = keys.slice(i, i + 25).map((k) => ({ DeleteRequest: { Key: k } }));
+    await ddb().send(new BatchWriteCommand({ RequestItems: { [TABLE]: batch } }));
+  }
+  return keys.length;
+}
+
 // --- Turn traces (observability/audit) -------------------------------------
 //
 // Written once when a chat turn completes. Records what the agents did
