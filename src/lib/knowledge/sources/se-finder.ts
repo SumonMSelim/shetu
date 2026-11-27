@@ -145,15 +145,20 @@ async function sweepLevel(
     total = data.totaltAntalTraffar ?? total;
     const batch = data.sokresultatItems ?? [];
     if (batch.length === 0) break;
+    let newKeys = 0;
     for (const item of batch) {
       const key = item.educationEventId ?? item.anmalningsalternativ?.anmalningsalternativKod ?? item.titel ?? "";
       if (seen.has(key)) continue;
       seen.add(key);
+      newKeys += 1;
       const mapped = mapSokItem(item, today);
       if (mapped) programmes.set(mapped.id, mapped);
       else skipped.push({ id: `se-${key.slice(0, 40)}`, reason: "not English-taught, unmappable level, or schema mismatch" });
     }
     onProgress?.(seen.size, total);
+    // A page with nothing new means the API stopped advancing: stop instead
+    // of looping over repeats.
+    if (newKeys === 0) break;
     if (batch.length < PAGE_SIZE) break; // last page
     sida += 1;
   }

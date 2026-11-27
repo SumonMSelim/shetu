@@ -164,6 +164,11 @@ export function mergeProgrammes(existing: Programme[], drafts: Programme[]): Mer
       for (const field of COMPARED_FIELDS) {
         const was = (twin as unknown as Record<string, unknown>)[field];
         const now = (draft as unknown as Record<string, unknown>)[field];
+        // An adapter that did not extract a field must not erase a value a
+        // previous harvest verified (e.g. fees that live on the per-programme
+        // detail API but not in the listing payload). Only an explicit new
+        // value updates the record.
+        if (now === undefined) continue;
         if (JSON.stringify(was ?? null) !== JSON.stringify(now ?? null)) {
           changes.push(field);
           (twin as unknown as Record<string, unknown>)[field] = now;

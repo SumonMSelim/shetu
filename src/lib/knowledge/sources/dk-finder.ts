@@ -11,12 +11,19 @@ import type { Programme } from "../types";
  * page once in a headless browser (which also passes the cookie-consent wall)
  * and then queries the API through that session. No LLM.
  *
- * Fields available per record: title, institution, city, degree type
+ * Fields available per record: title, institution, degree type
  * ("Master (2 years)" -> master, 2-year duration), subject area, ECTS
- * credits, and the detail page URL. Tuition fees are not published per
- * programme on this portal.
+ * credits, and the detail page URL. The LISTING payload has no fees, but
+ * each programme's content API item does: tuition_per_term__non_eu_eaa_ch
+ * (the portal renders it as "N EUR"), plus the campus folder as parent.
+ * A second pass per programme fetches that item and maps:
+ *   - tuitionNonEu: ANNUAL fee = 2 x per-term (a Danish academic year is
+ *     two terms), with the portal's per-term figure kept verbatim in notes;
+ *   - city: from the campus folder title ("Campus Horsens" -> "Horsens");
+ *   - currency: EUR on enriched records (the portal quotes EUR, not DKK).
  *
- * Verified live on 23 November 2026: 465 English-taught programmes.
+ * Verified live on 23 November 2026: 465 English-taught programmes;
+ * fee fields verified across SDU/CBS/UCPH/AAU/AU/VIA on 28 November 2026.
  */
 
 const PORTAL_URL = "https://studyindenmark.dk/portal";
@@ -58,6 +65,30 @@ interface PloneResponse {
   items_total?: number;
 }
 
+/** Per-programme content API item (the detail pass). */
+interface PloneDetail {
+  tuition_per_term__non_eu_eaa_ch?: string | null;
+  parent?: { title?: string } | null;
+}
+
+/** Sane per-term non-EU tuition band in EUR. Outside it the value is a
+    source-data error: drop it rather than serve a figure a student would
+    act on. (Observed live: EUR 3,500-16,300 per term.) */
+const FEE_PER_TERM_MIN = 500;
+const FEE_PER_TERM_MAX = 30000;
+
+/** City from the campus folder title: "Campus Horsens" -> "Horsens",
+    "Frederiksberg Campus" -> "Frederiksberg". Generic campus words (North,
+    City, ...) are kept whole: bare "North" is useless as a location. */
+const GENERIC_CAMPUS = /^(north|south|east|west|city|central|main)$/i;
+function cityFromCampus(campus?: string | null): string | undefined {
+  const t = campus?.trim();
+  if (!t) return undefined;
+  const stripped = t.replace(/^campus\s+/i, "").replace(/\s+campus$/i, "").trim();
+  if (!stripped || GENERIC_CAMPUS.test(stripped)) return t;
+  return stripped;
+}
+
 function levelFromDegree(degree?: string): { level: Programme["level"] | null; durationMonths?: number } {
   if (!degree) return { level: null };
   const d = degree.toLowerCase();
@@ -82,7 +113,7 @@ function slugFull(text: string): string {
   return text;
 }
 
-export function mapDkItem(raw: PloneItem, today: string): Programme | null {
+export function mapDkItem(raw: PloneItem, today: string, detail?: PloneDetail | null): Programme | null {
   const name = raw.title?.trim();
   const institution = raw.institution_title?.trim() || raw.institution?.trim();
   const degree = raw.degree_title?.trim() || raw.degree?.trim();
@@ -90,9 +121,26 @@ export function mapDkItem(raw: PloneItem, today: string): Programme | null {
   if (!level || !name || !institution) return null;
 
   const subject = raw.program_subject_title?.[0]?.trim();
+
+  // Fees: the detail item states a per-term figure the portal renders in
+  // EUR. Store the annual amount (2 terms) so records compare with the
+  // other countries' annual figures, and keep the portal's exact wording
+  // in the notes. Values outside the plausibility band are dropped, and a
+  // missing or zero figure means "not stated", never "free".
+  let tuitionNonEu: number | undefined;
+  let currency = "DKK";
+  const perTerm = detail ? Number(detail.tuition_per_term__non_eu_eaa_ch) : NaN;
+  if (Number.isFinite(perTerm) && perTerm >= FEE_PER_TERM_MIN && perTerm <= FEE_PER_TERM_MAX) {
+    tuitionNonEu = perTerm * 2;
+    currency = "EUR";
+  }
+
   const noteParts = [
     degree ? `degree: ${degree}` : "",
     subject ? `subject: ${subject}` : "",
+    tuitionNonEu !== undefined
+      ? `non-EU tuition EUR ${tuitionNonEu.toLocaleString("en-GB")}/year (portal states EUR ${perTerm.toLocaleString("en-GB")} per term)`
+      : "",
   ].filter(Boolean);
   const notes = noteParts.join("; ");
 
@@ -120,9 +168,10 @@ export function mapDkItem(raw: PloneItem, today: string): Programme | null {
     level,
     field: subject || "General",
     language: "English",
-    city: raw.city?.trim() || institution,
+    city: cityFromCampus(detail?.parent?.title) || raw.city?.trim() || institution,
     ...(durationMonths ? { durationMonths } : {}),
-    currency: "DKK",
+    ...(tuitionNonEu !== undefined ? { tuitionNonEu } : {}),
+    currency,
     applicationUrl: raw["@id"]?.trim() || PORTAL_URL,
     ...(notes.length >= 10 ? { notes } : {}),
     provenance: {
@@ -172,6 +221,22 @@ export async function runDkFinderHarvest(
     return (await res.json()) as PloneResponse;
   };
 
+  // Detail pass: the listing payload has no fees; each programme's content
+  // API item has them. Failures degrade gracefully to a record without fees.
+  const getDetail = async (atId: string): Promise<PloneDetail | null> => {
+    try {
+      const path = new URL(atId).pathname
+        .split("/")
+        .filter((s) => s && s.toLowerCase() !== "portal")
+        .join("/");
+      const res = await page.request.get(`https://studyindenmark.dk/++api++/portal/${path}`);
+      if (!res.ok) return null;
+      return (await res.json()) as PloneDetail;
+    } catch {
+      return null;
+    }
+  };
+
   try {
     const raw: PloneItem[] = [];
     let total = 0;
@@ -189,7 +254,9 @@ export async function runDkFinderHarvest(
     const programmes: Programme[] = [];
     const skipped: { id: string; reason: string }[] = [];
     for (const item of raw.slice(0, maxRecords ?? raw.length)) {
-      const mapped = mapDkItem(item, today);
+      const detail = item["@id"] ? await getDetail(item["@id"]) : null;
+      if (detail) await new Promise((r) => setTimeout(r, 150)); // polite pacing
+      const mapped = mapDkItem(item, today, detail);
       if (mapped) programmes.push(mapped);
       else
         skipped.push({

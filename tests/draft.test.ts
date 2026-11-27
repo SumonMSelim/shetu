@@ -139,6 +139,28 @@ test("mergeProgrammes keys identity on id, not on shared application URLs", () =
   );
 });
 
+test("mergeProgrammes keeps a verified field the draft did not extract", () => {
+  // Fees live on the per-programme detail API; a listing-only adapter draft
+  // has no tuitionNonEu. The merge must preserve the enriched value, not
+  // wipe it back to undefined.
+  const enriched = { ...program("https://a.example/one", "p1"), tuitionNonEu: 30000 };
+  const listingDraft = program("https://a.example/one", "p1");
+  assert.equal(listingDraft.tuitionNonEu, undefined, "sanity: draft carries no fee");
+  const { updated, unchanged } = mergeProgrammes([enriched], [listingDraft]);
+  assert.equal(unchanged, 1, "no compared field changed from the draft side");
+  assert.equal(updated.length, 0);
+  assert.equal(enriched.tuitionNonEu, 30000, "enriched fee survives the harvest");
+});
+
+test("mergeProgrammes still updates a field when the draft states a new value", () => {
+  const existing = [{ ...program("https://a.example/one", "p1"), tuitionNonEu: 30000 }];
+  const changed = { ...program("https://a.example/one", "p1"), tuitionNonEu: 32000 };
+  const { updated } = mergeProgrammes(existing, [changed]);
+  assert.equal(updated.length, 1);
+  assert.deepEqual(updated[0].changes, ["tuitionNonEu"]);
+  assert.equal(existing[0].tuitionNonEu, 32000);
+});
+
 test("htmlToText strips scripts, tags and entities", () => {
   const html = "<html><head><script>bad()</script><style>x{}</style></head><body><h1>TU&nbsp;Delft</h1><p>Fees &amp; more</p></body></html>";
   const text = htmlToText(html);
