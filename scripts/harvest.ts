@@ -33,6 +33,7 @@ import { runBeFinderHarvest } from "../src/lib/knowledge/sources/be-finder";
 import { runEeFinderHarvest } from "../src/lib/knowledge/sources/ee-finder";
 import { runNoFinderHarvest } from "../src/lib/knowledge/sources/no-finder";
 import { runDkFinderHarvest } from "../src/lib/knowledge/sources/dk-finder";
+import { runIeFinderHarvest } from "../src/lib/knowledge/sources/ie-finder";
 import { runDaadHarvest } from "../src/lib/knowledge/sources/daad-finder";
 import { mergeProgrammes } from "../src/lib/knowledge/draft";
 import { htmlToText, todayIso } from "../src/lib/knowledge/draft";
@@ -149,6 +150,13 @@ for (const source of due) {
       } else if (source.adapter === "daad-finder") {
         const run = await runDaadHarvest(today, (fetched, t) =>
           console.log(`  fetched ${fetched}/${t} programmes`),
+        );
+        programmes = run.programmes;
+        total = run.total;
+        skipped = run.skipped;
+      } else if (source.adapter === "ie-finder") {
+        const run = await runIeFinderHarvest(source.country, today, (_seen, institutions) =>
+          console.log(`  institution ${institutions} swept`),
         );
         programmes = run.programmes;
         total = run.total;

@@ -98,5 +98,15 @@
     "intervalDays": 30,
     "enabled": true,
     "notes": "Study in Flanders (Flemish government) programme listing. Server-rendered cards, plain fetch + regex parsing. No fees or city published on cards."
+  },
+  {
+    "id": "cao-ie-courses",
+    "country": "IE",
+    "kind": "portal-finder",
+    "url": "https://www.cao.ie/courses.php?bb=courses",
+    "adapter": "ie-finder",
+    "intervalDays": 30,
+    "enabled": true,
+    "notes": "CAO course search (Central Applications Office), the official national undergraduate database. Plain server-rendered form POST, one sweep per institution. Level from degree words + L8-only university rule; fees not published (future per-university enrichment)."
   }
 ]
