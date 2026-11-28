@@ -1,0 +1,27 @@
+{
+  "ranAt": "2026-11-28T02:32:03.561Z",
+  "model": "amazon.nova-pro-v1:0",
+  "totals": {
+    "scenarios": 1,
+    "passed": 1,
+    "failed": 0
+  },
+  "judgeAverage": 5,
+  "results": [
+    {
+      "id": "ie-programmes-grounded",
+      "kind": "grounding",
+      "pass": true,
+      "failures": [],
+      "judgeScore": 5,
+      "judgeReason": "The advisor's answer directly addresses the student's question by listing multiple universities in Ireland that offer computer science courses, with relevant links and sources.",
+      "answerChars": 1739,
+      "durationMs": 11939,
+      "stopReason": "endTurn",
+      "tools": [
+        "get_programmes"
+      ],
+      "answer": "<thinking> To find out if there are computer science courses in Ireland and which universities offer them, I need to use the `get_programmes` tool with the appropriate filters. I will set the country to 'IE' for Ireland, the field to 'Computer Science', and the level to 'bachelor' to start with. </thinking>\n\nআয়ারল্যান্ডে কম্পিউটার সায়েন্স কোর্স আছে। নিম্নলিখিত বিশ্ববিদ্যালয়গুলিতে কম্পিউটার সায়েন্স কোর্স অফার করা হয়:\n\n1. **Atlantic Technological University** - [আরও তথ্য](https://www.atu.ie/courses/bachelor-of-science-honours-computer-science)\n2. **South East Technological University** - [আরও তথ্য](https://www.setu.ie/courses/bsc-hons-in-computer-science-common-entry)\n3. **University College Cork (NUI)** - [আরও তথ্য](https://www.ucc.ie/en/CK401)\n4. **Dublin City University** - [আরও তথ্য](https://www.dcu.ie/DC121)\n5. **University College Dublin (NUI)** - [আরও তথ্য](https://hub.ucd.ie/usis/!W_HU_MENU.P_PUBLISH?p_tag=COURSE&MAJR=CSSA&)\n6. **University of Galway** - [আরও তথ্য](https://www.nuigalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html)\n7. **University of Limerick** - [আরও তথ্য](https://www.ul.ie/courses/computer-science-common-entry)\n8. **Maynooth University** - [আরও তথ্য](https://www.courses.maynoothuniversity.ie/bsc-computer-science-ft-mh604/)\n9. **Trinity College Dublin** - [আরও তথ্য](https://www.tcd.ie/courses/undergraduate/az/course.php?id=DUICS-ICSC-2F09)\n\nএই তালিকায় 15টি বিশ্ববিদ্যালয় রয়েছে। আরও অনেক বিশ্ববিদ্যালয় আছে যেগুলি কম্পিউটার সায়েন্স কোর্স অফার করে। আপনি যদি নির্দিষ্ট শহর বা বিশ্ববিদ্যালয়ের নাম দিতে চান তাহলে আমি আরও তথ্য খুঁজে দিতে পারি।\n\n**Sources:**\n- [CAO course search (Central Applications Office)](https://www.cao.ie/courses.php?bb=courses)"
+    }
+  ]
+}

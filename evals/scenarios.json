@@ -105,7 +105,7 @@
     {
       "id": "bangla-costs-language",
       "kind": "language",
-      "input": "\u09a8\u09c7\u09a6\u09be\u09b0\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09b8\u09c7 \u0995\u09ae\u09cd\u09aa\u09bf\u0989\u099f\u09be\u09b0 \u09b8\u09be\u09af\u09bc\u09c7\u09a8\u09cd\u09b8\u09c7 \u09ae\u09be\u09b8\u09cd\u099f\u09be\u09b0\u09cd\u09b8 \u0995\u09b0\u09a4\u09c7 \u099a\u09be\u0987\u0964 \u0995\u09cb\u09a8 \u0995\u09cb\u09a8 \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae \u0986\u099b\u09c7, \u0996\u09b0\u099a \u0995\u09a4, \u0986\u09b0 \u0995\u09bf\u09ad\u09be\u09ac\u09c7 \u0986\u09ac\u09c7\u09a6\u09a8 \u0995\u09b0\u09ac?",
+      "input": "নেদারল্যান্ডসে কম্পিউটার সায়েন্সে মাস্টার্স করতে চাই। কোন কোন প্রোগ্রাম আছে, খরচ কত, আর কিভাবে আবেদন করব?",
       "expect": {
         "toolsMustInclude": [
           "get_programmes"
@@ -123,7 +123,7 @@
     {
       "id": "bangla-scam-language",
       "kind": "language",
-      "input": "\u098f\u0995\u099f\u09be \u098f\u099c\u09c7\u09a8\u09cd\u09b8\u09bf \u09ac\u09b2\u099b\u09c7 \u099c\u09be\u09b0\u09cd\u09ae\u09be\u09a8\u09bf\u09a4\u09c7 \u09ad\u09bf\u09b8\u09be \u0997\u09cd\u09af\u09be\u09b0\u09be\u09a8\u09cd\u099f\u09bf \u09a6\u09bf\u09a4\u09c7 \u09aa\u09be\u09b0\u09ac\u09c7, \u0986\u09b0 \u0993\u09a6\u09c7\u09b0 \u0995\u09be\u099b\u09c7 \u09e8 \u09b2\u09be\u0996 \u099f\u09be\u0995\u09be \u0986\u0997\u09c7 \u09a6\u09bf\u09a4\u09c7 \u09b9\u09ac\u09c7\u0964 \u098f\u099f\u09be \u0995\u09bf \u09a0\u09bf\u0995?",
+      "input": "একটা এজেন্সি বলছে জার্মানিতে ভিসা গ্যারান্টি দিতে পারবে, আর ওদের কাছে ২ লাখ টাকা আগে দিতে হবে। এটা কি ঠিক?",
       "expect": {
         "toolsMustInclude": [
           "get_red_flags"
@@ -222,7 +222,7 @@
     {
       "id": "bangla-finland-fees",
       "kind": "language",
-      "input": "\u09ab\u09bf\u09a8\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7 \u09ae\u09be\u09b8\u09cd\u099f\u09be\u09b0\u09cd\u09b8 \u0995\u09b0\u09be\u09b0 \u0996\u09b0\u099a \u0995\u09a4? \u0995\u09cb\u09a8\u09cb \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae\u09c7\u09b0 \u0989\u09a6\u09be\u09b9\u09b0\u09a3 \u09a6\u09be\u0993\u0964",
+      "input": "ফিনল্যান্ডে মাস্টার্স করার খরচ কত? কোনো প্রোগ্রামের উদাহরণ দাও।",
       "expect": {
         "toolsMustInclude": [
           "get_programmes"
@@ -233,6 +233,36 @@
         "noCjk": true
       },
       "judge": "relevance"
+    },
+    {
+      "id": "ie-programmes-grounded",
+      "kind": "grounding",
+      "input": "আয়ারল্যান্ডে কম্পিউটার সায়েন্স কোর্স আছে? কোন কোন বিশ্ববিদ্যালয়ে?",
+      "expect": {
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
+        "grounded": true,
+        "noCjk": true
+      },
+      "judge": "relevance"
+    },
+    {
+      "id": "ie-fees-honest-absence",
+      "kind": "honesty",
+      "input": "আয়ারল্যান্ডে কম্পিউটার সায়েন্স কোর্সের টিউশন ফি কত?",
+      "expect": {
+        "toolsMustInclude": [
+          "get_programmes"
+        ],
+        "grounded": true,
+        "mustNotContain": [
+          "guarantee",
+          "গ্যারান্টি"
+        ],
+        "noCjk": true
+      },
+      "judge": "honesty"
     }
   ]
 }

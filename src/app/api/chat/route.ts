@@ -281,6 +281,17 @@ export async function POST(req: Request): Promise<Response> {
         // Audit record + metrics for this turn. Observability must never break
         // the chat response; the user already has their answer at this point.
         const turnTrace = trace.finish(userId, convId, nextSeq);
+
+        // Grounding monitoring: an answer that states figures (Western or
+        // Bengali numerals) without a single tool call or specialist in the
+        // turn came from model memory, not the verified records. Logged for
+        // monitoring (and eval gates cover the known cases); the content is
+        // already streamed.
+        const figureCount = (answer.match(/\d{3,}|[০-৯]{3,}/g) ?? []).length;
+        if (figureCount > 0 && turnTrace.toolCalls.length === 0 && turnTrace.specialists.length === 0) {
+          logWarn("answer.ungrounded_figures", undefined, { userId, convId, turn: nextSeq, figureCount });
+        }
+
         try {
           await putTurnTrace(turnTrace);
         } catch (err) {
