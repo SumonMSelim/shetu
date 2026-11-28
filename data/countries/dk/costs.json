@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "tuition-non-eu",
+    "label": "Tuition fee (non-EU full-degree students)",
+    "category": "tuition",
+    "amount": 6000,
+    "currency": "EUR",
+    "per": "year",
+    "rangeLow": 6000,
+    "rangeHigh": 16000,
+    "notes": "The official portal states: 'Annual tuition fees for full-degree students USD 8,000-21,000 / Euro 6,000-16,000 (DKK 45,000-120,000).' EU/EEA citizens and those with permanent or certain temporary residence permits study for free; the portal says: 'All other students must pay tuition fees.' Individual programme fees in our catalogue come from each programme's own portal record (stated per term there; annual = 2 x per term).",
+    "provenance": {
+      "source": "Study in Denmark - Tuition Fees and Scholarships",
+      "sourceUrl": "https://studyindenmark.dk/study-options/tuition-fees-and-scholarships",
+      "retrieved": "2026-11-28"
+    }
+  }
+]
