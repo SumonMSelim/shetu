@@ -48,6 +48,22 @@ import beApplicationsJson from "../../../data/countries/be/applications.json";
 import beVisaJson from "../../../data/countries/be/visa.json";
 import beRedFlagsJson from "../../../data/countries/be/red-flags.json";
 import beProgrammesJson from "../../../data/countries/be/programmes.json";
+import dkCountryJson from "../../../data/countries/dk/country.json";
+import dkScholarshipsJson from "../../../data/countries/dk/scholarships.json";
+import dkCostsJson from "../../../data/countries/dk/costs.json";
+import dkInstitutionsJson from "../../../data/countries/dk/institutions.json";
+import dkApplicationsJson from "../../../data/countries/dk/applications.json";
+import dkVisaJson from "../../../data/countries/dk/visa.json";
+import dkRedFlagsJson from "../../../data/countries/dk/red-flags.json";
+import dkProgrammesJson from "../../../data/countries/dk/programmes.json";
+import ieCountryJson from "../../../data/countries/ie/country.json";
+import ieScholarshipsJson from "../../../data/countries/ie/scholarships.json";
+import ieCostsJson from "../../../data/countries/ie/costs.json";
+import ieInstitutionsJson from "../../../data/countries/ie/institutions.json";
+import ieApplicationsJson from "../../../data/countries/ie/applications.json";
+import ieVisaJson from "../../../data/countries/ie/visa.json";
+import ieRedFlagsJson from "../../../data/countries/ie/red-flags.json";
+import ieProgrammesJson from "../../../data/countries/ie/programmes.json";
 import seCountryJson from "../../../data/countries/se/country.json";
 import seScholarshipsJson from "../../../data/countries/se/scholarships.json";
 import seCostsJson from "../../../data/countries/se/costs.json";
@@ -163,6 +179,28 @@ const BE = countryDataSchema.parse({
   programmes: beProgrammesJson,
 });
 
+const DK = countryDataSchema.parse({
+  meta: dkCountryJson,
+  scholarships: dkScholarshipsJson,
+  costs: dkCostsJson,
+  institutions: dkInstitutionsJson,
+  applications: dkApplicationsJson,
+  visa: dkVisaJson,
+  redFlags: dkRedFlagsJson,
+  programmes: dkProgrammesJson,
+});
+
+const IE = countryDataSchema.parse({
+  meta: ieCountryJson,
+  scholarships: ieScholarshipsJson,
+  costs: ieCostsJson,
+  institutions: ieInstitutionsJson,
+  applications: ieApplicationsJson,
+  visa: ieVisaJson,
+  redFlags: ieRedFlagsJson,
+  programmes: ieProgrammesJson,
+});
+
 const REGISTRY: Record<string, KnowledgeBase> = {
   NL: toKnowledgeBase(NL),
   DE: toKnowledgeBase(DE),
@@ -172,9 +210,11 @@ const REGISTRY: Record<string, KnowledgeBase> = {
   NO: toKnowledgeBase(NO),
   FR: toKnowledgeBase(FR),
   BE: toKnowledgeBase(BE),
+  DK: toKnowledgeBase(DK),
+  IE: toKnowledgeBase(IE),
 };
 
-function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO | typeof FR | typeof BE): KnowledgeBase {
+function toKnowledgeBase(data: typeof NL | typeof DE | typeof FI | typeof SE | typeof EE | typeof NO | typeof FR | typeof BE | typeof DK | typeof IE): KnowledgeBase {
   const { meta, ...collections } = data;
   return { country: meta.country, countryName: meta.countryName, currency: meta.currency, ...collections };
 }
